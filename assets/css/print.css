@@ -1,0 +1,15 @@
+#printable { display: none; }
+
+	@media print
+	{
+		#title { display: none; }
+		#non-printable { display: none; }
+		#mySidenav { display: none; }
+		#non-printable { display: none; }
+		#printable { display: block; }
+		#printables { display:none; }
+		input type['number'] { display: none; }
+		#total { display: none; }
+		#main { display: none; }
+		.btn_nav { display: none; }
+	}

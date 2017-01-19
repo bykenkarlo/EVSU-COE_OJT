@@ -1,0 +1,105 @@
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background: #c9302c;
+    font-size: 11px;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+	box-shadow: 0 15px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+
+	
+
+}
+
+.btn_nav
+{
+    z-index: 2;
+    position: absolute;
+    box-shadow: 0 5px 16px 0 rgba(0, 0, 0, 0.3), 0 7px 9px 0 rgba(0, 0, 0, 0.2); 
+    border-radius: 100px; 
+    margin: 0px 5px 0px 5px;
+    color: #fff;
+    background: #c9302c;
+}
+
+.nav_layout
+{
+    padding: 5px 3px 5px 32px;
+    text-decoration: none;
+    font-size:;
+    color: #000;
+    display: block;
+    font-weight: bold;
+    
+
+}
+.sidenav a {
+    padding: 2px 3px 2px 5px;
+    text-decoration: none;
+    font-size: 13px;
+    color: #000;
+    display: block;
+    transition: 0.3s
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: #ddd;
+}
+
+.nav_span
+{
+    padding: 5px 3px 2px 32px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: normal;
+    color: #fff;
+    display: block;
+    transition: 0.3s
+}
+.nav_email
+{
+    padding: 5px 3px 2px 32px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: normal;
+    color: #fff;
+    display: block;
+    transition: 0.3s   
+}
+
+
+.nav_span hr
+{
+    padding: 2px 3px 2px 32px;
+    color: #000;
+    display: block;
+
+}
+
+.closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 34px !important;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+
+}
+
+@media screen and (max-height: 600px) {
+  .sidenav {padding-top: 5px;}
+  .sidenav a {font-size: 15px;}
+}
+.clearfix::after {
+    clear: left;
+    display: table;
+}
