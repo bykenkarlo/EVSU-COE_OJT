@@ -10,7 +10,8 @@
 		
 </head>
 
-<body style="background-color: #f5f5f5">
+<body style="background-color: #f5f5f5;
+			 font-family: 'Century Gothic' ">
 <header> 
 <img src="<?php echo base_url();?>assets/images/EVSU_banner.png" height="100" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System">
 	
@@ -42,8 +43,8 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span><?php 
 				if (isset($_SESSION['username'])) { ?>
-				<?php echo $_SESSION['fname'].' '.$_SESSION['lname'];	
-				$user = $_SESSION['username'];	    
+				<span class="text-capitalize"><?php echo $_SESSION['fname'].' '.$_SESSION['lname'];?></span>	
+				<?php $user = $_SESSION['username'];	    
 				}?><span class="caret"></span>
           <ul class="dropdown-menu">
             <li><a style="color: #000;"  href="#"><span class="fa fa-cog"></span> Settings</a></li>
@@ -55,7 +56,7 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<div class="container">
+<div class="container" style="padding: 0px 50px 0px 50px">
 	<div class="panel " id="group_chat" >
 		<div class="panel-heading panel_head">
 			<h2><span class="fa fa-comments"></span> Chat Message</h2>

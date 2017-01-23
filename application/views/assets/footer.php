@@ -1,15 +1,5 @@
 
 <footer class="footer" id="non-printable" style="border-top: 7px #b20000 solid">
-	<script>
-	function openNav() {
-	    document.getElementById("mySidenav").style.width = "250px";
-	    document.getElementById("main").style.marginLeft = "250px";
-	}
-	function closeNav() {
-	    document.getElementById("mySidenav").style.width = "";
-	    document.getElementById("main").style.marginLeft= "";
-	}
-	</script>
 	<div class="row">
 		<div class="col-sm-12 text-center" id="footer_social_img" style="margin: 1em 0px 0px 0px;">
 			<ul class="list-inline">
@@ -37,5 +27,15 @@
 			</ul>			
 		</div>
 </footer>
+<script>
+	function openNav() {
+	    document.getElementById("mySidenav").style.width = "250px";
+	    document.getElementById("main").style.marginLeft = "250px";
+	}
+	function closeNav() {
+	    document.getElementById("mySidenav").style.width = "";
+	    document.getElementById("main").style.marginLeft= "";
+	}
+	</script>
 	</body>
 </html>

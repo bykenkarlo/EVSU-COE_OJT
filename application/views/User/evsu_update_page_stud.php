@@ -98,7 +98,7 @@
 					<div class="form-group">	
 						<label class="col-sm-3 control-label">Course</label>
 						<div class="col-sm-4">
-							<input type="text" name="course" class="form-control text-capitalize" value="<?= $info['course_abbrv']?>"  >
+							<input type="text" name="course" class="form-control text-capitalize" value="<?= $info['course_abbrv']?>" readonly>
 						</div>
 					</div>
 					<div class="form-group">	
@@ -116,8 +116,8 @@
 					
 					
 					<div class="pull-right" style="margin-right: 95px; margin-bottom: 20px; ">
-						<a href=""><button type="submit" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-share"></span> Update</button></a>
-						<a href="<?php echo base_url();?>Login/student_list"><button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button></td></a>
+						<a href=""><button type="submit" class="btn btn-primary btn-lg btnUpdateAdmin"><span class="glyphicon glyphicon-share"></span> Update</button></a>
+						<a href="<?php echo base_url();?>Login/student_list"><button type="button" class="btn btn-danger btn-lg btnCancel"><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button></td></a>
 					</div>	
 		</form>	
 	</div>

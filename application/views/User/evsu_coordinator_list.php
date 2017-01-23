@@ -2,9 +2,8 @@
 
 </head>
 <body style="background: #f5f5f5">
-<header> 
-<img src="<?php echo base_url();?>assets/images/EVSU_banner.png" height="100" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System">
-	
+<header id="bigScreen-view"> 
+	<img src="<?php echo base_url();?>assets/images/EVSU_banner.png" height="" width="100%" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System">
 </header>
 <nav class="navbar navbar-inverse" id="nav2">
   <div class="container-fluid">
@@ -55,24 +54,26 @@
 </nav>
 
 
-<div id="mySidenav" class="sidenav">
-	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-	<div class="panel-heading avatar1">
-		<h3>My Profile</h3>
-		<img src="<?php echo base_url();?>assets/images/img_avatar.png" style="height:106px;width:106px" alt="avatar">
-		
+<div id="mySidenav" class="sidenav " >
+	<a href="javascript:void(0)" class="closebtn avatarBody" onclick="closeNav()"
+	 style="position: absolute; float: left;">×</a>
+	<div class="panel-heading avatar1" style="padding-bottom: 
+	25px">
+		<h3 style="color: #000; font-weight: bold;">Welcome!</h3>
+		<!-- <span class="fa fa-user-circle  fa-5x" style="color: #000;"></span> -->
+		<img src="<?php echo base_url();?>assets/images/avatar_img.jpg" style="height:90px;width:90px" alt="avatar">
 	</div>
 	<span class="text-capitalize nav_span col-sm-12">Name: <?php echo $_SESSION['fname'].' '.$_SESSION['lname']; ?></span>
 	<span class="text-capitalize nav_span">Username: <?= $user; ?></span>
 	<span class="text-capitalize nav_span">Gender: <?= $sex; ?></span>
 	
 	<div class="add_admin_cdr">
-		<button type="button" class="btn btn-danger col-sm-2 btn-lg" data-toggle="modal" data-target="#myModal_add_admin"><span class="fa fa-user-plus"></span> Add Administrator</button>		
-		<button type="button" class="btn btn-danger col-sm-2 btn-lg" data-toggle="modal" data-target="#myModal_cdr"><span class="fa fa-user-plus"></span> Add Coordinator</button>
-		<button type="button" class="btn btn-danger col-sm-2 btn-lg" data-toggle="modal" data-target="#myModal_course"><span class="fa fa-plus"></span> Add Course</button>
-		<button type="button" class="btn btn-danger col-sm-2 btn-lg" data-toggle="modal" data-target="#myModal_comp"><span class="fa fa-plus"></span> Add Agency</button>
-		<button type="button" class="btn btn-danger col-sm-2 btn-lg" onclick="window.location='<?= base_url()?>Login/others';"><span class="fa fa-plus"></span> Others</button>		
-		<button type="button" onclick="window.location='<?php echo base_url();?>Login/userlogs';" class="btn btn-danger col-sm-2 btn-lg"><span class="fa fa-tasks"></span> User Logs</button>
+		<button type="button" class="btn btn-primary col-sm-2 btn-lg btnProfile" data-toggle="modal" data-target="#myModal_add_admin"><span class="fa fa-user-plus"></span> Add Administrator</button>		
+		<button type="button" class="btn btn-primary col-sm-2 btn-lg btnProfile" data-toggle="modal" data-target="#myModal_cdr"><span class="fa fa-user-plus"></span> Add Coordinator</button>
+		<button type="button" class="btn btn-primary col-sm-2 btn-lg btnProfile" data-toggle="modal" data-target="#myModal_course"><span class="fa fa-plus-circle"></span> Add Course</button>
+		<button type="button" class="btn btn-primary col-sm-2 btn-lg btnProfile" data-toggle="modal" data-target="#myModal_comp"><span class="fa fa-plus-circle"></span> Add Agency</button>
+		<button type="button" class="btn btn-primary col-sm-2 btn-lg btnProfile" onclick="window.location='<?= base_url()?>Login/others';"><span class="fa fa-list "></span> Others</button>		
+		<button type="button" onclick="window.location='<?php echo base_url();?>Login/userlogs';" class="btn btn-primary col-sm-2 btn-lg btnProfile"><span class="fa fa-tasks"></span> User Logs</button>
 	</div>
 
 <!-- <a href="#" class="text-capitalize">Logout</a> -->
@@ -395,8 +396,8 @@
 	</div>
 	
 	<div style="margin-bottom: 10px;">
-		<button type="button" class="btn btn-info btn-lg" onclick="window.location='<?= base_url();?>Login/profile_page'"><span class="fa fa-th-list"></span> Administrator Lists</button>
-		<button type="button" class="btn btn-info btn-lg" onclick="window.location='<?= base_url();?>Login/coordinator_lists'"><span class="fa fa-th-list"></span> Coordinator Lists</button>
+		<button type="button" class="btn btn-primary btn-lg btnAdminCdr" onclick="window.location='<?= base_url();?>Login/profile_page'"><span class="fa fa-th-list"></span> Administrator Lists</button>
+		<button type="button" class="btn btn-primary btn-lg btnAdminCdr" onclick="window.location='<?= base_url();?>Login/coordinator_lists'"><span class="fa fa-th-list"></span> Coordinator Lists</button>
 	</div>
 	<form action="<?= base_url()?>Control/delete_cdr_list" method="POST"> 
 		<table id="example" class=" table table-striped table-hover dt-responsive nowrap" cellspacing="0" style="margin-top: 10px; border-bottom: 1.5px solid SteelBlue;">
@@ -410,6 +411,15 @@
 					<th>Action</th>
 				</tr>
 			</thead>
+			<tfoot>
+				<tr class="alert alert-info">
+					<th><input  type="checkbox"></th>	
+					<th>Name</th>
+					<th>Username </th>
+					<th>Course </th>
+					<th>Date Registered </th>
+					<th>Action</th>
+			</tfoot>
 			<tbody>
 			<?php foreach ($this->Login_user_model->get_all_coordinator($course_id) as $key): ?>
 				<tr>
@@ -417,11 +427,11 @@
 					<td width="1"><input type="checkbox" name="delete_cdr[]" value="<?= $key['cdr_id'] ?>" id="selector"></input></td>
 					<td class="text-capitalize"><a href="#" style="color: #1565c0"><?php echo $key['fname']. ' ' .$key['lname'] ?></a></td>
 					<td class="text-capitalize"><?php echo $key['username'] ?></td>
-					<td class="text-capitalize"><?php echo $key['course_name'] ?></td>
+					<td class="text-capitalize"><?php echo $key['course_abbrv'] ?></td>
 					<td class="text-capitalize"><?php echo $key['date_reg'] ?></td>
 					<td>
-						<a href="<?php echo base_url();?>Login/update_coordinator/<?php echo $key['cdr_id']; ?>" class="btn btn-info btn-xs glyphicon glyphicon-pencil "></a>
-						<a href="<?php echo base_url();?>control/delete_coordinator/<?php echo $key['cdr_id']; ?>" class="btn btn-danger btn-xs glyphicon glyphicon-trash " onclick="return confirm('Are you sure?')"></a>
+						<a href="<?php echo base_url();?>Login/update_coordinator/<?php echo $key['cdr_id']; ?>" class="btn btn-info btn-xs btnCircle glyphicon glyphicon-pencil "></a>
+						<a href="<?php echo base_url();?>control/delete_coordinator/<?php echo $key['cdr_id']; ?>" class="btn btn-danger btn-xs btnCircle glyphicon glyphicon-trash " onclick="return confirm('Are you sure?')"></a>
 					</td>
 				</tr>
 			<?php endforeach ?>

@@ -80,6 +80,7 @@
 		<button type="button" class="btn btn-primary col-sm-2 btn-lg btnProfile" onclick="window.location='<?= base_url()?>Login/others';"><span class="fa fa-list"></span> Others</button>
 		<button type="button" onclick="window.location='<?php echo base_url();?>Login/userlogs';" class="btn btn-primary col-sm-2 btn-lg btnProfile"><span class="fa fa-tasks"></span> User Logs</button>		
 	</div>
+
 <!-- <a href="#" class="text-capitalize">Logout</a> -->
 </div>
 
@@ -119,8 +120,9 @@
 			<thead style="background: Steelblue ; color: #fff;">
 				<tr>
 					<th><input class="fa fa-check-square" type="checkbox" name="select-all" id="select-all" /></th>	
-					<th>Course Abbreviation</th>
-					<th>Course Name</th>
+					<th>Agency Name</th>
+					<th>Training Supervisor's Name</th>
+					<th>Agency Address</th>
 					<th>Date Added</th>
 					<th>Action</th>
 				</tr>
@@ -128,22 +130,24 @@
 			<tfoot>
 				<tr class="alert alert-info">
 					<th><input type="checkbox" name="select-all" id="select-all" /></th>	
-					<th>Course Abbreviation</th>
-					<th>Course Name</th>
+					<th>Agency Name</th>
+					<th>Training Supervisor's Name</th>
+					<th>Agency Address</th>
 					<th>Date Added</th>
 					<th>Action</th>
 				</tr>
 			</tfoot>
 			<tbody >
-				<?php foreach ($this->Login_user_model->get_all_course_adm( ) as $key): ?>			
+				<?php foreach ($this->Login_user_model->get_all_agency( ) as $key): ?>			
 				<tr>
-					<td width="1"><input type="checkbox" name="delete_cdr[]" value="<?= $key['course_id'] ?>" id="selector"></td>
-					<td class="text-capitalize"><?= $key['course_abbrv']?></td>
-					<td class="text-capitalize"><?php echo $key['course_name']; ?></td>
-					<td class="text-capitalize"><?php echo $key['date_reg']; ?></td>
+					<td width="1"><input type="checkbox" name="delete_cdr[]" value="<?= $key['comp_id'] ?>" id="selector"></td>
+					<td class="text-capitalize"><?= $key['cname']?></td>
+					<td class="text-capitalize"><?php echo $key['agency_spv']; ?></td>
+					<td class="text-capitalize"><?php echo $key['agency_address']; ?></td>
+					<td class="text-capitalize"><?php echo $key['date_created']; ?></td>
 					<td>
-						<button class="btn btn-info btn-xs btnCircle" type="button" onclick="window.location='<?= base_url();?>Login/update_admin/<?php echo $key['course_id']; ?>';"><span class="glyphicon glyphicon-pencil"></span></button>
-						<a href="<?php echo base_url();?>Control/delete_admin/<?php echo $key['course_id']; ?>" class="btn btn-danger btn-xs btnCircle glyphicon glyphicon-trash" onclick="return confirm('Are you sure?')"></a>
+						<button class="btn btn-info btn-xs btnCircle" type="button" onclick="window.location='<?= base_url();?>Login/update_admin/<?php echo $key['comp_id']; ?>';"><span class="glyphicon glyphicon-pencil"></span></button>
+						<a href="<?php echo base_url();?>Control/delete_admin/<?php echo $key['comp_id']; ?>" class="btn btn-danger btn-xs btnCircle glyphicon glyphicon-trash" onclick="return confirm('Are you sure?')"></a>
 					</td>
 				</tr>
 				<?php endforeach ?>

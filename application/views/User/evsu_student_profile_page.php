@@ -51,18 +51,19 @@
 <body>
 
 <div id="non-printable" style="z-index: 1;">
-	<button type="button" data-toggle="modal" data-target="#myModal_edit" style=" margin:0px 40px 50px 0px; border-radius: 100px; box-shadow: 0 9px 18px 0 rgba(0, 0, 0, 0.21), 0 3px 10px 0 rgba(0, 0, 0, 0.19); float: right; position: fixed; z-index: 2; right: 0; bottom: 0;background: #db4437" class="btn btn-lg"><span style="color: #fff; font-size: 30px;" class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+	<button type="button" data-toggle="modal" data-target="#myModal_journal" style=" margin:0px 40px 50px 0px; border-radius: 100px; box-shadow: 0 9px 18px 0 rgba(0, 0, 0, 0.21), 0 3px 10px 0 rgba(0, 0, 0, 0.19); float: right; position: fixed; z-index: 2; right: 0; bottom: 0;background: #db4437" class="btn btn-lg"><span style="color: #fff; font-size: 30px;" class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 	</button>
 </div>	
 
-<div id="mySidenav" class="sidenav" style="
-    background:url('<?php echo base_url();?>assets/images/sidenav.png')  no-repeat;background-size: 225%; padding: 20px 0px 0px 0px;  
-">
-	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-	<div class="panel-heading avatar1">
-		<h3>Welcome!</h3>
-		<img src="<?php echo base_url();?>assets/images/img_avatar.png" style="height:106px;width:106px" alt="avatar">
-		
+<div id="mySidenav" class="sidenav " >
+	<a href="javascript:void(0)" class="closebtn avatarBody" onclick="closeNav()"
+	 style="position: absolute; float: left;">×</a>
+	<div class="panel-heading avatar1" style="padding-bottom: 
+	25px">
+		<h3 style="color: #000; font-weight: bold;">Welcome!</h3>
+		<!-- <span class="fa fa-user-circle  fa-5x" style="color: #000;"></span> -->
+		<img data-toggle="modal" data-target="#myModal_add_admin" src="<?php echo base_url();?>assets/images/avatar_img.jpg" style="height:90px;width:90px" alt="avatar" >
+
 	</div>
 	<span class="text-capitalize nav_span col-sm-12">Student Number: <?php echo $stud_num;  ?></span>
 	<span class="text-capitalize nav_span col-sm-12">Name: <?php echo $_SESSION['fname'].' '.$_SESSION['lname']; ?></span>
@@ -71,11 +72,11 @@
 
 	
 	<div class="add_admin_cdr">
-		<button type="button" class="btn btn-primary col-sm-2" data-toggle="modal" data-target="#myModal_edit"><span class="fa fa-user-plus"></span> Edit Profile</button>
-		<button type="button" class="btn btn-primary col-sm-2" data-toggle="modal" data-target="#myModal_cdr"><span class="fa fa-cloud-upload"></span> Upload File</button>
-		<button onclick="window.location='<?php echo base_url();?>Student/journal';" type="button" class="btn btn-primary col-sm-2"><span class="fa fa-newspaper-o"></span> Journal</button>
-		<button onclick="window.location='<?php echo base_url();?>Student/grades';" type="button" class="btn btn-primary col-sm-2"><span class="fa fa-calculator"></span> Grades</button>
-		<button onclick="window.location='';" type="button" class="btn btn-primary col-sm-2"><span class="fa fa-thumbs-up"></span> Peer to Peer Evaluation</button>
+		<button type="button" class="btn btn-danger col-sm-2 btnProfileStudent" data-toggle="modal" data-target="#myModal_edit"><span class="fa fa-user-plus"></span> Edit Profile</button>
+		<button type="button" class="btn btn-danger col-sm-2 btnProfileStudent" data-toggle="modal" data-target="#myModal_cdr"><span class="fa fa-cloud-upload"></span> Upload File</button>
+		<button onclick="window.location='<?php echo base_url();?>Student/journal';" type="button" class="btn btn-danger col-sm-2 btnProfileStudent"><span class="fa fa-newspaper-o"></span> Journal</button>
+		<button onclick="window.location='<?php echo base_url();?>Student/grades';" type="button" class="btn btn-danger col-sm-2 btnProfileStudent"><span class="fa fa-calculator"></span> Grades</button>
+		<button style="font-size: 14px;" onclick="window.location='';" type="button" class="btn btn-danger col-sm-2 btnProfileStudent"><span class="fa fa-thumbs-up"></span> Peer to Peer Evaluation</button>
 	</div>
 </div>
 
@@ -109,11 +110,11 @@
 			
 			<div id="non-printable" class="btn-group" style="margin-left: -15px;">
 				<div class="pull-left">
-					<button id="" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-share"></span> Post</button>
+					<button id="" type="submit" class="btn btn-primary btnStudent"><span class="glyphicon glyphicon-share"></span> Post</button>
 				</div>
 				<div class="input-group" >
-		            <label class="input-group-btn">            	
-		               	<span class="btn btn-info">
+		            <label class="">            	
+		               	<span class="btn btn-info btnStudent">
 		               		 <span class="fa fa-image"></span> Add Image <input type="file" style="display: none;" name="fileToUpload" >
 		                </span>
 		            </label>
@@ -161,7 +162,7 @@
 
 
 <div style="margin: 10px 0px 20px -18px;" class="col-sm-12">
-	<button id="non-printable" class="btn btn-primary btn-sm" onClick="window.print()">
+	<button id="non-printable" class="btn btn-primary btnPrint" onClick="window.print()">
 		<span class="glyphicon glyphicon-print"></span> Print this page
 	</button>
 </div>
@@ -174,7 +175,7 @@
 </div>
 	
 <!-- Modal Journal -->
-  <div class="modal fade" id="myModal_edit" role="dialog">
+  <div class="modal fade" id="myModal_journal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -200,10 +201,10 @@
 								<div class="form-group" id="non-printable">
 									<p><textarea name="message" rows="8" cols="70" class="form-control col-sm-8" placeholder="Write your daily journal here..." required></textarea></p>
 								</div>			
-								<div id="non-printable" class="btn-group" style="margin-left: -15px;" >								
-										<button id=" " type="submit" class="btn btn-primary "><span class="glyphicon glyphicon-share"></span> Post</button>
-							            <label class="input-group-btn">			            	
-							               	<span class="btn btn-info">
+								<div id="non-printable" class="" style="margin-left: -15px;" >								
+										<button id=" " type="submit" class="btn btn-primary btnStudent"><span class="glyphicon glyphicon-share"></span> Post</button>
+							            <label class="">			            	
+							               	<span class="btn btn-info btnStudent">
 							               		 <span class="fa fa-image"></span> Add Image <input type="file" style="display: none;" name="fileToUpload" >
 							                </span>
 							            </label>							        

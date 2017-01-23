@@ -34,7 +34,7 @@
 				if (isset($_SESSION['username'])) { ?>
 				<?php echo $_SESSION['fname'].' '.$_SESSION['lname'];	
 				$user = $_SESSION['username'];	    
-				$course = $_SESSION['course_name'];	    
+				$course = $_SESSION['course_abbrv'];	    
 				$course_id = $_SESSION['course_id'];	    
 				$cname = $_SESSION['cname'];  
 				}?><span class="caret"></span>
@@ -50,11 +50,15 @@
 
 <!-- sidenav -->
 
-<div id="mySidenav" class="sidenav" >
-	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-	<div class="panel-heading avatar1">
-		<h3>My Profile</h3>
-		<img src="<?php echo base_url();?>assets/images/img_avatar.png" style="height:106px;width:106px" alt="avatar">
+<div id="mySidenav" class="sidenav " >
+	<a href="javascript:void(0)" class="closebtn avatarBody" onclick="closeNav()"
+	 style="position: absolute; float: left;">×</a>
+	<div class="panel-heading avatar1" style="padding-bottom: 
+	25px">
+		<h3 style="color: #000; font-weight: bold;">Welcome!</h3>
+		<!-- <span class="fa fa-user-circle  fa-5x" style="color: #000;"></span> -->
+		<img data-toggle="modal" data-target="#myModal_add_admin" src="<?php echo base_url();?>assets/images/avatar_img.jpg" style="height:90px;width:90px" alt="avatar" >
+
 		
 	</div>
 	<div class="side_nav">
@@ -64,11 +68,11 @@
 		<span class="text-capitalize nav_span">Agency Name: <?= $cname; ?></span>
 	</div>	
 	<div class="add_admin_cdr">
-		<button type="button" class="btn btn-primary col-sm-2" data-toggle="modal" data-target="#myModal_supervisor"><span class="fa fa-user-plus"></span> Add Supervisor</button>
+		<button type="button" class="btn btn-primary col-sm-2 btnProfile" data-toggle="modal" data-target="#myModal_supervisor"><span class="fa fa-user-plus"></span> Add Supervisor</button>
 		
-		<button type="button" class="btn btn-primary col-sm-2" data-toggle="modal" data-target="#myModal_student"><span class="fa fa-user-plus"></span> Add Student</button>
+		<button type="button" class="btn btn-primary col-sm-2 btnProfile" data-toggle="modal" data-target="#myModal_student"><span class="fa fa-user-plus"></span> Add Student</button>
 		
-		<a class="btn" href="<?php echo base_url();?>Login/uploads"><button type="button" class="btn btn-primary col-sm-2"><span class="fa fa-cloud-upload"></span> Upload Files</button></a>
+		<a class="btn" href="<?php echo base_url();?>Login/uploads"><button type="button" class="btn btn-primary col-sm-2 btnProfile"><span class="fa fa-cloud-upload"></span> Upload Files</button></a>
 	</div>
 
 <!-- <a href="#" class="text-capitalize">Logout</a> -->
@@ -331,8 +335,8 @@
 		<h1 align="left"><span class="fa fa-users"></span> List of Registered Students</h1>
 	</div>
 	<div style="margin-bottom: 20px;">
-		<button onclick="window.location='<?= base_url()?>Login/coordinator_profile_page'" class="btn btn-info btn-lg"><span class="fa fa-th-list"></span> Training Supervisor Lists</button>	
-			<button onclick="window.location='<?= base_url()?>Login/student_list'" class="btn btn-info btn-lg"><span class="fa fa-th-list"></span> Student Lists</button>
+		<button onclick="window.location='<?= base_url()?>Login/coordinator_profile_page'" class="btn btn-primary btn-lg btnCdrSpv"><span class="fa fa-th-list"></span> Training Supervisor Lists</button>	
+			<button onclick="window.location='<?= base_url()?>Login/student_list'" class="btn btn-primary btn-lg btnAdminCdr"><span class="fa fa-th-list"></span> Student Lists</button>
 	</div>
 	<form action="<?= base_url()?>Control/delete_stud_list" method="POST"> 
 		<table id="example" class="table table-striped table-hover" cellspacing="0" style="margin-top: 10px;border-bottom: 1.5px solid SteelBlue;">
@@ -352,7 +356,7 @@
 			</thead>
 			<tfoot>
 				<tr style="" class="alert alert-info">
-					<th><input class="fa fa-check-square" type="checkbox"/></th>
+					<th><input type="checkbox"/></th>
 					<th>Student Number </th>
 					<th>Last Name </th>
 					<th>First Name</th>
@@ -381,8 +385,8 @@
 					<td class="text-capitalize" ><?php echo $key['year']. ' - ' .$key['section']; ?></td>
 					<td class="text-capitalize" ><?php echo $key['date_reg']; ?></td>					
 					<td>
-						<a href="<?php echo base_url();?>Login/update_student_page/<?php echo $key['stud_id']; ?>" class="btn btn-info btn-xs glyphicon glyphicon-pencil btn-sm"></a>
-						<a href="<?php echo base_url();?>Control/delete_student/<?php echo $key['stud_id']; ?>" class="btn btn-danger btn-xs glyphicon glyphicon-trash btn-sm" onclick="return confirm('Are you sure?')"></a>
+						<a href="<?php echo base_url();?>Login/update_student_page/<?php echo $key['stud_id']; ?>" class="btn btn-info btn-xs btnCircle glyphicon glyphicon-pencil btn-sm"></a>
+						<a href="<?php echo base_url();?>Control/delete_student/<?php echo $key['stud_id']; ?>" class="btn btn-danger btn-xs btnCircle glyphicon glyphicon-trash btn-sm" onclick="return confirm('Are you sure?')"></a>
 					</td>
 				</tr>
 			<?php endforeach ?>

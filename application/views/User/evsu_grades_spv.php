@@ -88,8 +88,8 @@
 </nav>
 
 <body class="img-responsive" style="
-background:url('<?php echo base_url();?>assets/images/sidenav.png') no-repeat;
-background-size: 100% 92%; padding: 0px 0px 0px 0px" >
+background:url('<?php echo base_url();?>assets/images/background.png') no-repeat;
+background-size: 100% 90%; padding: 0px 0px 0px 0px" >
 
 
 <div class="container" style="font-size:14pt; margin-top: 10px; margin-bottom: 12px;">
@@ -251,7 +251,7 @@ background-size: 100% 92%; padding: 0px 0px 0px 0px" >
 			</tbody>
 		</table>
 		<div>
-			<button type="submit" class="btn btn-primary" style="float: right;" id="grades"><span class="fa fa-calculator"></span> Compute Grades</button><br>
+			<button type="submit" class="btn btn-primary btnCompGrades" style="float: right;" id="grades"><span class="fa fa-calculator"></span> Compute Grades</button><br>
 				<?php $data = $this->Login_user_model->get_grades($stud_id);?>
 
 			<div id="total" style="float: right; margin-right: -150px; margin-top: 30px;">
@@ -284,10 +284,11 @@ background-size: 100% 92%; padding: 0px 0px 0px 0px" >
 	</div>
 </div>
 	<div style="margin-left: 10px; margin-top: 50px;">
-		<button id="printables" class="btn btn-primary" onClick="window.print()"><span class="glyphicon glyphicon-print"></span> Print this page</button>
+		<button id="printables" class="btn btn-primary btnPrint" onClick="window.print()"><span class="glyphicon glyphicon-print"></span> Print this page</button>
 	</div>
 </div>
-
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
 <div class="container">	</div>
 
 
@@ -295,47 +296,4 @@ background-size: 100% 92%; padding: 0px 0px 0px 0px" >
 
 
 
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
-	<style type="text/css">
-	#printable { display: none; }
-
-	@media print
-	{
-		#non-printable { display: none; }
-		#printable { display: block; }
-		#printables { display:none; }
-		#title { display: none; }		
-		#print_header { display: none; }
-		#nav { display: none; }
-		#footer { display: none; }
-		#grades { display: none; }
-		input type['number'] { display: none; }
-		#total { display: none; }
-
-	}
-	#container
-	{
-		display: table;
-		border-radius: 4px;
-		border: .5px solid #ddd;
-	}
-	#row
-	{
-		display: table-row;
-		
-	}
-	#left, #right, #middle
-	{
-		border: .5px solid #ddd;
-		border-radius: 2px;
-		display: table-cell;
-		padding: 5px 10px 5px 10px;
-	}
-	.span
-	{
-		font-weight: bold;
-		text-align: center;
-	}
-	</style>
-</head>
+	

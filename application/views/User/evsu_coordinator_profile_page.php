@@ -33,7 +33,7 @@
 				if (isset($_SESSION['username'])) { ?>
 				<?php echo $_SESSION['fname'].' '.$_SESSION['lname'];	
 				$user = $_SESSION['username'];	    
-				$course = $_SESSION['course_name'];	    
+				$course = $_SESSION['course_abbrv'];	    
 				$cname = $_SESSION['cname'];
 				$course_id = $_SESSION['course_id'];   
 				}?><span class="caret"></span>
@@ -48,28 +48,27 @@
 </nav>
 
 
-<div id="mySidenav" class="sidenav" 
->
-	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-	<div class="panel-heading avatar1">
-		<h3>My Profile</h3>
-		<img src="<?php echo base_url();?>assets/images/img_avatar.png" style="height:106px;width:106px" alt="avatar">
-		
+<div id="mySidenav" class="sidenav " >
+	<a href="javascript:void(0)" class="closebtn avatarBody" onclick="closeNav()"
+	 style="position: absolute; float: left;">×</a>
+	<div class="panel-heading avatar1" style="padding-bottom: 
+	25px">
+		<h3 style="color: #000; font-weight: bold;">Welcome!</h3>
+		<!-- <span class="fa fa-user-circle  fa-5x" style="color: #000;"></span> -->
+		<img data-toggle="modal" data-target="#myModal_add_admin" src="<?php echo base_url();?>assets/images/avatar_img.jpg" style="height:90px;width:90px" alt="avatar" >		
 	</div>
 	<div class="side_nav">
 		<span class="text-capitalize nav_span">Name: <?php echo $_SESSION['fname'].' '.$_SESSION['lname']; ?></span>
 		<span class="text-capitalize nav_span">Username: <?= $user; ?></span>
-		<span class="text-capitalize nav_span">Course: <?= $course.' '.$course_id; ?></span>
+		<span class="text-capitalize nav_span">Course: <?= $course; ?></span>
 		<span class="text-capitalize nav_span">Agency Name: <?= $cname  ?></span>
 	</div>	
 	<div class="add_admin_cdr">
-		<button type="button" class="btn btn-primary col-sm-2" data-toggle="modal" data-target="#myModal_supervisor"><span class="fa fa-user-plus"></span> Add Supervisor</button>
+		<button type="button" class="btn btn-primary btnProfile col-sm-2" data-toggle="modal" data-target="#myModal_supervisor"><span class="fa fa-user-plus"></span> Add Supervisor</button>
 		
-		<button type="button" class="btn btn-primary col-sm-2" data-toggle="modal" data-target="#myModal_student"><span class="fa fa-user-plus"></span> Add Student</button>
-		<button onclick="window.location='<?php echo base_url();?>Login/uploads';" type="button" class="btn btn-primary col-sm-2"><span class="fa fa-cloud-upload"></span> Upload Files</button>
+		<button type="button" class="btn btn-primary btnProfile col-sm-2" data-toggle="modal" data-target="#myModal_student"><span class="fa fa-user-plus"></span> Add Student</button>
+		<button onclick="window.location='<?php echo base_url();?>Login/uploads';" type="button" class="btn btn-primary col-sm-2 btnProfile"><span class="fa fa-cloud-upload"></span> Upload Files</button>
 	</div>
-
-<!-- <a href="#" class="text-capitalize">Logout</a> -->
 </div>
 
 <div id="main">
@@ -301,8 +300,8 @@
 			<h1 align="left"><span class="fa fa-users"></span> Training Supervisors List</h1>
 		</div>
 		<div style="margin-bottom: 10px;">
-			<button onclick="window.location='<?= base_url()?>Login/coordinator_profile_page'" class="btn btn-info btn-lg"><span class="fa fa-th-list"></span> Training Supervisor Lists</button>	
-			<button onclick="window.location='<?= base_url()?>Login/student_list'" class="btn btn-info btn-lg"><span class="fa fa-th-list"></span> Student Lists</button>	
+			<button onclick="window.location='<?= base_url()?>Login/coordinator_profile_page'" class="btn btn-primary btn-lg btnCdrSpv"><span class="fa fa-th-list"></span> Training Supervisor Lists</button>	
+			<button onclick="window.location='<?= base_url()?>Login/student_list'" class="btn btn-primary btn-lg btnAdminCdr"><span class="fa fa-th-list"></span> Student Lists</button>	
 		</div>	
 		<div class="">
 		<form action="<?= base_url()?>Control/delete_spv_list" method="POST"> 
@@ -317,6 +316,16 @@
 							<th>Action</th>
 						</tr>
 					</thead>
+					<tfoot>
+						<tr class="alert alert-info">
+							<th><input type="checkbox"  /></th>	
+							<th>Name</th>
+							<th>Username </th>
+							<th>Agency Name </th>
+							<th>Date Registered</th>
+							<th>Action</th>
+						</tr>
+					</tfoot>
 					<tbody>
 					<?php foreach ($this->Login_user_model->get_all_spv(  ) as $key): ?>
 						<tr>
@@ -326,8 +335,8 @@
 							<td class="text-capitalize"><?php echo $key['cname'] ?></td>
 							<td class="text-capitalize"><?php echo $key['date_reg'] ?></td>
 							<td>
-							<a href="<?= base_url(); ?>Login/update_supervisor/<?php echo $key['spv_id']; ?>" class="btn btn-info btn-xs glyphicon glyphicon-pencil"></a>
-							<a href="<?= base_url(); ?>Control/delete_supervisor/<?php echo $key['spv_id']; ?>" class="btn btn-danger glyphicon glyphicon-trash btn-xs" onclick="return confirm('Are you sure?')"></a></td>
+							<a href="<?= base_url(); ?>Login/update_supervisor/<?php echo $key['spv_id']; ?>" class="btn btn-info btn-xs btnCircle glyphicon glyphicon-pencil"></a>
+							<a href="<?= base_url(); ?>Control/delete_supervisor/<?php echo $key['spv_id']; ?>" class="btn btn-danger btnCircle glyphicon glyphicon-trash btn-xs" onclick="return confirm('Are you sure?')"></a></td>
 						</tr>
 						<?php endforeach ?>
 					</tbody>

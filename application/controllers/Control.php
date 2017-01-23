@@ -84,6 +84,27 @@ class Control extends CI_Controller {
 		
 		
 	}	
+	public function studentGrades($id)
+	{
+		if(isset($_SESSION['username']))
+		{
+			$data['stud_id'] = $id;
+			$this->load->model('Login_user_model');
+			$this->load->view('assets/header');
+			$this->load->view('User/evsu_gradesStudentCdr', $data);
+			$this->load->view('assets/footer');
+		}
+		else
+		{
+			echo '  <script>
+						var base_url = window.location.origin;
+					    alert("You dont have the right to access this page. Please login first!");
+					    window.location="base_url"
+				    </script>';
+		}
+		
+		
+	}
 	public function attendance($id)
 	{
 		if(isset($_SESSION['username']))

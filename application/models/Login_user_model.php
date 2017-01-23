@@ -62,6 +62,10 @@ class Login_user_model extends CI_Model {
 		$this->db->order_by("course_id","ASC");
 		return $this->db->get('evsu_course_tbl')->result_array();
 	}
+	public function get_all_agency()
+	{
+		return $this->db->get('evsu_company_tbl')->result_array();
+	}
 	public function get_all_student_spv($cname)
 	{ 
 		$this->db->where('cname', $cname);
@@ -240,6 +244,13 @@ class Login_user_model extends CI_Model {
 	// {
 	// 	return $this->db->query("SELECT SUM()");
 	// }
+	public function insertImage($target_file, $admin_id)
+	{	
+		$query = ("INSERT INTO evsu_admin_tbl (admin_image) VALUES ('$target_file') ");
+		$this->db->query($query);
+		// $this->db->where('admin_id', $admin_id);
+		// $this->db->insert('evsu_admin_tbl', $data);
+	}
 	public function insert_journal($data)
 	{
 		$this->db->insert('evsu_journal_tbl', $data);

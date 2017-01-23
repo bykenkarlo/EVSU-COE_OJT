@@ -50,27 +50,27 @@
 </nav>
 
 
-<div id="mySidenav" class="sidenav" style="color: #fff;">
-	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-	<div class="panel-heading avatar1">
-		<h3>My Profile</h3>
-		<img src="<?php echo base_url();?>assets/images/img_avatar.png" style="height:106px;width:106px" alt="avatar">
-		
+<div id="mySidenav" class="sidenav " >
+	<a href="javascript:void(0)" class="closebtn avatarBody" onclick="closeNav()"
+	 style="position: absolute; float: left;">×</a>
+	<div class="panel-heading avatar1" style="padding-bottom: 
+	25px">
+		<h3 style="color: #000; font-weight: bold;">Welcome!</h3>
+		<!-- <span class="fa fa-user-circle  fa-5x" style="color: #000;"></span> -->
+		<img data-toggle="modal" data-target="#myModal_add_admin" src="<?php echo base_url();?>assets/images/avatar_img.jpg" style="height:90px;width:90px" alt="avatar" >		
 	</div>
-	<div class="side_nav" style="color: #fff;">
-		<span class="text-capitalize nav_span col-sm-12 font">Name: <?php echo $_SESSION['fname'].' '.$_SESSION['lname']; ?></span>
+	<div class="side_nav">
+		<span class="text-capitalize nav_span">Name: <?php echo $_SESSION['fname'].' '.$_SESSION['lname']; ?></span>
 		<span class="text-capitalize nav_span">Username: <?= $user; ?></span>
 		<span class="text-capitalize nav_span">Course: <?= $course; ?></span>
-		<span class="text-capitalize nav_span">Agency Name: <?= $cname; ?></span>
+		<span class="text-capitalize nav_span">Agency Name: <?= $cname  ?></span>
 	</div>	
 	<div class="add_admin_cdr">
-		<button type="button" class="btn btn-primary col-sm-2" data-toggle="modal" data-target="#myModal_supervisor"><span class="fa fa-user-plus"></span> Add Supervisor</button>
+		<button type="button" class="btn btn-primary btnProfile col-sm-2" data-toggle="modal" data-target="#myModal_supervisor"><span class="fa fa-user-plus"></span> Add Supervisor</button>
 		
-		<button type="button" class="btn btn-primary col-sm-2" data-toggle="modal" data-target="#myModal_student"><span class="fa fa-user-plus"></span> Add Student</button>
-		<button onclick="window.location='<?php echo base_url();?>Login/uploads';" type="button" class="btn btn-primary col-sm-2"><span class="fa fa-cloud-upload"></span> Upload Files</button>
+		<button type="button" class="btn btn-primary btnProfile col-sm-2" data-toggle="modal" data-target="#myModal_student"><span class="fa fa-user-plus"></span> Add Student</button>
+		<button onclick="window.location='<?php echo base_url();?>Login/uploads';" type="button" class="btn btn-primary col-sm-2 btnProfile"><span class="fa fa-cloud-upload"></span> Upload Files</button>
 	</div>
-
-<!-- <a href="#" class="text-capitalize">Logout</a> -->
 </div>
 
 <div id="main">
@@ -100,7 +100,7 @@
 		                </span>
 		            </label>
 		            <div class="col-sm-6">
-		                <input type="text" class="form-control " readonly>
+		                <input type="text" class="form-control " placeholder="*Upload .pdf files only" readonly>
 		            </div>              
 		        </div>
 		        <div class="input-group pull" style="margin-top: 10px;"">

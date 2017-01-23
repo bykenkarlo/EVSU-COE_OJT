@@ -5,7 +5,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background: #c9302c;
+    background: #fff;
     font-size: 11px;
     overflow-x: hidden;
     transition: 0.5s;
@@ -57,7 +57,7 @@
     text-decoration: none;
     font-size: 14px;
     font-weight: normal;
-    color: #fff;
+    color: #000;
     display: block;
     transition: 0.3s
 }
@@ -67,7 +67,7 @@
     text-decoration: none;
     font-size: 13px;
     font-weight: normal;
-    color: #fff;
+    color: #000;
     display: block;
     transition: 0.3s   
 }
@@ -82,11 +82,11 @@
 }
 
 .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 34px !important;
-    margin-left: 50px;
+    position: relative;
+    top: 1;
+    right: 10px;
+    font-size: 30px !important;
+    margin-left: 52px;
 }
 
 #main {

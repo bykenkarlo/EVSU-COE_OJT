@@ -47,13 +47,15 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<div id="mySidenav" class="sidenav" style="
-    background:url('<?php echo base_url();?>assets/images/sidenav.png')  no-repeat;background-size: 225%; padding: 20px 0px 0px 0px;  
-">
-	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-	<div class="panel-heading avatar1">
-		<h3>My Profile</h3>
-		<img src="<?php echo base_url();?>assets/images/img_avatar.png" style="height:106px;width:106px" alt="avatar">
+<div id="mySidenav" class="sidenav " >
+	<a href="javascript:void(0)" class="closebtn avatarBody" onclick="closeNav()"
+	 style="position: absolute; float: left;">×</a>
+	<div class="panel-heading avatar1" style="padding-bottom: 
+	25px">
+		<h3 style="color: #000; font-weight: bold;">Welcome!</h3>
+		<!-- <span class="fa fa-user-circle  fa-5x" style="color: #000;"></span> -->
+		<img data-toggle="modal" data-target="#myModal_add_admin" src="<?php echo base_url();?>assets/images/avatar_img.jpg" style="height:90px;width:90px" alt="avatar" >
+
 		
 	</div>
 	<span class="text-capitalize nav_span col-sm-12">Name: <?php echo $_SESSION['fname'].' '.$_SESSION['lname']; ?></span>
@@ -61,9 +63,9 @@
 	<span class="text-capitalize nav_span">Agency Name: <?= $cname; ?></span>
 	
 	<div class="add_admin_cdr">
-		<button type="button" class="btn btn-primary col-sm-2" data-toggle="modal" data-target="#myModal_edit"><span class="fa fa-user-plus"></span> Update Profile</button>
+		<button type="button" class="btn btn-primary col-sm-2 btnProfile" data-toggle="modal" data-target="#myModal_edit"><span class="fa fa-user-plus"></span> Update Profile</button>
 		
-		<button onclick="window.location='<?php echo base_url();?>Login/supervisor_profile_page';" href="<?php echo base_url();?>Login/userlogs" type="button" class="btn btn-primary col-sm-2 btn-"><span class="fa fa-cloud-upload"></span> Upload Files</button>
+		<button onclick="window.location='<?php echo base_url();?>Login/supervisor_profile_page';" href="<?php echo base_url();?>Login/userlogs" type="button" class="btn btn-primary col-sm-2 btnProfile btn-"><span class="fa fa-cloud-upload"></span> Upload Files</button>
 	</div>
 
 <!-- <a href="#" class="text-capitalize">Logout</a> -->

@@ -73,7 +73,7 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<div class="container">
+<div class="container" style="padding: 0px 50px 0px 50px">
 	<div class="panel" id="group_chat" style="border: .5px solid #ddd; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 		<div class="panel-heading panel_head ">
 			<h2><span class="fa fa-comments"></span> Chat Message</h2>

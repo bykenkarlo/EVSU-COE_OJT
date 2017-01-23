@@ -64,13 +64,13 @@
 </style>
 <body>
 
-<div id="mySidenav" class="sidenav" style="
-    background:url('<?php echo base_url();?>assets/images/sidenav.png')  no-repeat;background-size: 225%; padding: 20px 0px 0px 0px;  
-">
-	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+<div id="mySidenav" class="sidenav " >
+	<a href="javascript:void(0)" class="closebtn avatar1" onclick="closeNav()"
+	 style="position: absolute; float: left;">×</a>
 	<div class="panel-heading avatar1">
-		<h3>My Profile</h3>
-		<img src="<?php echo base_url();?>assets/images/img_avatar.png" style="height:106px;width:106px" alt="avatar">
+		<h3 style="color: #000; font-weight: bold;">Welcome!</h3>
+		<!-- <span class="fa fa-user-circle  fa-5x" style="color: #000;"></span> -->
+		<img src="<?php echo base_url();?>assets/images/avatar_img.jpg" style="height:106px;width:106px" alt="avatar">
 		
 	</div>
 	<span class="text-capitalize nav_span col-sm-12">Student Number:<?php echo $stud_num;  ?></span>
@@ -80,11 +80,11 @@
 
 	
 	<div class="add_admin_cdr">
-		<button type="button" class="btn btn-primary col-sm-2" data-toggle="modal" data-target="#myModal_edit"><span class="fa fa-user-plus"></span> Edit Profile</button>
-		<button type="button" class="btn btn-primary col-sm-2" data-toggle="modal" data-target="#myModal_cdr"><span class="fa fa-cloud-upload"></span> Upload File</button>
-		<button onclick="window.location='<?php echo base_url();?>Student/journal';" type="button" class="btn btn-primary col-sm-2"><span class="fa fa-newspaper-o"></span> Journal</button>
-		<button onclick="window.location='<?php echo base_url();?>Student/grades';" type="button" class="btn btn-primary col-sm-2"><span class="fa fa-calculator"></span> Grades</button>
-		<button onclick="window.location='';" type="button" class="btn btn-primary col-sm-2"><span class="fa fa-thumbs-up"></span> Peer to Peer Evaluation</button>
+		<button type="button" class="btn btn-danger col-sm-2 btnProfileStudent" data-toggle="modal" data-target="#myModal_edit"><span class="fa fa-user-plus"></span> Edit Profile</button>
+		<button type="button" class="btn btn-danger col-sm-2 btnProfileStudent" data-toggle="modal" data-target="#myModal_cdr"><span class="fa fa-cloud-upload"></span> Upload File</button>
+		<button onclick="window.location='<?php echo base_url();?>Student/journal';" type="button" class="btn btn-danger col-sm-2 btnProfileStudent"><span class="fa fa-newspaper-o"></span> Journal</button>
+		<button onclick="window.location='<?php echo base_url();?>Student/grades';" type="button" class="btn btn-danger col-sm-2 btnProfileStudent"><span class="fa fa-calculator"></span> Grades</button>
+		<button style="font-size: 14px;" onclick="window.location='';" type="button" class="btn btn-danger col-sm-2 btnProfileStudent"><span class="fa fa-thumbs-up"></span> Peer to Peer Evaluation</button>
 	</div>
 
 <!-- <a href="#" class="text-capitalize">Logout</a> -->

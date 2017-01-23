@@ -1,8 +1,11 @@
-
+body
+{
+	font-family: "Century Gothic";	
+}
 @font-face
 {
 	font-family: myFirstFont;
-	src = url(Artifika-Regular.ttf);
+	src: "Century Gothic";
 }
 body
 {
@@ -371,42 +374,32 @@ header
 {
 	margin: -22px 0px 10px 0px;
 }
-
-
-.profile_hr
-{
-	width: 120px;
-	color: #ddd;
-}
-
-.avatar2 img
-{
-	border-radius: 50px;
-	margin: 0px 50px 0px 0px;
-}
-
 .avatar1 img
 {
 	text-align: left;
 	border-radius: 50px;
+	height: 80px; 
+	width:80px;
+	box-shadow: 1px 3px 2px 1px rgba(0, 0, 0, 0.2), 0 2px 3px 1px rgba(0, 0, 0, 0.19);
+	cursor: pointer;
 }
 
 .avatar1
 {
+	background: #ddd;
 	text-align: center;
-	margin: -10px 0px 0px 0px;
+	margin: -60px 0px 10px 0px;
+	box-shadow: 0 1px 19px 0 rgba(0, 0, 0, 0.2), 0 0px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.avatarBody
+{
+	background: #ddd;
+	text-align: center;
+	margin: -60px 0px 0px 0px;
 }
 .avatar1 h3
 {
 	margin: 10px 0px 10px 0px;
-}
-
-.underline_detail
-{
-	font-weight: bold;
-	cursor: pointer;
-	border-bottom: 1px dotted #808080;
-	font-size: 11pt;
 }
 #userlists
 {	
@@ -538,14 +531,12 @@ header
 }
 .add_admin_cdr a
 {
-	color: #fff;
+	color: #000;
 	font-weight: bold;
 	text-align: left;
 	margin: 0px  5px 2px -5px;
 	width: 195px;
-	height: 2.5em;
-
-
+	height: 2em;
 }
 .add_admin_cdr button
 {
@@ -553,6 +544,7 @@ header
 	margin: 0px  5px 2px 28px;
 	width: 195px;
 	height: 2.5em;
+	font-size: 15px;
 }
 .edit_profile_modal
 {
@@ -832,4 +824,171 @@ header
 
 .btn_material:hover, .btn_material-large:hover {
   background-color: #2bbbad;
+}
+.btnSubmit
+{
+  background-color: #FFFFFF; 
+  border-color: #3269AD;
+  border: 2px solid #5bc0de;
+  border-radius: 22.5px; 
+  font-weight: bold;
+  width: 210px;
+  margin: 5px 0px 5px 5px;
+  color: #5bc0de; 
+}
+.btnAdminCdr
+{
+  background-color: #FFFFFF; 
+  border-color: #3269AD;
+  border: 1.8px solid #3269AD;
+  border-radius: 22.5px; 
+  font-weight: bold;
+  width: 210px;
+  margin: 5px 0px 5px 5px;
+  color: #3E699F; 
+}
+.btnCdrSpv
+{
+  border-color: #3269AD;
+  border: 1.8px solid #3269AD;
+  border-radius: 22.5px; 
+  font-weight: bold;
+  width: 260px;
+  margin: 5px 0px 5px 5px;
+  color: #3E699F; 
+  background-color: #FFFFFF; 
+}
+.btnCircle {
+  width: 28px;
+  height: 28px;
+  padding: 5px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 3px 0 rgba(0, 0, 0, 0.19);
+
+}
+.btnProfile
+{
+  background-color: #FFFFFF; 
+  border-color: #3269AD;
+  border: 1.3px solid #3269AD;
+  border-radius: 22.5px; 
+  font-weight: bold;
+  width: 210px;
+  margin: 5px 0px 5px 5px;
+  color: #3E699F; 
+}
+.btnProfileStudent
+{
+  background-color: #FFFFFF; 
+  border-color: #c9302c;
+  border: 1.3px solid #c9302c;
+  border-radius: 22.5px; 
+  font-weight: bold;
+  width: 210px;
+  margin: 5px 0px 5px 5px;
+  color: #c9302c; 
+}
+.btnPrint {
+  border: 2px solid #376092;
+  border-radius: 22.5px; 
+  font-weight: bold;
+  width: 150px;
+  margin: 5px 0px 5px 5px;
+  color: #376092;
+  background-color: #FFFFFF; 
+}
+.btnCompGrades {
+  border-radius: 22.5px;
+  border: 2px solid #376092;
+  font-weight: bold;
+  width: 190px;
+  margin: 5px 0px 5px 5px;
+  color: #376092;
+  background-color: #FFFFFF;
+}
+.btnUpdateAdmin {
+  border: 1.8px solid #376092;
+  border-radius: 22.5px;
+  font-weight: bold;
+  width: 140px;
+  margin: 5px 0px 5px 5px;
+  color: #376092;
+  background-color: #FFFFFF;
+}
+.btnAttendance {
+  border: 1.8px solid #376092;
+  border-radius: 22.5px;
+  font-weight: bold;
+  width: 190px;
+  margin: 5px 0px 5px 5px;
+  color: #376092;
+  background-color: #FFFFFF;
+}
+.btnPTP {
+  border: 1.8px solid #376092;
+  border-radius: 22.5px;
+  font-weight: bold;
+  width: 210px;
+  margin: 5px 0px 5px 5px;
+  color: #376092;
+  background-color: #FFFFFF;
+}
+.btnShowGrades {
+  border: 1.8px solid #376092;
+  border-radius: 22.5px;
+  font-weight: bold;
+  width: 300px;
+  margin: 5px 0px 5px 5px;
+  color: #376092;
+  background-color: #FFFFFF;
+}
+.btnCancel {
+  border-radius: 22.5px;
+  border: 1.8px solid #d9534f;
+  font-weight: bold;
+  width: 140px;
+  margin: 5px 0px 5px 5px;
+  color: #d9534f;
+  background-color: #FFFFFF;
+}
+.btnStudent
+{
+  background-color: #FFFFFF; 
+  border: 2px solid #5bc0de;
+  border-radius: 22.5px; 
+  font-weight: bold;
+  width: 150px;
+  margin: 5px 0px 5px 5px;
+  color: #5bc0de; 
+}
+@media screen and (min-width: 319px) {
+	#mobile-view {
+		display: none;
+	}
+}
+@media only screen and (max-width: 768px) {
+	#bigScreen-view {
+		display: block;
+	}
+}
+.table-borderless {
+	table-layout: none;
+}
+.studentInfo h3 {
+	border-bottom: .8px dashed #ddd;
+}
+.studentInfo:hover {
+	color: #376092;
+	cursor: pointer;
+}
+.studentInfo {
+	bottom: 0;
+}
+.well-custom {
+	background: #fff;
+}
+.studentAvatar {
+	border-radius: 50px;
 }

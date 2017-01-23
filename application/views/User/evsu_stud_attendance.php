@@ -369,7 +369,7 @@
 	
 	<div class="col-sm-8">
 		<div class="pull-right" style="margin-top: 10px;">
-			<button type="submit" class="btn btn-info btn-lg signin_button"><span class="glyphicon glyphicon-check"></span> Submit</button>
+			<button type="submit" class="btn btn-info btn-lg signin_button btnSubmit"><span class="glyphicon glyphicon-check"></span> Submit</button>
 		</div>
 	</div>
 </div>
@@ -386,8 +386,12 @@
 	
 
 <div class="" style="margin: 0em 0px 0px 0px;">
-<div class="attendance_sheet_recrd">
-	<h1 id=""><span class="fa fa-calendar" style="margin-top: 3em;"></span> Attendance Sheet</h1>
+
+<div class="row">
+	<div class="attendance_sheet_recrd">
+	<h1 id=""><span class="fa fa-calendar" style="margin-top: 2em; margin-left: 15px"></span> Attendance Sheet</h1>
+</div>
+
 </div>
 	<table class="table table-striped table-bordered table-hover">
 		<thead>
@@ -417,8 +421,8 @@
 		</tbody>
 		<?php endforeach ?>		
 	</table>
-<div style="float: right; margin-bottom: 20px; margin-left: -15px;" class="">
-	<button id="non-printable" class="btn btn-primary btn-sm" onClick="window.print()">
+<div style="float: right; margin-bottom: 20px;" class="">
+	<button id="non-printable" class="btn btn-primary btnPrint" onClick="window.print()">
 		<span class="glyphicon glyphicon-print"></span> Print this page
 	</button>
 </div>

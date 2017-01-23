@@ -193,8 +193,8 @@
 						</div>
 					</div>
 					<div class="pull-right" style="margin-right: 95px; margin-bottom: 20px; ">
-						<a href=""><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-share"></span> Update</button></a>
-						<a href="<?php echo base_url();?>Login/coordinator_lists"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button></td></a>
+						<a href=""><button type="submit" class="btn btn-primary btn-lg btnUpdateAdmin"><span class="glyphicon glyphicon-share"></span> Update</button></a>
+						<a href="<?php echo base_url();?>Login/coordinator_lists"><button type="button" class="btn btn-danger btn-lg btnCancel"><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button></td></a>
 					</div>	
 		</form>	
 	</div>

@@ -2,7 +2,7 @@
 </head>
 <body style="background-color: #f5f5f5">
 <header>
-<img src="<?php echo base_url();?>assets/images/EVSU_banner.png" height="100" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System"> 		
+<img src="<?php echo base_url();?>assets/images/EVSU_banner.png" width="100%" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System"> 		
 </header>
 <nav class="navbar navbar-inverse" id="nav2">
   <div class="container-fluid">
@@ -30,7 +30,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span><?php 
 				if (isset($_SESSION['username'])) { ?>
 				<span class="text-capitalize"><?php echo $_SESSION['fname'].' '.$_SESSION['lname'];?></span>	
-				<?php $email = $_SESSION['email'];
+				<?php $email = $_SESSION['email_add'];
 				$sex = $_SESSION['sex'];
 				$user = $_SESSION['username'];	    
 				   
@@ -56,28 +56,28 @@
 
 <!-- sidenav -->
 
-<div id="mySidenav" class="sidenav" style="
-    background:url('<?php echo base_url();?>assets/images/sidenav.png')  no-repeat;background-size: 225%; padding: 20px 0px 0px 0px;  
-">
-	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-	<div class="panel-heading avatar1">
-		<h3>My Profile</h3>
-		<img src="<?php echo base_url();?>assets/images/img_avatar.png" style="height:106px;width:106px" alt="avatar">
-		
+<div id="mySidenav" class="sidenav " >
+	<a href="javascript:void(0)" class="closebtn avatarBody" onclick="closeNav()"
+	 style="position: absolute; float: left;">×</a>
+	<div class="panel-heading avatar1" style="padding-bottom: 
+	25px">
+		<h3 style="color: #000; font-weight: bold;">Welcome!</h3>
+		<!-- <span class="fa fa-user-circle  fa-5x" style="color: #000;"></span> -->
+		<img src="<?php echo base_url();?>assets/images/avatar_img.jpg" style="height:90px;width:90px" alt="avatar">
 	</div>
 	<span class="text-capitalize nav_span col-sm-12">Name: <?php echo $_SESSION['fname'].' '.$_SESSION['lname']; ?></span>
 	<span class="text-capitalize nav_span">Username: <?= $user; ?></span>
+	<span class="nav_email">Email: <?= $email; ?></span>
 	<span class="text-capitalize nav_span">Gender: <?= $sex; ?></span>
 	
-	<div class="add_admin_cdr">
-		<button type="button" class="btn btn-danger col-sm-2" data-toggle="modal" data-target="#myModal_add_admin"><span class="fa fa-user-plus"></span> Add Administrator</button>		
-		<button type="button" class="btn btn-danger col-sm-2 " data-toggle="modal" data-target="#myModal_cdr"><span class="fa fa-user-plus"></span> Add Coordinator</button>
-		<button type="button" class="btn btn-danger col-sm-2 " data-toggle="modal" data-target="#myModal_course"><span class="fa fa-plus"></span> Add Course</button>
-		<button type="button" class="btn btn-danger col-sm-2 " data-toggle="modal" data-target="#myModal_comp"><span class="fa fa-plus"></span> Add Agency</button>		
-		<button type="button" onclick="window.location='<?php echo base_url();?>Login/userlogs';" class="btn btn-danger col-sm-2"><span class="fa fa-tasks"></span> User Logs</button>
-		
+	<div class="add_admin_cdr" style="text-align: left;">
+		<button type="button" class="btn btn-primary col-sm-2 btn-lg btnProfile" data-toggle="modal" data-target="#myModal_add_admin"><span class="fa fa-user-plus"></span> Add Administrator</button>		
+		<button type="button" class="btn btn-primary col-sm-2 btn-lg btnProfile" data-toggle="modal" data-target="#myModal_cdr"><span class="fa fa-user-plus"></span> Add Coordinator</button>
+		<button type="button" class="btn btn-primary col-sm-2 btn-lg btnProfile" data-toggle="modal" data-target="#myModal_comp"><span class="fa fa-plus-circle"></span> Add Agency</button>
+		<button type="button" class="btn btn-primary col-sm-2 btn-lg btnProfile" data-toggle="modal" data-target="#myModal_course"><span class="fa fa-plus-circle"></span> Add Course</button>
+		<button type="button" class="btn btn-primary col-sm-2 btn-lg btnProfile" onclick="window.location='<?= base_url()?>Login/others';"><span class="fa fa-list"></span> Others</button>
+		<button type="button" onclick="window.location='<?php echo base_url();?>Login/userlogs';" class="btn btn-primary col-sm-2 btn-lg btnProfile"><span class="fa fa-tasks"></span> User Logs</button>		
 	</div>
-
 <!-- <a href="#" class="text-capitalize">Logout</a> -->
 </div>
 
@@ -276,7 +276,7 @@
 <!--Modal end -->
 
 
-<!-- Modal add coordinator-->
+<!-- Modal add course-->
   <div class="modal fade" id="myModal_course" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
@@ -295,12 +295,19 @@
 								
 							<form class="form-horizontal" action="<?php echo base_url();?>Control/add_course" method="POST">	
 									<div class="form-group">	
-										<label class="col-sm-3 control-label">Course</label>
+										<label class="col-sm-3 control-label">Course Abbreviation</label>
 										<div class="col-sm-8">
-											<input type="text" name="reg_course" class="form-control text-capitalize" placeholder="Course" autofocus required>
+											<input type="text" name="reg_course_abbrv" class="form-control text-capitalize" placeholder="Course Abbreviation" autofocus required>
 											<label><small style="font-weight: normal;">*BSCE</small></label>
 										</div>
-									</div>							
+									</div>
+									<div class="form-group">	
+										<label class="col-sm-3 control-label">Course Name</label>
+										<div class="col-sm-8">
+											<input type="text" name="reg_course_name" class="form-control text-capitalize" placeholder="Course Name" required>
+											<label><small style="font-weight: normal;">*Bachelor of Science in Civil Engineering</small></label>
+										</div>
+									</div>
 									<div class="pull-right" style="margin-right: 50px; margin-bottom: 10px; margin-top: -15px;">
 										<button type="submit" class="btn btn-info reg_button"><span class="glyphicon glyphicon-cloud"></span> Add Course</button>
 									</div>	

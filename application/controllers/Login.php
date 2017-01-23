@@ -15,7 +15,7 @@ class Login extends CI_Controller {
 		{
 			echo '  <script>
 					    alert("You dont have the right to access this page. Please login first!");
-					    location.href="/EVSU_OJT/"
+					    location.href=" http://localhost/EVSU_OJT/"
 				    </script>';		
 		}		
 	}
@@ -44,6 +44,24 @@ class Login extends CI_Controller {
 			$this->load->view('assets/header');
 			$this->load->model('Login_user_model');
 			$this->load->view('User/evsu_course_agency_page');
+			$this->load->view('assets/footer');
+		}
+		else
+		{
+			echo '  <script>
+					    alert("You dont have the right to access this page. Please login first!");
+					    location.href="/EVSU_OJT/"
+				    </script>';
+		}
+		
+	}
+	public function agency_list()
+	{
+		if(isset($_SESSION['username']))
+		{
+			$this->load->view('assets/header');
+			$this->load->model('Login_user_model');
+			$this->load->view('User/evsu_agency_list');
 			$this->load->view('assets/footer');
 		}
 		else
@@ -467,7 +485,7 @@ class Login extends CI_Controller {
 			$logs = array('user' => $user, 'ip_address'=>$ip_address, 'activity' => 'Logged in');
 			$this->Login_user_model->add_activity($logs);
 			$this->Login_user_model->get_journal_data($stud_id);
-			$this->message('message','success' ,'Successfully Login');
+			$this->message('message','info' ,'Successfully Login');
 			redirect('Student/student_profile_page');		
 		}
 		elseif ($verified2)
@@ -478,17 +496,17 @@ class Login extends CI_Controller {
 			$_SESSION['username'] = $admin_info['username'];
 			$_SESSION['currentUser'] = $admin_info['username'];
 			$_SESSION['admin_id'] = $admin_info['admin_id'];
+			$_SESSION['admin_image'] = $admin_info['admin_image'];
 			$_SESSION['lname'] = $admin_info['lname'];
 			$_SESSION['fname'] = $admin_info['fname'];
 			$_SESSION['sex'] = $admin_info['sex'];
 			$_SESSION['email_add'] = $admin_info['email_add'];
 			$_SESSION['currentAdmin'] = $admin_info['username'];
 			$_SESSION['course_id'] = $courseInfo['course_id'];
-
 			$_SESSION['username'] = $user;	
 			$logs = array('user' => $user, 'ip_address'=>$ip_address, 'activity' => 'Logged in');
 			$this->Login_user_model->add_activity($logs);
-			$this->message('message','success' ,'Successfully Login!');
+			$this->message('message','info' ,'Successfully Login!');
 			redirect('/Login/profile_page');		
 		}
 		elseif ($verified3)
@@ -510,7 +528,7 @@ class Login extends CI_Controller {
 			$course_data= array('course' => $course );
 			$logs = array('user' => $user, 'ip_address'=>$ip_address, 'activity' => 'Logged in');
 			$this->Login_user_model->add_activity($logs);
-			$this->message('message','success' ,'Successfully Login!');
+			$this->message('message','info' ,'Successfully Login!');
 			redirect('/Login/coordinator_profile_page');		
 				
 		}
@@ -528,7 +546,7 @@ class Login extends CI_Controller {
 			$_SESSION['username'] = $user;
 			$logs = array('user' => $user, 'ip_address'=>$ip_address, 'activity' => 'Logged in');
 			$this->Login_user_model->add_activity($logs);
-			$this->message('message','success' ,'Succesfully Login');
+			$this->message('message','info' ,'Succesfully Login');
 			redirect('/Login/supervisor_profile_page');		
 				
 		}
@@ -607,13 +625,13 @@ class Login extends CI_Controller {
 			$fname = $this->input->post('fname');
 			$lname = $this->input->post('lname');
 			$sex = $this->input->post('sex');
-			$course = $this->input->post('course');
+			// $course = $this->input->post('course');
 			$year = $this->input->post('year');
 			$section = $this->input->post('section');
 			$cname = $this->input->post('cname');
 			$stud_id = $this->input->post('stud_id');
 
-			$data = array('fname' => $fname, 'lname' => $lname, 'sex' => $sex, 'course'=>$course, 'year'=>$year, 'section'=> $section, 'cname'=> $cname);
+			$data = array('fname' => $fname, 'lname' => $lname, 'sex' => $sex, 'year'=>$year, 'section'=> $section, 'cname'=> $cname);
 			$this->Login_user_model->update_stud($data, $stud_id);
 
 			$user = $_SESSION['username'];
@@ -656,11 +674,67 @@ class Login extends CI_Controller {
 		$data = array('stud_id' => $stud_id,'name'=>$name, 'month'=>$month, 'date'=>$date, 'year'=>$year,'day'=>$day,'time_in_hour'=>$time_in_hour,'time_in_min'=>$time_in_min,'time_in_ap'=>$time_in_ap,'time_out_hour'=>$time_out_hour,'time_out_min'=>$time_out_min,'time_out_ap'=>$time_out_ap);
 
 		$this->Login_user_model->insert_attend($data, $stud_id);
-		$this->message('message','success' ,'Success!');		
+		$this->message('message','info' ,'Success! Attendance inserted!');		
 		
 		redirect('/Login/supervisor_profile_page/stud_id');
 		}
-		
+		public function insertImage() {
+			$this->load->model('Login_user_model');
+			$admin_id = $this->input->post('admin_id');
+			
+
+			$target_dir = "assets/uploads/";
+			$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+			$uploadOk = 1;
+			$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+			// Check if image file is a actual image or fake image
+			if(isset($_POST["submit"])) {
+			    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+			    if($check !== false) {
+			        echo "File is an image - " . $check["mime"] . ".";
+			        $uploadOk = 1;
+			    } else {
+			        echo "File is not an image.";
+			        $uploadOk = 0;
+			    }
+			}
+			// Check if file already exists
+			if (file_exists($target_file)) {
+			    echo "Sorry, file already exists.";
+			    $uploadOk = 0;
+			}
+			// Check file size
+			if ($_FILES["fileToUpload"]["size"] > 500000) {
+			    echo "Sorry, your file is too large.";
+			    $uploadOk = 0;
+			}
+			// Allow certain file formats
+			if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+			&& $imageFileType != "gif" ) {
+			    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+			    $uploadOk = 0;
+			}
+			// Check if $uploadOk is set to 0 by an error
+			if ($uploadOk == 0) {
+			    echo "Sorry, your file was not uploaded.";
+			// if everything is ok, try to upload file
+			} else {
+			    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+			        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+			    } else {
+			        echo "Sorry, there was an error uploading your file.";
+			    }
+			}
+
+			
+			$this->Login_user_model->insertImage($target_file, $admin_id);			
+			$user = $_SESSION['username'];
+
+			$logs = array('user' => $user, 'activity' => 'Added his/her profile image!');
+			$this->Login_user_model->add_activity($logs);
+			$this->message('message','info' ,'Succes, Image added');		
+			redirect('/Login/profile_page');
+		}
 		public function insert_journal()
 		{
 		$this->load->model('Login_user_model');
