@@ -26,14 +26,9 @@ Our goal has its goal to make the work of our professors easier and for the stud
 Specific Objectives:
 ####################
 
-*To design a more organized way of submitting the grades of the OJT's.
-
-*To help the industry partners of EVSU to submit the grades of the of the OJT's in their agency in a faster and more effecient way.
-
-*To allow the OJT Coordinators to manage and monitor the OJT status and grades of the students more conveniently.
-
-*To create a module that will compute intern's grades based on inputted data.
-
-*To create a system that will secure and maintain the integrity of data.
-
-*To create a module that will keep the records of every intern in different agencies or companies.
+◘To design a more organized way of submitting the grades of the OJT's.
+◘To help the industry partners of EVSU to submit the grades of the of the OJT's in their agency in a faster and more effecient way.
+◘To allow the OJT Coordinators to manage and monitor the OJT status and grades of the students more conveniently.
+◘To create a module that will compute intern's grades based on inputted data.
+◘To create a system that will secure and maintain the integrity of data.
+◘To create a module that will keep the records of every intern in different agencies or companies.
