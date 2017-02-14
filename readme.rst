@@ -1,70 +1,36 @@
-###################
-What is CodeIgniter
-###################
+**************************************************
+This project is based in PHP Codeigniter Framework
+**************************************************
+########################################################
+On the Job Training Monitoring and Online Grading System
+########################################################
+********************************
+Eastern Visayas State University
+********************************
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+**********************
+College Of Engineering
+**********************
 
-*******************
-Release Information
-*******************
+************************
+Objective of the Project
+************************
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
+******************
+General Objective:
+******************
 
-**************************
-Changelog and New Features
-**************************
+This project will eliminate common problems caused by the traditional way of managing the grades, performance of the OJT's. To create an online grading system primarily for the Enginnering Department of the Eastern Visayas State University
 
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+Our goal has its goal to make the work of our professors easier and for the students to be more aware of their grades.
 
-*******************
-Server Requirements
-*******************
+******************
+Specific Objectives:
+******************
 
-PHP version 5.4 or newer is recommended.
-
-It should work on 5.2.4 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
-
-************
-Installation
-************
-
-Please see the `installation section <https://codeigniter.com/user_guide/installation/index.html>`_
-of the CodeIgniter User Guide.
-
-*******
-License
-*******
-
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
-
-*********
-Resources
-*********
-
--  `User Guide <https://codeigniter.com/docs>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community IRC <https://webchat.freenode.net/?channels=%23codeigniter>`_
-
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
-
-***************
-Acknowledgement
-***************
-
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
+*To design a more organized way of submitting the grades of the OJT's.
+*To help the industry partners of EVSU to submit the grades of the of the OJT's in their agency in a faster and more effecient way.
+*To allow the OJT Coordinators to manage and monitor the OJT status and grades of the students more conveniently.
+*To create a module that will compute intern's grades based on inputted data.
+*To create a system that will secure and maintain the integrity of data.
+*To create a module that will keep the records of every intern in different agencies or companies.
