@@ -10,8 +10,8 @@ Our goal has its goal to make the work of our professors easier and for the stud
 	<meta name="keywords" content="" />
 	<link rel="shortcut icon" href="<?php echo base_url();?>assets/images/logo-icon.png">
 	<link rel="shortcut icon" href="<?php echo base_url();?>assets/images/EVSU_logo.png">
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
+<!-- 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
+ -->	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
 
 
 </head>
@@ -33,7 +33,20 @@ Our goal has its goal to make the work of our professors easier and for the stud
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-      		<?php if (isset($_SESSION['currentStud'])) { ?>    
+        <?php if (isset($_SESSION['currentStud'])) { ?>    
+		<li class="#"><a href="<?= base_url()?>Login/student_profile_page"><span class="fa fa-bars"></span> EVSU-COE </a></li>
+      		<?php } elseif (isset($_SESSION['currentAdmin'])) { ?>	
+        <li class="#"><a href="<?= base_url()?>Login/profile_page"><span class="fa fa-bars"></span> EVSU-COE </a></li>
+        	<?php } elseif (isset($_SESSION['currentCdr'])) { ?>
+        <li class="#"><a href="<?= base_url()?>Login/coordinator_profile_page"><span class="fa fa-bars"></span> EVSU-COE </a></li>
+			<?php } elseif (isset($_SESSION['currentSpv'])) { ?>
+        <li class="#"><a href="<?= base_url()?>Login/supervisor_profile_page"><span class="fa fa-bars"></span> EVSU-COE </a></li>
+			<?php } elseif (!isset($_SESSION['username'])) { ?>
+        <li class="#"><a href="#"><span class="fa fa-bars"></span> EVSU-COE </a></li>
+		<?php } ?>    
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <?php if (isset($_SESSION['currentStud'])) { ?>    
         <li class="#"><a href="<?= base_url()?>Login/student_profile_page"><span class="fa fa-home"></span> Home </a></li>
       		<?php } elseif (isset($_SESSION['currentAdmin'])) { ?>	
         <li class="#"><a href="<?= base_url()?>Login/profile_page"><span class="fa fa-home"></span> Home </a></li>
@@ -45,9 +58,7 @@ Our goal has its goal to make the work of our professors easier and for the stud
         <li class="#"><a href="#"><span class="fa fa-home"></span> Home </a></li>
 		<?php } ?>
 		<li><a href="#about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
-		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>	    
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
+		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
         <li class="dropdown">
         <?php 
 			if (isset($_SESSION['username'])) { ?>
@@ -66,9 +77,15 @@ Our goal has its goal to make the work of our professors easier and for the stud
   </div><!-- /.container-fluid -->
 </nav>
 </header>
-<body class="img-responsive" style="
-background:url('<?php echo base_url();?>assets/images/evsu_bg.jpg') no-repeat;
-background-size: 100% 29%; margin: 0px 0px 10px 0px">
+
+<body class="img-responsive" style="background:url('<?php echo base_url();?>assets/images/evsu_bg.jpg') no-repeat center center fixed;
+	background-size: 100% 29%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+	">
+
 <div class="container pageTitle" style="text-align: center;">
   <h3>Eastern Visayas State University</h3>
   <h2>College of Engineering</h2>
@@ -76,6 +93,7 @@ background-size: 100% 29%; margin: 0px 0px 10px 0px">
   <h1> Monitoring and Online<br> Grading System</h1z> 
   <p>Building Globally Competitive Professionals</p>
 </div>
+
 <div class="container"></div>
 <div id="login_button" 
 	style="  
@@ -114,7 +132,7 @@ background-size: 100% 29%; margin: 0px 0px 10px 0px">
 							<div class="message_alert">
 								<?= $this->session->flashdata('message') ?>
 							</div>	
-							<form class="form-horizontal" action="<?php echo base_url();?>Login/Login_user" method="POST">
+							<form class="form-horizontal" action="<?php echo base_url();?>Login/Login_user" method="POST" id="login_form">
 									<div class="form-group">
 										<label class="col-sm-3 control-label">Username</label>						
 										<div class="col-sm-8">
@@ -136,7 +154,7 @@ background-size: 100% 29%; margin: 0px 0px 10px 0px">
 										<!-- <a href="<?php echo base_url();?>control/register_form" class="btn btn-primary reg_button"><span class="glyphicon glyphicon-cloud"></span> Register Here</a> -->
 									</div>
 									<div class="col-sm-7 remem_for" style="float: left;">
-										<a href="#" class="forget_pass">Forget Password</a>
+										<a href="#" data-toggle="modal" data-target="#myModal_forgot" class="forget_pass">Forget Password</a>
 									</div>
 							</form>
 						</div>
@@ -148,11 +166,68 @@ background-size: 100% 29%; margin: 0px 0px 10px 0px">
           <button type="button" class="btn btn-primary" data-dismiss="modal" ><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
         </div>        		
         	</div>
+      </div> 
+      <script type="text/javascript">
+	    $('#login_form').submit(function() {
+	    $('#gif').css('visibility', 'visible');
+		});
+      </script>    
+    </div>
+  </div> 
+</div>
+<!--Modal end -->
+
+ <!-- Modal forgot password-->
+  <div class="modal fade" id="myModal_forgot" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" id="modal-content">
+        <div class="modal-header panel_head">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+         	<div class="">
+				<h2>Enter Your email</h2>
+			</div>
+        </div>
+        <div class="modal-body" id="login_reg">
+			<div class="container">
+				<div class="col-sm-6 " id="">
+					<div id="" class="">
+						<div class="enter_your_id">	
+							<form class="form-horizontal" action="<?php echo base_url();?>control/check_student" method="POST">
+									<div class="message_alert">
+										<?= $this->session->flashdata('message') ?>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label"><span>Email Address</span></label>	
+
+										<div class="col-sm-8">
+											<input type="email" name="reg_stud_num" class="form-control" placeholder="Email address" autofocus required>
+											<label><small style="font-weight: normal; float: right;">*must be valid email address</small></label>
+										</div>
+									</div>	
+						
+									<div class="pull-right" style="margin-right: 50px; margin-bottom: 10px; margin-top: -15px;">
+										<button type="submit" class="btn btn-info reg_button"><span class="glyphicon glyphicon-cloud"></span> Enter</button>
+									</div>
+									
+									
+							</form>
+						</div>
+					</div>
+				</div>
+        	</div>
+        	<div >
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" style="margin-right: 33px;"><span class="fa fa-close"></span> Close</button>
+        </div>        		
+        	</div>
       </div>     
     </div>
   </div> 
 </div>
 <!--Modal end -->
+
 
  <!-- Modal register student-->
   <div class="modal fade" id="myModal_signup" role="dialog">
@@ -232,9 +307,10 @@ background-size: 100% 29%; margin: 0px 0px 10px 0px">
 		    Signup
 		 </a>	
 </div>
-<div class="container" style="background-color: #f5f5f5">
+<!-- <img src="<?= base_url()?>assets/images/spin.gif" id="gif" style="display: block; margin: 0 auto; width: 200px; visibility: hidden;"> -->
+<div class="container-body">
 <div id="about"></div>
-<div class="container">
+<div class="">
 <div class="container">
 	<div id="about">
 		<h2><b>On the Job Training Monitoring and Online Grading System</b></h2>
@@ -242,13 +318,13 @@ background-size: 100% 29%; margin: 0px 0px 10px 0px">
 		<h5>College Of Engineering</h5>
 	</div>	
 		<div class="container">
-			<div class="row ">
-						<div class="col-sm-8">
-							<h3 class="text-justify oph3" style="text-align: center;"><b>
+			<div class="row font-size text-left">
+						<div class="col-sm-10">
+							<h3 class="oph3 text-indent"><b>
 							Objective of the Project</b></h3>
 						<b class="col-sm-8 opb">General Objective:</b>
-							<div class="col-sm-12" style="text-align: center;">
-							<p>This project will eliminate common problems caused by the traditional way of managing the grades, performance of the OJT's. To create an online grading system primarily for the Enginnering Department of the Eastern Visayas State University</p>
+							<div class="col-sm-12">
+							<p class="text-indent">This project will eliminate common problems caused by the traditional way of managing the grades, performance of the OJT's. To create an online grading system primarily for the Enginnering Department of the Eastern Visayas State University</p>
 							<p>Our goal has its goal to make the work of our professors easier and for the students to be more aware of their grades.</p>
 							</div>
 						<b class="col-sm-8 opb">Specific Objectives:</b>
@@ -267,21 +343,8 @@ background-size: 100% 29%; margin: 0px 0px 10px 0px">
 	
 </div>
 
-<div class="" style="margin-left: 25px; margin-top: 30px;">
-	<div class="row">`
-		<div class="col-sm-8 col-sm-offset-2 ">
-			<p class="text-justify">
-				<h2 class="evsu_vm"><b>EVSU VISION</b></h2>
-				<p style="padding-left: 3em;">A Leading State University in Technological and Professional Education.</p>
-			</p><br>
-			<p class="text-justify">	
-				<h2 class="evsu_vm"><b>EVSU MISSION</b></h2>
-				<p style="padding-left: 3em;">Develop a Strong Technologically and Professionally Competent Productive Human Resource Imbued with Positive Values Needed to Propel Sustainable Development.</p>
-			</p>
-		</div>
-	</div>	
-</div>
-<div class="container ">
+
+<!-- <div class="container ">
 	<div id="contact_us">
 <div class="col-sm-8 contact_mess container ">
 	<div class="row">
@@ -298,5 +361,5 @@ background-size: 100% 29%; margin: 0px 0px 10px 0px">
 	</div>	
 </div>			
 </div>
-</div>
+</div> -->
 </div>

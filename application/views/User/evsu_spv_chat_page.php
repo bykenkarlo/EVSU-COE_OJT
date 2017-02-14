@@ -4,10 +4,9 @@
 	<title>EVSU | College of Engineering | On the Job Training Monitoring and Grading System< </title>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.bootstrap-dropdown-hover.js"></script>
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
 </head>
 
-<body style="background-color: #f5f5f5">
+<body>
 <header>
 <img src="<?php echo base_url();?>assets/images/EVSU_banner.png" height="100" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System"> 
 	<!-- <div class="header">
@@ -39,24 +38,12 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="#"><a href="<?php echo base_url();?>Login/supervisor_profile_page"><span class="fa fa-home"></span> Home </a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      	<li class="#"><a href="<?php echo base_url();?>Login/supervisor_profile_page"><span class="fa fa-home"></span> Home </a></li>
         <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
 		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
 		<li><a href="<?php echo base_url();?>Login/supervisor_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
-       <!--  <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li> -->
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span><?php 
 				if (isset($_SESSION['username'])) { ?>

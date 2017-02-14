@@ -124,6 +124,25 @@ class Control extends CI_Controller {
 		}
 		
 	}
+	public function performance($id)
+	{
+		if(isset($_SESSION['username']))
+		{
+			$data['stud_id'] = $id;
+			$this->load->model('Login_user_model');
+			$this->load->view('assets/header');
+			$this->load->view('User/evsu_performance_page', $data);
+			$this->load->view('assets/footer');
+		}
+		else
+		{
+			echo '  <script>
+					    alert("You dont have the right to access this page. Please login first!");
+					    location.href="/EVSU_OJT/"
+				    </script>';
+		}
+		
+	}
 	public function edit_users($id)
 	{
 		
@@ -221,25 +240,24 @@ class Control extends CI_Controller {
 		$reg_lname = $this->input->post('reg_lname');
 		$reg_fname = $this->input->post('reg_fname');
 		$reg_gender = $this->input->post('reg_gender');
-		$reg_cname = $this->input->post('reg_cname');
+		$reg_comp_id = $this->input->post('reg_comp_id');
 		$reg_course_id = $this->input->post('reg_course_id');
 		$reg_year = $this->input->post('reg_year');
 		$reg_section = $this->input->post('reg_section');
 
-		$where = array('stud_id' => $reg_stud_num, 'lname'=> $reg_lname, 'fname' => $reg_fname, 'sex'=> $reg_gender, 'cname' => $reg_cname, 'course_id' => $reg_course_id, 'year' => $reg_year, 'section'=> $reg_section);
+		$where = array('stud_id' => $reg_stud_num, 'lname'=> $reg_lname, 'fname' => $reg_fname, 'sex'=> $reg_gender, 'comp_id' => $reg_comp_id, 'course_id' => $reg_course_id, 'year' => $reg_year, 'section'=> $reg_section);
 		
-		$check_exist = $this->Stud_user_model->check_official_stud($where);
-
+		$check_exist = $this->Stud_user_model->check_official_studID($reg_stud_num);
 		if ($check_exist <= 0)
 		{
-		$data = array('stud_id' => $reg_stud_num, 'lname'=> $reg_lname, 'fname' => $reg_fname, 'sex'=> $reg_gender, 'cname' => $reg_cname, 'course_id' => $reg_course_id, 'year' => $reg_year, 'section'=> $reg_section);
+		$data = array('stud_id' => $reg_stud_num, 'lname'=> $reg_lname, 'fname' => $reg_fname, 'sex'=> $reg_gender, 'comp_id' => $reg_comp_id, 'course_id' => $reg_course_id, 'year' => $reg_year, 'section'=> $reg_section);
 		$this->Stud_user_model->insert_user_official_stud($data);
 		$this->message('message','info' ,'Student added');		
 		}
 
 		else
 		{
-			$this->message('message','danger' ,'User Already Exist');
+			$this->message('message','danger' ,'Student Already Existing!');
 		}
 		redirect('/Login/student_list');
 	}
@@ -252,15 +270,18 @@ class Control extends CI_Controller {
 		$reg_fname = $this->input->post('reg_fname');
 		$reg_sex = $this->input->post('reg_sex');
 		$reg_email = $this->input->post('reg_email');
+		$reg_contact = $this->input->post('reg_contact');
+		$reg_birthday = $this->input->post('reg_birthday');
+		$reg_curaddress = $this->input->post('reg_curaddress');
 		$reg_pass = $this->input->post('reg_pass');
 	
 
-		$where = array('username'=> $reg_username, 'lname'=> $reg_lname, 'fname' => $reg_fname, 'email_add' => $reg_email, 'sex' => $reg_sex, 'password' => $reg_pass);
+		$where = array('username'=> $reg_username, 'lname'=> $reg_lname, 'fname' => $reg_fname, 'email_add' => $reg_email, 'sex' => $reg_sex, 'contactNum'=>$reg_contact,'address'=>$reg_curaddress,'birthday'=>$reg_birthday, 'password' => $reg_pass);
 		$check_exist = $this->Stud_user_model->check_admin($where);
 
 		if ($check_exist <= 0)
 		{
-		$data = array('username'=> $reg_username, 'lname' => $reg_lname, 'fname' => $reg_fname, 'email_add' => $reg_email, 'password' => $reg_pass);
+		$data = array('username'=> $reg_username, 'lname' => $reg_lname, 'fname' => $reg_fname, 'email_add' => $reg_email, 'contactNum'=>$reg_contact,'address'=>$reg_curaddress,'birthday'=>$reg_birthday, 'password' => $reg_pass);
 		$this->Stud_user_model->insert_admin($data);
 		
 		
@@ -285,15 +306,17 @@ class Control extends CI_Controller {
 		$reg_fname = $this->input->post('reg_fname');
 		$reg_course_id = $this->input->post('reg_course_id');
 		$reg_cname = $this->input->post('reg_cname');
+		$reg_contact = $this->input->post('reg_contact');
+		$reg_birthday = $this->input->post('reg_birthday');
+		$reg_address = $this->input->post('reg_address');
 		$reg_pass = $this->input->post('reg_pass');
 
-
-		$where = array('username'=> $reg_username, 'lname'=> $reg_lname, 'fname' => $reg_fname, 'course_id' => $reg_course_id, 'cname'=>$reg_cname,'password' => $reg_pass);
+		$where = array('username'=> $reg_username, 'lname'=> $reg_lname, 'fname' => $reg_fname, 'course_id' => $reg_course_id, 'cname'=>$reg_cname,'address'=>$reg_address, 'contactNum'=>$reg_contact,'birthday'=>$reg_birthday, 'password' => $reg_pass);
 		$check_exist = $this->Stud_user_model->check_cdr($where);
 
 		if ($check_exist <= 0)
 		{
-		$data = array('username'=> $reg_username, 'lname' => $reg_lname, 'fname' => $reg_fname, 'course_id' => $reg_course_id, 'cname'=> $reg_cname,'password' => $reg_pass);
+		$data = array('username'=> $reg_username, 'lname' => $reg_lname, 'fname' => $reg_fname, 'course_id' => $reg_course_id, 'cname'=> $reg_cname,'address'=>$reg_address, 'contactNum'=>$reg_contact,'birthday'=>$reg_birthday, 'password' => $reg_pass);
 		$this->Stud_user_model->insert_cdr($data);
 
 		$user = $_SESSION['username'] ;
@@ -314,20 +337,17 @@ class Control extends CI_Controller {
 		$reg_username = $this->input->post('reg_username');
 		$reg_lname = $this->input->post('reg_lname');
 		$reg_fname = $this->input->post('reg_fname');
-		$reg_cname = $this->input->post('reg_cname');
+		$reg_comp_id = $this->input->post('reg_comp_id');
 		$reg_pass = $this->input->post('reg_pass');
-
-
-		$where = array('username'=> $reg_username, 'lname'=> $reg_lname, 'fname' => $reg_fname, 'cname' => $reg_cname, 'password' => $reg_pass);
+		$where = array('username'=> $reg_username, 'lname'=> $reg_lname, 'fname' => $reg_fname, 'comp_id' => $reg_comp_id, 'password' => $reg_pass);
 		$check_exist = $this->Stud_user_model->check_spv($where);
 
 		if ($check_exist <= 0)
 		{
-			$data = array('username'=> $reg_username, 'lname' => $reg_lname, 'fname' => $reg_fname, 'cname' => $reg_cname, 'password' => $reg_pass);
+			$data = array('username'=> $reg_username, 'lname' => $reg_lname, 'fname' => $reg_fname, 'comp_id' => $reg_comp_id, 'password' => $reg_pass);
 			$this->Stud_user_model->insert_spv($data);
 			$this->message('message','info' ,'Succes, Supervisor added');		
 		}
-
 		else
 		{
 			$this->message('message','danger' ,'Supervisor Already Exist');
@@ -372,7 +392,7 @@ class Control extends CI_Controller {
 
 		if ($check_exist){
 			$this->message('message','danger' ,'Agency Already Exist');
-			redirect('Login/profile_page');
+			redirect('Login/agency_list');
 		}
 
 		else
@@ -382,7 +402,7 @@ class Control extends CI_Controller {
 			$this->message('message','info' ,'Success, Agency Added!');	
 			$logs = array('user' => $user, 'activity' => 'Added New Agency'.' '.$reg_cname);
 			$this->Stud_user_model->add_activity($logs);
-			redirect('/Login/profile_page');
+			redirect('/Login/agency_list');
 
 		}
 	}
@@ -449,6 +469,15 @@ class Control extends CI_Controller {
 		$this->message('message', 'danger', 'Coordinators Deleted!');
 		redirect('/Login/coordinator_lists');
 	}
+	public function delete_agency_list($id)
+	{
+		$this->load->model('Stud_user_model');
+		$id = $this->input->post('delete_agency');
+		
+		$this->Stud_user_model->delete_agency_list($id);
+		$this->message('message', 'danger', 'Agency Deleted!');
+		redirect('/Login/agency_list');
+	}
 	public function delete_spv_list($id)
 	{
 		$this->load->model('Stud_user_model');
@@ -460,7 +489,7 @@ class Control extends CI_Controller {
 	}
 	public function delete_stud_list($id)
 	{
-		$this->load->model('stud_user_model');
+		$this->load->model('Stud_user_model');
 		$id = $this->input->post('delete_stud_list');
 		
 		$this->Stud_user_model->delete_stud_list($id);
@@ -481,6 +510,36 @@ class Control extends CI_Controller {
 		$this->Stud_user_model->delete_coordinator($id);
 		$this->message('message', 'danger', 'Coordinator has been Deleted');
 		redirect('/Login/coordinator_lists');
+	}
+	public function deleteCourse($id)
+	{
+		$this->load->model('Stud_user_model');
+		$course_info = $this->Stud_user_model->get_course_info($id);
+		$name = $course_name['course_name'];
+		
+		$user = $_SESSION['username'] ;
+		$logs = array('user' => $user, 'activity' => 'Course Deleted'.' '.$name);
+		$this->Stud_user_model->add_activity($logs);
+
+		
+		$this->Stud_user_model->deleteCourse($id);
+		$this->message('message', 'danger', 'Course has been Deleted');
+		redirect('/Login/others');
+	}
+	public function deleteAgency($id)
+	{
+		$this->load->model('Stud_user_model');
+		$agency_info = $this->Stud_user_model->get_agency_info($id);
+		$name = $course_name['cname'];
+		
+		$user = $_SESSION['username'] ;
+		$logs = array('user' => $user, 'activity' => 'Agency Deleted'.' '.$name);
+		$this->Stud_user_model->add_activity($logs);
+
+		
+		$this->Stud_user_model->deleteAgency($id);
+		$this->message('message', 'danger', 'Agency has been Deleted');
+		redirect('/Login/agency_list');
 	}
 	public function delete_supervisor($id)
 	{

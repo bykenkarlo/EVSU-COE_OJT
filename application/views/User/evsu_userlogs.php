@@ -1,6 +1,6 @@
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.js"></script>
 </head>
-<body style="background-color: #f5f5f5">
+<body>
 <header>
 <img src="<?php echo base_url();?>assets/images/EVSU_banner.png" width="100%" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System"> 		
 </header>
@@ -18,14 +18,13 @@
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="#"><a href="profile_page"><span class="fa fa-home"></span> Home </a></li>
+      <ul class="nav navbar-nav">        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      	<li class="#"><a href="profile_page"><span class="fa fa-home"></span> Home </a></li>
         <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
 		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
 		<li><a href="<?php echo base_url();?>Login/admin_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
- 
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span><?php 
 				if (isset($_SESSION['username'])) { ?>

@@ -28,6 +28,11 @@ class Stud_user_model extends CI_Model {
 		$this->db->where($where);
 		return $this->db->get('evsu_official_stud_tbl')->num_rows();
 	}
+	public function check_official_studID($reg_stud_num)
+	{
+		$this->db->where('stud_id',$reg_stud_num);
+		return $this->db->get('evsu_official_stud_tbl')->num_rows();
+	}
 	public function insert_user_official_stud($data)
 	{
 		$this->db->insert('evsu_official_stud_tbl', $data);
@@ -102,6 +107,16 @@ class Stud_user_model extends CI_Model {
 		$this->db->where('cdr_id', $id);
 		$this->db->delete('evsu_cdr_tbl');
 	}
+	Public function deleteCourse($id)
+	{
+		$this->db->where('course_id', $id);
+		$this->db->delete('evsu_course_tbl');
+	}
+	Public function deleteAgency($id)
+	{
+		$this->db->where('comp_id', $id);
+		$this->db->delete('evsu_company_tbl');
+	}
 	Public function delete_supervisor($id)
 	{
 		$this->db->where('spv_id', $id);
@@ -124,6 +139,13 @@ class Stud_user_model extends CI_Model {
 		if (!empty($id)) {
 			$this->db->where_in('cdr_id', $id);
 			$this->db->delete('evsu_cdr_tbl');
+		}
+	}
+	Public function delete_agency_list($id)
+	{
+		if (!empty($id)) {
+			$this->db->where_in('comp_id', $id);
+			$this->db->delete('evsu_company_tbl');
 		}
 	}
 	Public function delete_spv_list($id)
@@ -153,6 +175,16 @@ class Stud_user_model extends CI_Model {
 	{
 		$this->db->where('cdr_id', $id);
 		return $this->db->get('evsu_cdr_tbl')->row_array();
+	}
+	Public function get_course_info($id)
+	{
+		$this->db->where('course_id', $id);
+		return $this->db->get('evsu_course_tbl')->row_array();
+	}
+	Public function get_agency_info($id)
+	{
+		$this->db->where('comp_id', $id);
+		return $this->db->get('evsu_company_tbl')->row_array();
 	}
 	public function getThisUser($id)
 	{

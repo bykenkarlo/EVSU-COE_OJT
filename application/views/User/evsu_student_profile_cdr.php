@@ -1,8 +1,4 @@
 
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/dataTables.css">
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
-
 </head>
 
 </body>
@@ -28,15 +24,16 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="#"><a href="<?php echo base_url();?>Login/student_list"><span class="fa fa-home"></span> Home </a></li>
-        <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
-		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
-		<li><a href="<?php echo base_url();?>Login/supervisor_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
- 
+        
       </ul>
       <ul class="nav navbar-nav navbar-right">
+      	<li class="#"><a href="<?php echo base_url();?>Login/student_list"><span class="fa fa-home"></span> Home </a></li>
+        <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
+		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
+		<li><a href="<?php echo base_url();?>Login/coordinator_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
+ 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span><?php 
+          <a href="#" class="dropdown-toggle text-capitalize" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span><?php 
 				if (isset($_SESSION['username'])) { ?>
 				<?php echo $_SESSION['fname'].' '.$_SESSION['lname'];	
 				$course = $_SESSION['course_abbrv'];
@@ -80,7 +77,6 @@
 	<span style="font-size:30px;cursor:pointer;float: left; z-index: 1; background: #c9302c;" onclick="openNav()" class="btn_nav btn btn-md btn-circle btn_circle">
 		<span style="color: #fff" class="fa fa-tasks"></span>
 	</span>
-
 <div class="container" style="font-size:14pt; margin-top: 10px; margin-bottom: -10px;">
 		<?= $this->session->flashdata('message') ?>
 </div>
@@ -88,7 +84,7 @@
 
 	<?php $info = $this->Login_user_model->get_stud_info($stud_id); ?>	
 
-<div class="well well-sm well-custom">
+<div class="well well-sm well-custom" style="margin-bottom: 1px;">
 	<h2 class="text-capitalize"><span class="fa fa-user"></span> <?= $info['fname'].' '.$info['lname']?>'s Profile</h2>
 </div>	
 
@@ -111,7 +107,6 @@
 		<label class="col-sm-12 control-label studentInfo"><b>Year:</b> <?= $info['year']?></label>
 		<label class="col-sm-12 control-label text-capitalize studentInfo"><b>Section:</b> <?= $info['section']?></label>
 	</div>
-	
 </div>
 <?php $grades = $this->Login_user_model->get_grades($stud_id); ?>
 
@@ -140,7 +135,7 @@
 		<div class="well well-custom">
 	    	<span class="fa fa-calendar"></span> <b>Attendance Sheet</b>
 			<table class="table table-striped table-bordered table-hover" style="margin-top: 10px;" >
-				<thead>			
+				<thead style="background: Steelblue; color: #fff;">			
 					<tr>
 						<!-- <th>Name</th> -->
 						<th>Date</th>
@@ -149,9 +144,7 @@
 						<th>Time out</th>
 					</tr>
 				</thead>
-					<?php foreach ($this->Login_user_model->get_attendance($stud_id) as $key) :
-						$output = 	$key['time_in_hour'] ;
-					 ?>
+					<?php foreach ($this->Login_user_model->get_attendance($stud_id) as $key) { ?>
 				<tbody>
 					<tr>
 						<!-- <td class="text-capitalize"><?= $key['name']?></td> -->
@@ -159,36 +152,58 @@
 						<td><?= $key['day']?></td>
 						<td><?= $key['time_in_hour'].':'.$key['time_in_min'].' '.$key['time_in_ap']?></td>
 						<td><?= $key['time_out_hour'].':'.$key['time_out_min'].' '.$key['time_out_ap']?></td>
-								
 					</tr>
 				</tbody>
-				<?php endforeach ?>		
+					
+				
+				<?php } ?>		
 			</table>
 		</div>
 	</div>
-
-
 	<div class="collapse" id="PTPCollapse" style="margin: 10px;">
 		<div class="well well-custom">
 			<span class="fa fa-thumbs-o-up"></span><span> <b>Peer to Peer Evaluations</b></span>
 			<table class="table table-hover table-striped table-bordered" style="margin-top: 10px;"">
-				<thead>
+				<thead style="background: Steelblue; color: #fff;">			
 					<tr>
-						<th>Student's Name</th>
-						<th>Rate</th>
+						<th class="Tcenter"><span class="fa fa-users"></span> Student's Name</th>
+						<th class="Tcenter">Rate 
+						<span class="fa fa-star"></span>
+						<span class="fa fa-star"></span>
+						<span class="fa fa-star"></span>
+						<span class="fa fa-star"></span>
+						<span class="fa fa-star"></span>
+						</th>
 					</tr>
 				</thead>
+					<?php foreach($this->Login_user_model->getPTPInfo($stud_id) as $key ) 
+						$graded_by = $key['graded_by'];
+
+						if (isset($graded_by)) { 
+							$gradedBy = $this->Login_user_model->getStudName($graded_by);
+							$fullname = $gradedBy['lname'].', '.$gradedBy['fname'];
+					?>
 				<tbody>
-					<tr>
-						<td></td>
-						<td></td>
-					</tr>
+						<tr>
+							<td style="font-size: 15px;"><span class="fa  fa-angle-double-right"></span><a href="<?php echo base_url();?>Login/student_profiles/<?php echo $graded_by ?>" class="text-capitalize"> <?= $fullname ?></a>  </td>
+							<td style="text-align: center;"><button class="btn btn-primary btnStudGrade"><span class="fa fa-calculator"></span> Grade: <?= $key['total_grades']?></button></td>
+						</tr>
 				</tbody>
+					<?php }
+					elseif (!isset($graded_by)) { ?>						 
+				<tbody>
+						<tr>
+							<td style="font-size: 15px;"><span class="fa  fa-angle-double-right"></span><span> No Record!</span>  </td>
+							<td style="text-align: center;"><button class="btn btn-primary btnStudGrade"><span class="fa fa-calculator"></span> Grade: 0</button></td>
+						</tr>
+				</tbody>		
+											
+					<?php } ?>
+					
 			</table>
 		</div>
 	</div>
 </div>
-
 <!-- Modal add supervisor -->
   <div class="modal fade" id="myModal_supervisor" role="dialog">
     <div class="modal-dialog">
@@ -272,8 +287,6 @@
   </div> 
 </div>
 <!--Modal end -->
-
-
 <!-- Modal add student-->
   <div class="modal fade" id="myModal_student" role="dialog">
     <div class="modal-dialog">
@@ -390,19 +403,20 @@
 
 	</div>
 </div>
-<script>
-	
-	$(document).ready(function() {
-    $('#example').DataTable({
-        "aLengthMenu": [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"]],
-        "iDisplayLength": 5
-    });
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>
+	<script>
+		
+		$(document).ready(function() {
+	    $('#example').DataTable({
+	        "aLengthMenu": [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"]],
+	        "iDisplayLength": 5
+	    });
 
 
-} );
+	} );
 
-	
-</script>
+		
+	</script>s
 
 	
 

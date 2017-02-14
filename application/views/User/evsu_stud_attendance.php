@@ -9,7 +9,6 @@
     <link href="<?php echo base_url();?>assets/fullcalendar/css/bootstrapValidator.min.css" rel="stylesheet" />
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/combodate.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/date_picker/jquery.simple-dtpicker.js"></script>
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
 	<style type="text/css">
 	thead{
 	text-align: center;
@@ -39,13 +38,14 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="#"><a href="<?php echo base_url();?>Login/supervisor_profile_page"><span class="fa fa-home"></span> Home </a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      	<li class="#"><a href="<?php echo base_url();?>Login/supervisor_profile_page"><span class="fa fa-home"></span> Home </a></li>
         <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
 		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
 		<li><a href="<?php echo base_url();?>Login/supervisor_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
 
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span><?php 
 				if (isset($_SESSION['username'])) { ?>
@@ -79,11 +79,11 @@
 		<button type="button" onclick="window.location='<?= base_url();?>Login/supervisor_profile_page';" style=" margin:0px 30px 50px 0px; border-radius: 100px; box-shadow: 0 9px 18px 0 rgba(0, 0, 0, 0.21), 0 3px 10px 0 rgba(0, 0, 0, 0.19); float: right; position: fixed; z-index: 1; right: 0; bottom: 0;background: #db4437" class="btn btn-lg"><span style="color: #fff; font-size: 50px;" class="fa fa-arrow-left fa-1x"></span>
 		</button>
 	</div>
-<div class="col-sm-12" style="margin-left: -20px;">
-	<div class="panel-heading panel_head">
+<div class="col-sm-12">
+	<div class="well well-custom">
 		<h1><span class="fa fa-calendar"></span> Attendance Form</h1><br>
 	</div>
-	<form class="form-horizontal" action="<?php echo base_url();?>Login/insert_attendance" method="POST" style="background: #fff; border-radius: 2px; padding: 5px 15px 15px 20px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.1);margin-top: -10px;" >
+	<form class="form-horizontal" action="<?php echo base_url();?>Login/insert_attendance" method="POST" style="background: #fff; margin:-15px 0px 30px 0px;box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.21), 0 3px 6px 0 rgba(0, 0, 0, 0.19); padding: 20px 10px 15px 10px; " >
 
 	<div class="form-group">
 		<input type="hidden" name="stud_id" value="<?= $stud_id?>">
@@ -383,17 +383,11 @@
 
 
 
-	
-
-<div class="" style="margin: 0em 0px 0px 0px;">
-
-<div class="row">
-	<div class="attendance_sheet_recrd">
-	<h1 id=""><span class="fa fa-calendar" style="margin-top: 2em; margin-left: 15px"></span> Attendance Sheet</h1>
-</div>
-
-</div>
-	<table class="table table-striped table-bordered table-hover">
+<div class="col-sm-12" style="margin-left: 15px;">
+	<div class="well well-custom">
+		<h1 id=""><span class="fa fa-calendar"></span> Attendance Sheet</h1>
+	</div>
+	<table class="table table-striped table-bordered table-hover" style="margin-top: -18px;">
 		<thead>
 		
 			<tr>
@@ -421,6 +415,8 @@
 		</tbody>
 		<?php endforeach ?>		
 	</table>
+</div>
+	
 <div style="float: right; margin-bottom: 20px;" class="">
 	<button id="non-printable" class="btn btn-primary btnPrint" onClick="window.print()">
 		<span class="glyphicon glyphicon-print"></span> Print this page

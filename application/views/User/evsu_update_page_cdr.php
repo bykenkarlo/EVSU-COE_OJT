@@ -2,13 +2,10 @@
 <html>
 <head>
 	<title>EVSU | College of Engineering | On the Job Training Monitoring and Grading System< </title>
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/EVSU_OJT_css.css">
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
-
+	<link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/css/bootstrap-datepicker.css">
 </head>
 
-<body style="background-color: #f5f5f5">
+<body>
 <header>
 <img src="<?php echo base_url();?>assets/images/EVSU_banner.png" height="100" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System"> 
 	
@@ -30,13 +27,14 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="#"><a href="<?php echo base_url();?>Login/profile_page"><span class="fa fa-home"></span> Home </a></li>
-        <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
-		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
-		<li><a href="<?php echo base_url();?>Login/admin_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
+        
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
+      	<li class="#"><a href="<?php echo base_url();?>Login/profile_page"><span class="fa fa-home"></span> Home </a></li>
+        <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
+		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
+		<li><a href="<?php echo base_url();?>Login/admin_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span><?php 
 				if (isset($_SESSION['username'])) { ?>
@@ -144,10 +142,6 @@
 </div>
 <!--Modal end -->
 
-
-
-
-
 <?php $info = $this->Login_user_model->get_cdr_info($cdr_id); ?>	
 
 <div class="" id="table_list" style="background: #fff; margin: 10px 0px 40px 0px; border-radius: 5px;" >
@@ -175,9 +169,41 @@
 						</div>
 					</div>
 					<div class="form-group">	
-						<label class="col-sm-3 control-label">Course</label>
+						<label class="col-sm-3 control-label">Contact Number</label>
 						<div class="col-sm-8">
-							<input type="text" name="course" class="form-control text-capitalize" value="<?= $info['course_name']?> " >
+							<div class="input-group">
+								<span class="input-group-addon">
+							            <span class="">+63</span>
+							    </span>
+								<input type="text" name="contact" class="form-control " value="<?= $info['contactNum']?>">
+								
+							</div>
+							<label><small style="font-weight: normal;">*must be valid mobile number.</small></label>
+						</div>
+					</div>
+					<div class="form-group date" data-provide="datepicker">	
+						<label class="col-sm-3 control-label">Birthday</label>		
+						<div class='col-sm-8 ' id='datetimepicker1'>
+							<div class="input-group">
+								<input type='text' name="birthday" class="form-control" value="<?= $info['birthday']?>" />
+							    <span class="input-group-addon">
+							            <span class="glyphicon glyphicon-calendar"></span>
+							    </span>
+							</div>	
+							<label><small style="font-weight: normal;">*Month/Day/Year</small></label>
+
+						</div>
+						<script type="text/javascript">
+							$('#datetimepicker').data("DateTimePicker").FUNCTION();
+						</script>
+
+					</div>
+
+					
+					<div class="form-group">	
+						<label class="col-sm-3 control-label">Current Address</label>
+						<div class="col-sm-8">
+							<input type="text" name="address" class="form-control text-capitalize" value="<?= $info['address']?> ">
 						</div>
 					</div>
 					<div class="form-group">	
@@ -206,7 +232,8 @@
 
 
 
-
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/af.js"></script>
 <div class="container">	
 </div>
 

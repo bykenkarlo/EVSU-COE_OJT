@@ -1,9 +1,13 @@
-
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/buttons.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/buttons.bootstrap.min.css">
+	<style type="text/css">
+		
+	</style>
 </head>
 </body>
 
 <header>
-<img src="<?php echo base_url();?>assets/images/EVSU_banner.png" height="100" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System"> 			
+<img id="non-printable" src="<?php echo base_url();?>assets/images/EVSU_banner.png" height="100" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System"> 			
 </header>
 <nav class="navbar navbar-inverse" id="nav2">
   <div class="container-fluid">
@@ -22,15 +26,16 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="#"><a href="<?php echo base_url();?>Login/coordinator_profile_page"><span class="fa fa-home"></span> Home </a></li>
-        <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
-		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
-		<li><a href="<?php echo base_url();?>Login/coordinator_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
+        
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
+      	<li class="#"><a href="<?php echo base_url();?>Login/coordinator_profile_page"><span class="fa fa-home"></span> Home </a></li>
+        <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
+		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
+		<li><a href="<?php echo base_url();?>Login/coordinator_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span><?php 
+          <a class="text-capitalize" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span><?php 
 				if (isset($_SESSION['username'])) { ?>
 				<?php echo $_SESSION['fname'].' '.$_SESSION['lname'];	
 				$user = $_SESSION['username'];	    
@@ -132,11 +137,11 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">Agency Name</label>
 										<div class="col-sm-4">
-											<select name="reg_cname" class="form-control">
+											<select name="reg_comp_id" class="form-control text-capitalize">
 												<option value="-">Choose</option>
 												<?php foreach ($this->Login_user_model->get_all_cname() as $key) : 
 												?>
-												<option value="<?= $key['cname'] ?>"><?= $key['cname'] ?></option>
+												<option class="text-capitalize" value="<?= $key['comp_id'] ?>"><?= $key['cname'] ?></option>
 												<?php endforeach ?>
 											</select>
 										</div>	
@@ -147,7 +152,7 @@
 											<select name="reg_course_id" class="form-control" value="Course">
 												<option value="-">Choose</option>
 												<?php foreach ($this->Login_user_model->get_all_course() as $key):?>
-												<option value="<?= $key['course_id'] ?>"><?= $key['course_name'] ?></option>
+												<option class="text-capitalize" value="<?= $key['course_id'] ?>"><?= $key['course_name'] ?></option>
 												<?php endforeach ?>
 												<!--  -->
 											</select>
@@ -208,7 +213,6 @@
 <!-- Modal add supervisor -->
   <div class="modal fade" id="myModal_supervisor" role="dialog">
     <div class="modal-dialog">
-    
       <!-- Modal content-->
       <div class="modal-content" id="">
         <div class="modal-header panel_head">
@@ -221,8 +225,7 @@
 			<div class="container">
 				<div class="col-sm-6 " id="=">
 					<div id="" class="">
-						<div class="">
-								
+						<div class="">					
 							<form class="form-horizontal" action="<?= base_url(); ?>Control/register_supervisor" method="POST">	
 									<div class="form-group">	
 										<label class="col-sm-3 control-label">Username</label>
@@ -244,10 +247,16 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label">Agency Name</label>						
-										<div class="col-sm-8">
-											<input type="text" name="reg_cname" class="form-control text-capitalize" placeholder="Agency Name"  required>
-										</div>
+										<label class="col-sm-3 control-label">Agency Name</label>
+										<div class="col-sm-4">
+											<select name="reg_comp_id" class="form-control" value="Course">
+												<option value="-">Choose</option>
+												<?php foreach ($this->Login_user_model->get_all_cname() as $key) : 
+												?>
+												<option value="<?= $key['comp_id'] ?>"><?= $key['cname'] ?></option>
+												<?php endforeach ?>
+											</select>
+										</div>	
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label">Password</label>						
@@ -282,7 +291,6 @@
   </div> 
 </div>
 <!--Modal end -->
-			
 		<?php
 			 if (isset($_SESSION['student_info']))
 			 {
@@ -337,6 +345,8 @@
 	<div style="margin-bottom: 20px;">
 		<button onclick="window.location='<?= base_url()?>Login/coordinator_profile_page'" class="btn btn-primary btn-lg btnCdrSpv"><span class="fa fa-th-list"></span> Training Supervisor Lists</button>	
 			<button onclick="window.location='<?= base_url()?>Login/student_list'" class="btn btn-primary btn-lg btnAdminCdr"><span class="fa fa-th-list"></span> Student Lists</button>
+			<button type="button" class="btn btn-primary btn-lg btnAdminCdr" onclick="window.location='<?= base_url();?>Login/others'"><span class="fa fa-th-list"></span> Course Lists</button>
+			<button type="button" class="btn btn-primary btn-lg btnAdminCdr" onclick="window.location='<?= base_url();?>Login/agency_list'"><span class="fa fa-th-list"></span> Agency Lists</button>
 	</div>
 	<form action="<?= base_url()?>Control/delete_stud_list" method="POST"> 
 		<table id="example" class="table table-striped table-hover" cellspacing="0" style="margin-top: 10px;border-bottom: 1.5px solid SteelBlue;">
@@ -372,7 +382,7 @@
 			<?php foreach ($this->Login_user_model->get_all_student($course_id) as $key): ?>
 				<tr>
 					<td>
-						<input type="checkbox" name="delete_stud_list[]" id="selector" value="<?= $key['stud_id']; ?>"></input>
+						<input type="checkbox" name="delete_stud_list[]" value="<?= $key['stud_id']; ?>">
 					</td>
 					<td>
 						<a href="<?php echo base_url();?>Login/student_profiles/<?php echo $key['stud_id'] ?>" style="color: #1565c0"> <?= $key['stud_id']; ?></a>
@@ -409,18 +419,33 @@
 
 <div class="container">	
 </div>
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.js"></script>
-	<script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/dataTables.bootstrap.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/buttons.flash.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/buttons.html5.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/buttons.print.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/dataTables.buttons.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/buttons.bootstrap.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jszip.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/vfs_fonts.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/pdfmake.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/buttons.colVis.min.js"></script>
 	
+	<script>
 	$(document).ready(function() {
     $('#example').DataTable({
-        "aLengthMenu": [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"]],
-        "iDisplayLength": 5
-    });
 
-} );	
-</script>
-<script>
+        // "aLengthMenu": [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"]],
+        "iDisplayLength": 10,
+        dom: 'Bfrtip',
+    	
+        buttons: [ 'copy', 'csv', 'pdf', 'colvis']
+    	});
+
+	} );	
+	</script>
+
+	<script>
 		// Listen for click on toggle checkbox
 		$('#select-all').click(function(event) {   
 		    if(this.checked) {

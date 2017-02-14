@@ -26,12 +26,13 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="#"><a href="<?php echo base_url(); ?>"><span class="fa fa-home"></span> Home </a></li>
-        <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
-		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
+        
  
       </ul>
       <ul class="nav navbar-nav navbar-right">
+      	<li class="#"><a href="<?php echo base_url(); ?>"><span class="fa fa-home"></span> Home </a></li>
+        <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
+		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

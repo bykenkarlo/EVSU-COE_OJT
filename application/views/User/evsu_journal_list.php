@@ -31,13 +31,14 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="#"><a href="<?php echo base_url();?>Student/student_profile_page"><span class="fa fa-home"></span> Home </a></li>
-        <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
-		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
-		<li><a href="<?php echo base_url();?>Student/student_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
+       
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
+      	 <li class="#"><a href="<?php echo base_url();?>Student/student_profile_page"><span class="fa fa-home"></span> Home </a></li>
+        <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
+		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
+		<li><a href="<?php echo base_url();?>Student/student_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span><?php 
 				if (isset($_SESSION['stud_num'])) { ?>
@@ -65,12 +66,13 @@
 <body>
 
 <div id="mySidenav" class="sidenav " >
-	<a href="javascript:void(0)" class="closebtn avatar1" onclick="closeNav()"
+	<a href="javascript:void(0)" class="closebtn avatarBody" onclick="closeNav()"
 	 style="position: absolute; float: left;">×</a>
-	<div class="panel-heading avatar1">
+	<div class="panel-heading avatar1" style="padding-bottom: 
+	25px">
 		<h3 style="color: #000; font-weight: bold;">Welcome!</h3>
 		<!-- <span class="fa fa-user-circle  fa-5x" style="color: #000;"></span> -->
-		<img src="<?php echo base_url();?>assets/images/avatar_img.jpg" style="height:106px;width:106px" alt="avatar">
+		<img data-toggle="modal" data-target="#myModal_add_admin" src="<?php echo base_url();?>assets/images/avatar_img.jpg" style="height:90px;width:90px" alt="avatar" >
 		
 	</div>
 	<span class="text-capitalize nav_span col-sm-12">Student Number:<?php echo $stud_num;  ?></span>
@@ -84,15 +86,15 @@
 		<button type="button" class="btn btn-danger col-sm-2 btnProfileStudent" data-toggle="modal" data-target="#myModal_cdr"><span class="fa fa-cloud-upload"></span> Upload File</button>
 		<button onclick="window.location='<?php echo base_url();?>Student/journal';" type="button" class="btn btn-danger col-sm-2 btnProfileStudent"><span class="fa fa-newspaper-o"></span> Journal</button>
 		<button onclick="window.location='<?php echo base_url();?>Student/grades';" type="button" class="btn btn-danger col-sm-2 btnProfileStudent"><span class="fa fa-calculator"></span> Grades</button>
-		<button style="font-size: 14px;" onclick="window.location='';" type="button" class="btn btn-danger col-sm-2 btnProfileStudent"><span class="fa fa-thumbs-up"></span> Peer to Peer Evaluation</button>
+		<button style="font-size: 14px;" onclick="window.location='<?= base_url(); ?>Login/PTPgrades?studID=null'" type="button" class="btn btn-danger col-sm-2 btnProfileStudent"><span class="fa fa-thumbs-up"></span> Peer to Peer Evaluation</button>
 	</div>
 
 <!-- <a href="#" class="text-capitalize">Logout</a> -->
 </div>
 
 <div id="main">
-	<span style="font-size:30px;cursor:pointer;float: left; z-index: 1; background: #c9302c;" onclick="openNav()" class="btn_nav btn btn-md btn-circle btn_circle">
-		<span style="color: #fff" class="fa fa-tasks"></span>
+	<span  style="font-size:30px;cursor:pointer;float: left; z-index: 1; background: #c9302c;" onclick="openNav()"  class="btn_nav btn btn-md btn-circle btn_circle">
+		<span id="#non-printable" style="color: #fff" class="fa fa-tasks"></span>
 	</span>
 
 

@@ -135,7 +135,7 @@ background-size: 100% 90%; padding: 0px 0px 0px 0px" >
 				
 		</div>
 		<div>
-			<label class="control-label col-sm-7">Agency Address: <span style="border-top: 1px solid #000; width: 20" ></span></label>
+			<label class="control-label col-sm-7">Agency Address: <?= $info['agency_address']?><span style="border-top: 1px solid #000; width: 20" ></span></label>
 		</div>
 		<div class="" style="float: right;margin:-100px 50px 0px 0px;">
 			<p>
@@ -288,7 +288,6 @@ background-size: 100% 90%; padding: 0px 0px 0px 0px" >
 	</div>
 </div>
 <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
 <div class="container">	</div>
 
 

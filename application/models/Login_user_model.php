@@ -50,7 +50,20 @@ class Login_user_model extends CI_Model {
 		$this->db->SELECT('*');
 		$this->db->FROM('evsu_official_stud_tbl ');
 		$this->db->JOIN('evsu_course_tbl','evsu_official_stud_tbl.course_id = evsu_course_tbl.course_id','right');
+		$this->db->JOIN('evsu_company_tbl','evsu_official_stud_tbl.comp_id = evsu_company_tbl.comp_id','left');
 		$this->db->WHERE(array('evsu_course_tbl.course_id' => $course_id));
+		$query = $this->db->get()->result_array();
+		return $query;
+
+		// $this->db->where('course_id', $course_id);
+		// return $this->db->get('evsu_official_stud_tbl')->result_array();
+	}
+	public function getStudentData()
+	{ 
+		$this->db->SELECT('*');
+		$this->db->FROM('evsu_official_stud_tbl ');
+		$this->db->JOIN('evsu_company_tbl','evsu_official_stud_tbl.comp_id = evsu_company_tbl.comp_id','left');
+		// $this->db->WHERE(array('evsu_official_stud_tbl.stud_id' => $stud_id));
 		$query = $this->db->get()->result_array();
 		return $query;
 
@@ -66,21 +79,53 @@ class Login_user_model extends CI_Model {
 	{
 		return $this->db->get('evsu_company_tbl')->result_array();
 	}
-	public function get_all_student_spv($cname)
+	public function getCompanyData($comp_id)
+	{
+		$this->db->WHERE('comp_id', $comp_id);
+		return $this->db->get('evsu_company_tbl')->result_array();
+	}
+	public function get_all_student_spv($comp_id)
 	{ 
-		$this->db->where('cname', $cname);
-		return $this->db->get('evsu_official_stud_tbl')->result_array();
+		$this->db->SELECT('*');
+		$this->db->FROM('evsu_official_stud_tbl ');
+		$this->db->JOIN('evsu_company_tbl','evsu_official_stud_tbl.comp_id = evsu_company_tbl.comp_id','left');
+		$this->db->WHERE(array('evsu_company_tbl.comp_id' => $comp_id));
+		$query = $this->db->get()->result_array();
+		
+		return $query;
+		// $this->db->WHERE('comp_id', $comp_id);
+		// return $this->db->GET('evsu_official_stud_tbl')->result_array();
 	}
 	public function get_all_spv()
 	{
-		return $this->db->get('evsu_spv_tbl')->result_array();
+		$this->db->ORDER_BY("lname", "ASC");
+		$this->db->SELECT('*');
+		$this->db->FROM('evsu_spv_tbl');
+		$this->db->JOIN('evsu_company_tbl','evsu_spv_tbl.comp_id = evsu_company_tbl.comp_id','left');
+		$query = $this->db->get()->result_array();
+		return $query;
+		// return $this->db->get('evsu_spv_tbl')->result_array();
+	}
+	public function get_spv_data($comp_id)
+	{
+		$this->db->SELECT('*');
+		$this->db->FROM('evsu_spv_tbl');
+		$this->db->JOIN('evsu_company_tbl','evsu_spv_tbl.comp_id = evsu_company_tbl.comp_id','right');
+		$this->db->WHERE(array('evsu_spv_tbl.comp_id'=>$comp_id));
+		$query = $this->db->get()->row_array();
+		return $query;
+		// return $this->db->get('evsu_spv_tbl')->result_array();
 	}
 	public function getuserlogs()
 	{
 		$this->db->join('evsu_userlogs_tbl', 'evsu_userlogs_tbl.admin_id = evsu_admin_tbl.admin_id', 'left');
 		$query = $this->db->get('evsu_userlogs_tbl','evsu_admin_tbl');
 	}
-
+	Public function getAgencyInfo($comp_id)
+	{
+		$this->db->where('comp_id', $comp_id);
+		return $this->db->get('evsu_company_tbl')->row_array();
+	}
 	Public function get_admin_info($id)
 	{
 		$this->db->where('admin_id', $id);
@@ -102,10 +147,16 @@ class Login_user_model extends CI_Model {
 		$query = $this->db->get()->row_array();
 		return $query;
 	}
-	Public function get_spv_info($uid)
+	Public function get_spv_info($spv_id)
 	{
-		$this->db->where('spv_id', $uid);
-		return $this->db->get('evsu_spv_tbl')->row_array();
+		$this->db->SELECT('*');
+		$this->db->FROM('evsu_spv_tbl ');
+		$this->db->JOIN('evsu_company_tbl','evsu_spv_tbl.comp_id = evsu_company_tbl.comp_id','left');
+		$this->db->where('spv_id', $spv_id);
+		$query = $this->db->get()->row_array();
+		return $query;
+		// $this->db->where('spv_id', $spv_id);
+		// return $this->db->get('evsu_spv_tbl')->row_array();
 	}
 	Public function get_stud_info($id)
 	{
@@ -113,11 +164,18 @@ class Login_user_model extends CI_Model {
 		$this->db->SELECT('*');
 		$this->db->FROM('evsu_official_stud_tbl ');
 		$this->db->JOIN('evsu_course_tbl','evsu_official_stud_tbl.course_id = evsu_course_tbl.course_id','left');
+		$this->db->JOIN('evsu_company_tbl','evsu_official_stud_tbl.comp_id = evsu_company_tbl.comp_id', 'left');
 		$this->db->where('stud_id', $id);
 		$query = $this->db->get()->row_array();
 		return $query;
+
 		// $this->db->where('stud_id', $id);
 		// return $this->db->get('evsu_official_stud_tbl')->row_array();
+	}
+	Public	function updateAgency($data, $comp_id)
+	{
+		$this->db->where('comp_id', $comp_id);
+		$this->db->update('evsu_company_tbl', $data);
 	}
 	Public	function update_cdr($data, $cdr_id)
 	{
@@ -240,10 +298,16 @@ class Login_user_model extends CI_Model {
 		$this->db->where('stud_id', $stud_id);
 		return $this->db->get('evsu_criteria_grades_tbl')->row_array();	
 	}
-	// public function getOutput()
-	// {
-	// 	return $this->db->query("SELECT SUM()");
-	// }
+	Public function get_gradesPTP($studentID)
+	{
+		$this->db->where('stud_id', $studentID);
+		return $this->db->get('evsu_PTP_grades_tbl')->row_array();	
+	}
+	Public function computePTP($data, $stud_id)
+	{
+		$this->db->WHERE('stud_id', $stud_id);
+		$this->db->INSERT('evsu_PTP_grades_tbl', $data);	
+	}
 	public function insertImage($target_file, $admin_id)
 	{	
 		$query = ("INSERT INTO evsu_admin_tbl (admin_image) VALUES ('$target_file') ");
@@ -315,7 +379,18 @@ class Login_user_model extends CI_Model {
 		$query =  $this->db->query("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_NAME = 'evsu_journal_tbl' ");
 		return $query->row_array();
 	}
-
+	public function getPTPInfo($stud_id) {
+		$this->db->SELECT('*');
+		$this->db->FROM('evsu_ptp_grades_tbl ');
+		$this->db->JOIN('evsu_official_stud_tbl','evsu_ptp_grades_tbl.stud_id = evsu_official_stud_tbl.stud_id','left');
+		$this->db->WHERE(array('evsu_official_stud_tbl.stud_id' => $stud_id));
+		$query = $this->db->get()->result_array();
+		return $query;
+	}
+	public function getStudName($graded_by) {
+		$this->db->WHERE('stud_id', $graded_by);
+		return $this->db->get('evsu_official_stud_tbl')->row_array();
+	}
 
 
 

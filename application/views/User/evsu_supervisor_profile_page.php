@@ -1,6 +1,6 @@
 
 </head>
-<body style="background: #f5f5f5;">
+<body class="body">
 
 <header >
 <img src="<?php echo base_url();?>assets/images/EVSU_banner.png" height="100" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System"> 
@@ -24,19 +24,20 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="#"><a href="<?php echo base_url();?>Login/supervisor_profile_page"><span class="fa fa-home"></span> Home </a></li>
-        <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
-		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
-		<li><a href="<?php echo base_url();?>Login/supervisor_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
  
       </ul>
       <ul class="nav navbar-nav navbar-right">
+      	 <li class="#"><a href="<?php echo base_url();?>Login/supervisor_profile_page"><span class="fa fa-home"></span> Home </a></li>
+        <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
+		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
+		<li><a href="<?php echo base_url();?>Login/supervisor_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span><?php 
 				if (isset($_SESSION['username'])) { ?>
 				<?php echo $_SESSION['fname'].' '.$_SESSION['lname'];	
 				$user = $_SESSION['username'];	
-				$cname = $_SESSION['cname'];    
+				$comp_id = $_SESSION['comp_id'];   
+				$cname = $_SESSION['cname']; 
 				}?><span class="caret"></span>
           <ul class="dropdown-menu">
             <li><a style="color: #000;"  href="#"><span class="fa fa-cog"></span> Settings</a></li>
@@ -47,6 +48,7 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
 <div id="mySidenav" class="sidenav " >
 	<a href="javascript:void(0)" class="closebtn avatarBody" onclick="closeNav()"
 	 style="position: absolute; float: left;">×</a>
@@ -55,9 +57,8 @@
 		<h3 style="color: #000; font-weight: bold;">Welcome!</h3>
 		<!-- <span class="fa fa-user-circle  fa-5x" style="color: #000;"></span> -->
 		<img data-toggle="modal" data-target="#myModal_add_admin" src="<?php echo base_url();?>assets/images/avatar_img.jpg" style="height:90px;width:90px" alt="avatar" >
-
-		
 	</div>
+		<?php  ?>
 	<span class="text-capitalize nav_span col-sm-12">Name: <?php echo $_SESSION['fname'].' '.$_SESSION['lname']; ?></span>
 	<span class="text-capitalize nav_span">Username: <?= $user; ?></span>
 	<span class="text-capitalize nav_span">Agency Name: <?= $cname; ?></span>
@@ -67,8 +68,6 @@
 		
 		<button onclick="window.location='<?php echo base_url();?>Login/supervisor_profile_page';" href="<?php echo base_url();?>Login/userlogs" type="button" class="btn btn-primary col-sm-2 btnProfile btn-"><span class="fa fa-cloud-upload"></span> Upload Files</button>
 	</div>
-
-<!-- <a href="#" class="text-capitalize">Logout</a> -->
 </div>
 <div id="main">
 	<span style="font-size:30px;cursor:pointer;float: left; z-index: 1; background: #c9302c;" onclick="openNav()" class="btn_nav btn btn-md btn-circle btn_circle">
@@ -94,17 +93,17 @@
 							<th><span class="fa fa-user"></span> Gender </th>
 							<th><span class="fa fa-calculator"></span> Grades</th>
 							<th><span class="fa fa-calendar"></span> Attendance Record</th>
-							<th><span class="fa fa-list"></span> Performance</th>
+							<th><span class="fa fa-list"></span> Performance/Feedback</th>
 						</tr>
 					</thead>
 					<tbody>
-					<?php foreach ($this->Login_user_model->get_all_student_spv($cname) as $key): ?>
+					<?php foreach ($this->Login_user_model->get_all_student_spv($comp_id) as $key): ?>
 						<tr class="spv_td_list">
 							<td  style="text-align: left;" class="text-capitalize"><a href="<?php echo base_url();?>Login/student_profile/<?php echo $key['stud_id'] ?>" style="" > <?php echo $key['lname'].' ' .$key['fname'] ?></a></td>
 							<td class="text-capitalize"><?php echo $key['sex']; ?></td>
 							<td class="text-capitalize"><a href="<?php echo base_url();?>Control/grades/<?php echo $key['stud_id'] ?>" style="color: #1565c0">View</a></td>
 							<td class="text-capitalize"><a href="<?php echo base_url();?>Control/attendance/<?php echo $key['stud_id'] ?>" style="color: #1565c0"> View</a></td>
-							<td class="text-capitalize" ><a href="#" style="color: #1565c0"> View</a></td>
+							<td class="text-capitalize" ><a href="<?php echo base_url();?>Control/performance/<?php echo $key['stud_id'] ?>" style="color: #1565c0">View</a></td>
 						</tr>
 						<?php endforeach ?>
 					</tbody>
@@ -162,8 +161,7 @@
   </div> 
 </div>
 <!--Modal  -->
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
-	<script>
+s	<script>
 		$(document).ready(function() {
 	    $('#example').DataTable({
 	        "aLengthMenu": [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"]],

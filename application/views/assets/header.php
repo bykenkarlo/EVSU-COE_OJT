@@ -18,10 +18,11 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/print.css">
 	<link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/css/dataTables.bootstrap.min.css">
 
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.js"></script>
+	<!-- <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.js"></script> -->
+ 	
+ 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/dataTables.bootstrap.min.js"></script>
 

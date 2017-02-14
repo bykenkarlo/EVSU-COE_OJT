@@ -1,4 +1,19 @@
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/buttons.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/buttons.bootstrap.min.css">
+	<style type="text/css">
+	@media print
+	{
+		#non-printable { display: none; }
+		#printable { display: block; }
+
+	}
+	#example_length{ display: none; }
+	#example_info{  display: : none; }
+	#example_filter{ display: none;	}
+	#example_previous{ display: none; }
+	#example_next{ display: none; }
+
+	</style>
 <body class="img-responsive" style="
 background:url('<?php echo base_url();?>assets/images/background.png') no-repeat;
 background-size: 100% 90%; padding: 0px 0px 0px 0px" >
@@ -22,14 +37,13 @@ background-size: 100% 90%; padding: 0px 0px 0px 0px" >
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="#"><a href="<?php echo base_url();?>Login/student_profile_page"><span class="fa fa-home"></span> Home </a></li>
+      <ul class="nav navbar-nav">       
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      	<li class="#"><a href="<?php echo base_url();?>Login/student_profile_page"><span class="fa fa-home"></span> Home </a></li>
         <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
 		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
 		<li><a href="<?php echo base_url();?>Login/student_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
-
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span><?php 
 				if (isset($_SESSION['stud_num'])) { ?>
@@ -89,12 +103,12 @@ background-size: 100% 90%; padding: 0px 0px 0px 0px" >
 	</div>
 	<div class="row" style="font-size: 15px;margin:40px 0px 0px 10px;">
 		<div class="form-group">
-			<label class="control-label col-sm-7">Name of Agency: <?= $info['cname']?></label>
-			
-				
+			<label class="control-label col-sm-7">Name of Agency:<span class="text-capitalize" style="border-bottom: : 1px solid #000; width: 50" > <?= $info['cname']?></span></label>			
 		</div>
+			<?php  ?>
 		<div>
-			<label class="control-label col-sm-7">Agency Address: <span style="border-top: 1px solid #000; width: 20" ></span></label>
+			<label class="control-label col-sm-7">Agency Address: <span class="text-capitalize" style="border-bottom: : 1px solid #000; width: 50" >
+			<?= $info['agency_address']?></span></label>
 		</div>
 		<div class="" style="float: right;margin:-100px 50px 0px 0px;">
 			<p>
@@ -110,10 +124,10 @@ background-size: 100% 90%; padding: 0px 0px 0px 0px" >
 </div>
 	<?php $info = $this->Login_user_model->get_stud_data($stud_id); ?>	
 	
-	<div style="font-" class="table_grades">
+	<div id="" class="table_grades">
 	<form action="<?php echo base_url();?>Login/compute_grades_spv" method="post">
 		
-		<table class="table table-bordered table-hover "  class="table_grades">
+		<table id="example" class="table table-bordered table-hover "  class="table_grades">
 			<thead style="color:#fff; background: SteelBlue; ">
 
 				<tr>
@@ -247,3 +261,27 @@ background-size: 100% 90%; padding: 0px 0px 0px 0px" >
 </div>
 
 <div class="container">	</div>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/dataTables.bootstrap.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/buttons.flash.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/buttons.html5.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/buttons.print.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/dataTables.buttons.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/buttons.bootstrap.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jszip.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/vfs_fonts.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/pdfmake.min.js"></script>
+	<script>	
+	$(document).ready(function() {
+    $('#example').DataTable({
+        "aLengthMenu": [[1, 5, 10, 20, 50, -1], [1, 5, 10, 20, 50, "All"]],
+        "iDisplayLength": 20,
+        "bInfo" : false,
+        dom: 'Bfrtip',
+    	buttons: [
+    		'copy','csv',
+    		]
+	    });
+    $(".first.paginate_button, .last_paginate_button").remove();
+	} );	
+	</script>

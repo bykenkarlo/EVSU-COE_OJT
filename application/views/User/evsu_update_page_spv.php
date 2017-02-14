@@ -3,11 +3,10 @@
 <head>
 	<title>EVSU | College of Engineering | On the Job Training Monitoring and Grading System< </title>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
 
 </head>
 
-<body style="background-color: #f5f5f5">
+<body>
 <header>
 <img src="<?php echo base_url();?>assets/images/EVSU_banner.png" height="100" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System"> 
 	
@@ -29,13 +28,14 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="#"><a href="<?= base_url(); ?>Login/coordinator_profile_page"><span class="fa fa-home"></span> Home </a></li>
+       
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      	 <li class="#"><a href="<?= base_url(); ?>Login/coordinator_profile_page"><span class="fa fa-home"></span> Home </a></li>
         <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
 		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
 		<li><a href="<?php echo base_url();?>Login/coordinator_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
 
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span><?php 
 				if (isset($_SESSION['username'])) { ?>
@@ -170,10 +170,11 @@
 					<div class="form-group">	
 						<label class="col-sm-3 control-label">Agency Name</label>
 						<div class="col-sm-4">
-								<select name="cname" class="form-control" value="Course">
-									<option value="-">Choose</option>
-										<?php foreach ($this->Login_user_model->get_all_cname() as $key) : 
-												?>
+								<select name="cname" class="form-control" value="Course" readonly>
+								
+										<option value=""><?= $info['cname'] ?></option>
+									
+										<?php foreach ($this->Login_user_model->get_all_cname() as $key) : ?>
 												<option value="<?= $key['cname'] ?>"><?= $key['cname'] ?></option>
 										<?php endforeach ?>
 								</select>

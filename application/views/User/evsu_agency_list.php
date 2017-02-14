@@ -2,7 +2,7 @@
 	<!-- <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/css/material.css"> -->
 </head>
 
-<body style="background: #f5f5f5;">
+<body>
 <header  > 
 <img src="<?php echo base_url();?>assets/images/EVSU_banner.png" height="100" width="100%" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System">	
 </header>
@@ -23,30 +23,27 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="#"><a href="<?= base_url();?>Login/profile_page"><span class="fa fa-home"></span> Home </a></li>
-        <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
-		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
-		<li><a href="<?php echo base_url();?>Login/admin_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
+       
  
       </ul>
       <ul class="nav navbar-nav navbar-right">
+      	<li class="#"><a href="<?= base_url(); ?>Login/coordinator_profile_page"><span class="fa fa-home"></span> Home </a>
+        </li>
+        <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
+		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
+		<li><a href="<?= base_url(); ?>Login/coordinator_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span><?php 
 				if (isset($_SESSION['username'])) { ?>
 				<span class="text-capitalize"><?php echo $_SESSION['fname'].' '.$_SESSION['lname'];?></span>
 				<?php 
-				$email = $_SESSION['email_add'];
-				$sex = $_SESSION['sex'];
+				// $email = $_SESSION['email_add'];
+				// $sex = $_SESSION['sex'];
 				$user = $_SESSION['username'];	    
 				$currentUser = $_SESSION['currentUser'];   
 				} ?>
 				
-				<?php if ($sex == 'm') { 
-					$sex = 'Male';
-					}
-					elseif ($sex == 'f') {
-						$sex = 'Female';
-				} ?>
+				
 		<span class="caret"></span>
           <ul class="dropdown-menu">
             <li><a style="color: #000;"  href="<?php echo base_url();?>Member/logout/<?= md5($_SESSION['username']);?>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -116,7 +113,8 @@
 		<button type="button" class="btn btn-primary btn-lg btnAdminCdr" onclick="window.location='<?= base_url();?>Login/agency_list'"><span class="fa fa-th-list"></span> Agency Lists</button>
 	</div>
 	<div class="table-responsive">
-		<table id="example" class="table table-hover table-striped " style="margin-top: 20px; border-bottom: 1px solid Steelblue">
+		<form action="<?= base_url()?>Control/delete_agency_list" method="POST">
+			<table id="example" class="table table-hover table-striped " style="margin-top: 20px; border-bottom: 1px solid Steelblue">
 			<thead style="background: Steelblue ; color: #fff;">
 				<tr>
 					<th><input class="fa fa-check-square" type="checkbox" name="select-all" id="select-all" /></th>	
@@ -140,19 +138,24 @@
 			<tbody >
 				<?php foreach ($this->Login_user_model->get_all_agency( ) as $key): ?>			
 				<tr>
-					<td width="1"><input type="checkbox" name="delete_cdr[]" value="<?= $key['comp_id'] ?>" id="selector"></td>
+					<td width="1"><input type="checkbox" name="delete_agency[]" value="<?= $key['comp_id'] ?>" id="selector"></td>
 					<td class="text-capitalize"><?= $key['cname']?></td>
 					<td class="text-capitalize"><?php echo $key['agency_spv']; ?></td>
 					<td class="text-capitalize"><?php echo $key['agency_address']; ?></td>
 					<td class="text-capitalize"><?php echo $key['date_created']; ?></td>
 					<td>
-						<button class="btn btn-info btn-xs btnCircle" type="button" onclick="window.location='<?= base_url();?>Login/update_admin/<?php echo $key['comp_id']; ?>';"><span class="glyphicon glyphicon-pencil"></span></button>
-						<a href="<?php echo base_url();?>Control/delete_admin/<?php echo $key['comp_id']; ?>" class="btn btn-danger btn-xs btnCircle glyphicon glyphicon-trash" onclick="return confirm('Are you sure?')"></a>
+						<button class="btn btn-info btn-xs btnCircle" type="button" onclick="window.location='<?= base_url();?>Login/updateAgencyPage/<?php echo $key['comp_id']; ?>';"><span class="glyphicon glyphicon-pencil"></span></button>
+						<a href="<?php echo base_url();?>Control/deleteAgency/<?php echo $key['comp_id']; ?>" class="btn btn-danger btn-xs btnCircle glyphicon glyphicon-trash" onclick="return confirm('Are you sure?')"></a>
 					</td>
 				</tr>
 				<?php endforeach ?>
 			</tbody>
 		</table>
+		<div style="margin: 0px 0px 10px 0px; float: right;" class="btn-group" >
+			<button data-toggle="modal" data-target="#myModal_comp" type="button" class="btn btn-default"><span class="fa fa-user-plus"></span> New</button>
+			<button type="submit" class="btn btn-default" onclick="return confirm('Are you sure to delete this?')"><span class="glyphicon glyphicon-trash"></span> Delete Multiple</button>
+		</div>
+		</form>
 	</div>
 		
 	</div>
@@ -453,7 +456,6 @@
 	</div>
 </div>
 </div>
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.js"></script>
 	<script>	
 		$(document).ready(function() {
 	    $('#example').DataTable({

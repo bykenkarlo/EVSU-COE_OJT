@@ -298,6 +298,23 @@ class Login extends CI_Controller {
 					    location.href="/EVSU_OJT/"
 				    </script>';
 		}
+	}
+	public function PTPgrades()
+	{
+		if(isset($_SESSION['username']))
+		{
+		$this->load->model('Login_user_model');
+		$this->load->view('assets/header');
+		$this->load->view('User/evsu_PTP_page');
+		$this->load->view('assets/footer');
+		}
+		else
+		{
+			echo '  <script>
+					    alert("You dont have the right to access this page. Please login first!");
+					    location.href="/EVSU_OJT/"
+				    </script>';
+		}
 	}	
 	public function student_profile($stud_id)
 	{
@@ -337,6 +354,25 @@ class Login extends CI_Controller {
 		}
 		
 	}
+	public function updateAgencyPage($comp_id)
+	{
+		if(isset($_SESSION['username']))
+		{
+			$data['comp_id'] = $comp_id;
+			$this->load->view('assets/header');
+			$this->load->model('Login_user_model');
+			$this->load->view('User/evsu_update_agency', $data);
+			$this->load->view('assets/footer');
+		}
+		else
+		{
+			echo '  <script>
+					    alert("You dont have the right to access this page. Please login first!");
+					    location.href="/EVSU_OJT/"
+				    </script>';
+		}
+		
+	}
 	public function compute_grades_spv()
 	{
 		$this->load->model('Login_user_model');
@@ -362,11 +398,34 @@ class Login extends CI_Controller {
 		$this->Login_user_model->compute_grades($data, $stud_id);
 		$this->message('message','info' ,'Grades Added');
 		redirect('/Login/supervisor_profile_page');
+	}
+	public function compute_grades_PTP()
+	{
+		$this->load->model('Login_user_model');
+		$fullname = $this->input->post('fullname');
+		$stud_id = $this->input->post('stud_id');
+		$graded_by = $this->input->post('graded_by');
+		$answer_1 = $this->input->post('answer_1');
+		$answer_2 = $this->input->post('answer_2');
+		$answer_3 = $this->input->post('answer_3');
+		$answer_4 = $this->input->post('answer_4');
+		$answer_5 = $this->input->post('answer_5');
+		$answer_6 = $this->input->post('answer_6');
+		$answer_7 = $this->input->post('answer_7');
+		$answer_8 = $this->input->post('answer_8');
+		$answer_9 = $this->input->post('answer_9');
+		$answer_10 = $this->input->post('answer_10');
+		 
 
+		$sum = array('answer_1' => $answer_1, 'answer_2'=>$answer_2,'answer_3'=>$answer_3,'answer_4'=>$answer_4,'answer_5'=>$answer_5,'answer_6'=>$answer_6, 'answer_7'=>$answer_7,'answer_8'=>$answer_8,'answer_9'=>$answer_9,'answer_10'=>$answer_10 );
+		$grades = array_sum($sum) / 10;
 		
+		$data = array('stud_id'=>$stud_id,'graded_by'=>$graded_by, 'total_grades' => $grades,'answer_1' => $answer_1, 'answer_2'=>$answer_2,'answer_3'=>$answer_3,'answer_4'=>$answer_4,'answer_5'=>$answer_5,'answer_6'=>$answer_6, 'answer_7'=>$answer_7,'answer_8'=>$answer_8,'answer_9'=>$answer_9,'answer_10'=>$answer_10);
+		// $data = array('grades' => $output);
 
-		
-		
+		$this->Login_user_model->computePTP($data, $stud_id);
+		$this->message('message','info' ,'Grades Added to '.'<span class="text-capitalize">'.$fullname.'</span>');
+		redirect('/Login/PTPgrades?studID='.$stud_id.'');
 	}
 	public function admin_chat_message()
 	{
@@ -405,10 +464,7 @@ class Login extends CI_Controller {
 					    alert("You dont have the right to access this page. Please login first!");
 					    location.href="/EVSU_OJT/"
 				    </script>';
-		}
-
-		
-		
+		}			
 	}
 	public function supervisor_chat_message()
 	{
@@ -426,10 +482,7 @@ class Login extends CI_Controller {
 					    alert("You dont have the right to access this page. Please login first!");
 					    location.href="/EVSU_OJT/"
 				    </script>';
-		}
-
-		
-		
+		}		
 	}
 	public function student_chat_message()
 	{
@@ -447,10 +500,7 @@ class Login extends CI_Controller {
 					    alert("You dont have the right to access this page. Please login first!");
 					    location.href="/EVSU_OJT/"
 				    </script>';
-		}
-
-		
-		
+		}			
 	}
 	public function login_user()
 	{
@@ -478,7 +528,12 @@ class Login extends CI_Controller {
 			$_SESSION['day_code'] = $StudentInfo['day_code'];
 			$_SESSION['username'] = $StudentInfo['username'];
 			$_SESSION['currentStud'] = $StudentInfo['username']; 
-			$stud_id = $_SESSION['stud_num'];
+			$stud_id = $StudentInfo['stud_num'];
+
+			// $studentData = $this->Login_user_model->get_studentData($stud_id);
+			// $_SESSION['cname'] = $studentData['cname'];
+			// $_SESSION['comp_id'] = $studentData['comp_id'];
+
 			$_SESSION['username'] = $user;
 			$_SESSION['day_code']  = $getJournal_ID['AUTO_INCREMENT'];
 
@@ -507,6 +562,7 @@ class Login extends CI_Controller {
 			$logs = array('user' => $user, 'ip_address'=>$ip_address, 'activity' => 'Logged in');
 			$this->Login_user_model->add_activity($logs);
 			$this->message('message','info' ,'Successfully Login!');
+			echo json_encode($data);
 			redirect('/Login/profile_page');		
 		}
 		elseif ($verified3)
@@ -524,7 +580,6 @@ class Login extends CI_Controller {
 			$_SESSION['currentCdr'] = $cdr_info['username'];	
 			$_SESSION['username'] = $user;
 			$course = $_SESSION['course'];
-
 			$course_data= array('course' => $course );
 			$logs = array('user' => $user, 'ip_address'=>$ip_address, 'activity' => 'Logged in');
 			$this->Login_user_model->add_activity($logs);
@@ -537,13 +592,15 @@ class Login extends CI_Controller {
 			$spv_info = $this->Login_user_model->get_spv($user, $pass);
 			$_SESSION['username'] = $spv_info['username'];
 			$_SESSION['fname'] = $spv_info['fname'].' '.$spv_info['lname'];
-			$_SESSION['spv_id'] = $cdr_info['spv_id'];
+			$_SESSION['spv_id'] = $spv_info['spv_id'];
 			$_SESSION['lname'] = $spv_info['lname'];
 			$_SESSION['fname'] = $spv_info['fname'];
-			$_SESSION['cname'] = $spv_info['cname'];
+			$_SESSION['comp_id'] = $spv_info['comp_id'];
+			$comp_id = $spv_info['comp_id'];
 			$_SESSION['currentSpv'] = $spv_info['username'];	
-
 			$_SESSION['username'] = $user;
+			$data = $this->Login_user_model->get_spv_data($comp_id);
+			$_SESSION['cname'] = $data['cname'];
 			$logs = array('user' => $user, 'ip_address'=>$ip_address, 'activity' => 'Logged in');
 			$this->Login_user_model->add_activity($logs);
 			$this->message('message','info' ,'Succesfully Login');
@@ -569,11 +626,13 @@ class Login extends CI_Controller {
 			$this->load->model('Login_user_model');
 			$fname = $this->input->post('fname');
 			$lname = $this->input->post('lname');
-			$course = $this->input->post('course');
+			$contact = $this->input->post('contact');
+			$birthday = $this->input->post('birthday');
+			$address = $this->input->post('address');
 			$pass = $this->input->post('password');
 			$cdr_id = $this->input->post('cdr_id');
 
-			$data = array('fname' => $fname, 'lname' => $lname, 'course'=>$course, 'password' => $pass);
+			$data = array('fname' => $fname, 'lname' => $lname, 'birthday'=>$birthday,'address'=>$address,'contactNum'=>$contact, 'password' => $pass);
 			$this->Login_user_model->update_cdr($data, $cdr_id);
 
 			$user = $_SESSION['username'];
@@ -588,10 +647,13 @@ class Login extends CI_Controller {
 			$fname = $this->input->post('fname');
 			$lname = $this->input->post('lname');
 			$email_add = $this->input->post('email_add');
+			$contact = $this->input->post('contact');
+			$birthday = $this->input->post('birthday');
+			$address = $this->input->post('address');
 			$pass = $this->input->post('password');
 			$admin_id = $this->input->post('admin_id');
 
-			$data = array('fname' => $fname, 'lname' => $lname, 'email_add' => $email_add, 'password' => $pass);
+			$data = array('fname' => $fname, 'lname' => $lname, 'email_add' => $email_add, 'contact'=>$contact,'birthday'=>$birthday,'address'=>$address, 'password' => $pass);
 			$this->Login_user_model->update_admin($data, $admin_id);
 
 			$user = $_SESSION['username'];
@@ -606,11 +668,10 @@ class Login extends CI_Controller {
 			$this->load->model('Login_user_model');
 			$fname = $this->input->post('fname');
 			$lname = $this->input->post('lname');
-			$cname = $this->input->post('cname');
 			$pass = $this->input->post('password');
 			$spv_id = $this->input->post('spv_id');
 
-			$data = array('fname' => $fname, 'lname' => $lname,'cname'=>$cname, 'password' => $pass);
+			$data = array('fname' => $fname, 'lname' => $lname, 'password' => $pass);
 			$this->Login_user_model->update_spv($data, $spv_id);
 
 			$user = $_SESSION['username'];
@@ -628,10 +689,9 @@ class Login extends CI_Controller {
 			// $course = $this->input->post('course');
 			$year = $this->input->post('year');
 			$section = $this->input->post('section');
-			$cname = $this->input->post('cname');
 			$stud_id = $this->input->post('stud_id');
 
-			$data = array('fname' => $fname, 'lname' => $lname, 'sex' => $sex, 'year'=>$year, 'section'=> $section, 'cname'=> $cname);
+			$data = array('fname' => $fname, 'lname' => $lname, 'sex' => $sex, 'year'=>$year, 'section'=> $section);
 			$this->Login_user_model->update_stud($data, $stud_id);
 
 			$user = $_SESSION['username'];
@@ -654,6 +714,23 @@ class Login extends CI_Controller {
 			$this->Login_user_model->add_activity($logs);
 			$this->message('message', 'info', 'User successfully Updated');
 			redirect('/Login/student_profile_page');
+		}
+		public function updateAgency()
+		{
+			$this->load->model('Login_user_model');
+			$comp_id = $this->input->post('comp_id');
+			$cname = $this->input->post('cname');
+			$agency_spv = $this->input->post('agency_spv');
+			$agency_address = $this->input->post('agency_address');
+
+			$data = array('cname' => $cname, 'agency_spv' => $agency_spv, 'agency_address' => $agency_address);
+			$this->Login_user_model->updateAgency($data, $comp_id);
+
+			$user = $_SESSION['username'];
+			$logs = array('user' => $user, 'activity' => 'Updated Agency Info'.' '.$fname.' '.$lname);
+			$this->Login_user_model->add_activity($logs);
+			$this->message('message', 'info', 'Agency Updated');
+			redirect('/Login/agency_list');
 		}
 		public function insert_attendance()
 		{
@@ -739,8 +816,10 @@ class Login extends CI_Controller {
 		{
 		$this->load->model('Login_user_model');
 		$stud_num = $this->input->post('stud_num');	
-		$message = $this->input->post('message');
-		$title = $this->input->post('title');	
+		$tasks1 = $this->input->post('tasks1');
+		$tasks2 = $this->input->post('tasks2');
+		$tasks3 = $this->input->post('tasks3');
+		$tasks4 = $this->input->post('tasks4');
 
 
 
@@ -788,7 +867,7 @@ class Login extends CI_Controller {
 		}
 
 
-		$data = array('stud_id' => $stud_num, 'journal_post'=> $message, 'journal_title' => $title,'image'=>$target_file);
+		$data = array('stud_id' => $stud_num, 'tasks1'=> $tasks1, 'tasks2' => $tasks2, 'tasks3' => $tasks3, 'tasks4' => $tasks4,'image'=>$target_file);
 		$this->Login_user_model->insert_journal($data);
 		
 		
