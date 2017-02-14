@@ -5,9 +5,13 @@ This Project is Based in PHP Codeigniter Framework
 
 ########################################################
 On the Job Training Monitoring and Online Grading System
-Eastern Visayas State University
-College Of Engineering
 ########################################################
+################################
+Eastern Visayas State University
+################################
+#######################
+College Of Engineering
+#######################
 
 
 ************************
