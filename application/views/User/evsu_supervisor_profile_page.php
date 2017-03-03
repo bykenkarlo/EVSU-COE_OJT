@@ -27,9 +27,9 @@
  
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      	 <li class="#"><a href="<?php echo base_url();?>Login/supervisor_profile_page"><span class="fa fa-home"></span> Home </a></li>
+      	 <li class="#"><a href="<?php echo base_url();?>"><span class="fa fa-home"></span> Home </a></li>
         <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
-		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
+		<li><a href="<?= base_url();?>Login/Usersguide"><span class="fa fa-envelope"></span> Help Desk</a></li>
 		<li><a href="<?php echo base_url();?>Login/supervisor_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span><?php 
@@ -161,7 +161,7 @@
   </div> 
 </div>
 <!--Modal  -->
-s	<script>
+	<script>
 		$(document).ready(function() {
 	    $('#example').DataTable({
 	        "aLengthMenu": [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"]],

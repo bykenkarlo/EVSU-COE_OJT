@@ -50,8 +50,8 @@
 </head>
 
 <header>
-<img id="non-printable" src="<?php echo base_url();?>assets/images/EVSU_banner.png" height="100" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System"> 
-	
+<header id="mobile-view"> 
+	<img src="<?php echo base_url();?>assets/images/EVSU_banner.png" height="100" width="100%" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System">
 </header>
 <?php $info = $this->Login_user_model->get_stud_info($stud_id); ?>
 <nav class="navbar navbar-inverse" id="nav2">
@@ -83,7 +83,7 @@
 				if (isset($_SESSION['username'])) { ?>
 				<?php echo $_SESSION['fname'].' '.$_SESSION['lname'];	
 				$user = $_SESSION['username'];	
-					
+				$stud_id = $_SESSION['stud_id'];
 
 				}?><span class="caret"></span>
           <ul class="dropdown-menu">
@@ -110,8 +110,9 @@ background-size: 100% 100%; padding: 0px 0px 0px 0px" >
 <div style="margin: 30px 0px 20px 0px">
 	<div class="" style="text-align: center;">
 		<div id="non-printable">
-			<button type="button" onclick="window.location='<?= base_url();?>Login/student_profiles/<?= $info['stud_id'];?>';" style=" margin:0px 30px 50px 0px; border-radius: 100px; box-shadow: 0 9px 18px 0 rgba(0, 0, 0, 0.21), 0 3px 10px 0 rgba(0, 0, 0, 0.19); float: right; position: fixed; z-index: 1; right: 0; bottom: 0;background: #db4437" class="btn btn-lg"><span style="color: #fff; font-size: 50px;" class="fa fa-arrow-left fa-1x"></span>
-			</button>
+			
+			<button type="button" onclick="window.location='<?= base_url();?>Login/student_profiles/<?= $info['stud_id'];?>';" style=" margin:0px 30px 50px 0px; border-radius: 120px; box-shadow: 0 9px 18px 0 rgba(0, 0, 0, 0.21), 0 3px 10px 0 rgba(0, 0, 0, 0.19); float: right; position: fixed; z-index: 1; right: 0; bottom: 0;background: #db4437" class="btn btn-sm"><span style="color: #fff; font-size: 40px; padding-top: 5px; padding-bottom: 5px;" class="fa fa-hand-o-left"></span>
+		</button>
 		</div>
 		<div>
 			<p class="" style="text-align: center; font-size: 18px;">
@@ -147,7 +148,7 @@ background-size: 100% 100%; padding: 0px 0px 0px 0px" >
 				
 		</div>
 		<div>
-			<label class="control-label col-sm-7">Agency Address: <?= $info['agency_address']?><span style="border-top: 1px solid #000; width: 20" ></span></label>
+			<label class="control-label col-sm-7 text-capitalize">Agency Address: <?= $info['agency_address']?><span style="border-top: 1px solid #000; width: 20" ></span></label>
 		</div>
 		<div class="" style="float: right;margin:-100px 50px 0px 0px;">
 			<p>
@@ -185,7 +186,7 @@ background-size: 100% 100%; padding: 0px 0px 0px 0px" >
 						
 					<td>	
 						<input type="hidden" name="stud_id" value="<?= $info['stud_id'];?>">					
-						<input type="number" name="answer_1" step="any" class="col-sm-12 form-control" value="<?=$data['answer_1']?>" required>
+						<span><?= $data['answer_1']; ?></span>
 					</td>
 					
 				</tr>
@@ -194,7 +195,7 @@ background-size: 100% 100%; padding: 0px 0px 0px 0px" >
 						<p>2. <b>QUALITY OF  WORK.</b> Turns out work that meets industry standards of neatness and accuracy.</p>
 					</td>
 					<td>
-						<input type="number" max="5" min="1" step="any" name="answer_2" value="<?=$data['answer_2']?>" class="col-sm-12 form-control" required>
+						<span><?= $data['answer_2']; ?></span>
 					</td>
 				</tr>
 				<tr>
@@ -202,7 +203,7 @@ background-size: 100% 100%; padding: 0px 0px 0px 0px" >
 						<p>3. <b>QUANTITY OF  WORK.</b> Works steadily and turns out a quantity of work that meets industry standards of production.</p>
 					</td>
 					<td>
-						<input type="number" name="answer_3" step="any" class="col-sm-12 form-control" value="<?=$data['answer_3']?>" required>
+						<span><?= $data['answer_3']; ?></span>
 					</td>
 				</tr>
 				<tr>
@@ -210,7 +211,7 @@ background-size: 100% 100%; padding: 0px 0px 0px 0px" >
 						<p>4. <b>DEPENDABILITY.</b> Is present and on time each day. Can be counted on to finish the hob assigned to him/her</p>
 					</td>
 					<td>
-						<input type="number" name="answer_4" step="any" class="col-sm-12 form-control" value="<?=$data['answer_4']?>" required >
+						<?= $data['answer_4']; ?>
 					</td>
 				</tr>
 				<tr>
@@ -218,7 +219,7 @@ background-size: 100% 100%; padding: 0px 0px 0px 0px" >
 						<p>5. <b>WORK ORGANIZATION.</b> Thinks through each training assignment and assembles the needed materials before stating. Handles the work in order of priority.</p>
 					</td>
 					<td>
-						<input type="number" name="answer_5" step="any" class="col-sm-12 form-control" value="<?=$data['answer_5']?>" required>
+						<?= $data['answer_5']; ?>
 					</td>
 				</tr>
 				<tr>
@@ -226,7 +227,7 @@ background-size: 100% 100%; padding: 0px 0px 0px 0px" >
 						<p>6. <b>JUDGEMENT ON SEEKING HELP.</b> Knows when to ask questions on training procedures so as to avoid making mistakes or wasting time. Also knows wen to seek in-service training to build needed skills.</p>
 					</td>
 					<td>
-						<input type="number" name="answer_6" step="any" class="col-sm-12 form-control" value="<?=$data['answer_6']?>" required>
+						<?= $data['answer_6']; ?>
 					</td>
 				</tr>
 				<tr>
@@ -234,7 +235,7 @@ background-size: 100% 100%; padding: 0px 0px 0px 0px" >
 						<p>7. <b>ATTITUDE.</b> Is enthusiastic about mastering the job. Accepts constructive criticism gracefully Works smoothly and cooperatively with fellow trainees. Is friendly and helplful to visitors.</p>
 					</td>
 					<td>
-						<input type="number" name="answer_7" step="any" class="col-sm-12 form-control" value="<?=$data['answer_7']?>" required>
+						<?= $data['answer_7']; ?>
 					</td>
 				</tr>
 				<tr>
@@ -242,7 +243,7 @@ background-size: 100% 100%; padding: 0px 0px 0px 0px" >
 						<p>8. <b>APPEARANCE OF WORK STATION.</b> training materials, supplies and equipment are kept in good order while work is on progress. Everything is left in good condition or put neatly away at the end of each rtaining session. </p>
 					</td>
 					<td>
-						<input type="text" name="answer_8" step="any" class="col-sm-12 form-control" value="<?=$data['answer_8']?>" required>
+						<?= $data['answer_8']; ?>
 					</td>
 				</tr>
 				<tr>
@@ -250,17 +251,18 @@ background-size: 100% 100%; padding: 0px 0px 0px 0px" >
 						<p>9. <b>PERSONAL APPEARANCE.</b> Always looks neat and clean. Meets the industry standards of grooming.</p>
 					</td>
 					<td>
-						<input type="number" name="answer_9" step="any" class="col-sm-12 form-control" value="<?=$data['answer_9']?>" required>
+						<?= $data['answer_9']; ?>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<p>10. <b>ATTENDANCE AND PUNCTIONALTY.</b> Consider frequency of absences as tardiness and exerts effort to avoid or keep them minimal</p>
+						<p><i hidden="">`</i>10. <b>ATTENDANCE AND PUNCTIONALTY.</b> Consider frequency of absences as tardiness and exerts effort to avoid or keep them minimal.</p>
 					</td>
 					<td>
-						<input type="number" name="answer_10" step="any" class="col-sm-12 form-control" value="<?=$data['answer_10']?>" required>
+						<?= $data['answer_10']; ?>
 					</td>
 				</tr>
+				
 			</tbody>
 		</table>
 		<div>
@@ -314,12 +316,11 @@ background-size: 100% 100%; padding: 0px 0px 0px 0px" >
 	$(document).ready(function() {
     $('#example').DataTable({
 
-        "aLengthMenu": [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"]],
         "iDisplayLength": 10,
         dom: 'Bfrtip',
         "bInfo" : false,
     	buttons: [
-    		'copy','csv',
+    		'copy','csv','pdf'
     		]
         
     	});

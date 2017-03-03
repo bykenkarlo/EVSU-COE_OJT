@@ -8,6 +8,11 @@ class Stud_user_model extends CI_Model {
 		$this->db->where($where);
 		return $this->db->get('evsu_official_stud_tbl')->num_rows();
 	}
+	public function check_login_student($where)
+	{
+		$this->db->where($where);
+		return $this->db->get('evsu_student_tbl')->num_rows();
+	}
 	public function check_student($where)
 	{
 		$this->db->where($where);
@@ -88,6 +93,7 @@ class Stud_user_model extends CI_Model {
 	{
 		$this->db->insert('evsu_spv_tbl', $data);
 	}
+	
 	public function get_all_users()
 	{
 		return $this->db->get('evsu_admin_tbl')->result_array();
@@ -127,6 +133,11 @@ class Stud_user_model extends CI_Model {
 		$this->db->where('stud_id', $id);
 		$this->db->delete('evsu_official_stud_tbl');
 	}
+	Public function delete_student1($id)
+	{
+		$this->db->where('stud_id', $id);
+		$this->db->delete('evsu_cdr_spv_agency_stud_tbl');
+	}
 	Public function delete_userlogs($id)
 	{
 		if (!empty($id)) {
@@ -155,11 +166,25 @@ class Stud_user_model extends CI_Model {
 			$this->db->delete('evsu_spv_tbl');
 		}
 	}
+	Public function deleteCourseList($id)
+	{
+		if (!empty($id)) {
+			$this->db->where_in('course_id', $id);
+			$this->db->delete('evsu_course_tbl');
+		}
+	}
 	Public function delete_stud_list($id)
 	{
 		if (!empty($id)) {
 			$this->db->where_in('stud_id', $id);
 			$this->db->delete('evsu_official_stud_tbl');
+		}
+	}
+	Public function delete_stud_list1($id)
+	{
+		if (!empty($id)) {
+			$this->db->where_in('stud_id', $id);
+			$this->db->delete('evsu_cdr_spv_agency_stud_tbl');
 		}
 	}
 	Public function add_activity($logs)
@@ -215,6 +240,14 @@ class Stud_user_model extends CI_Model {
 	{
 		$this->db->where('file_id', $id);
 		$this->db->delete('evsu_fileupload_tbl');
+	}
+	public function checkEmail($where) {
+		$this->db->WHERE($where);
+		return $this->db->GET('evsu_spv_tbl')->num_rows();
+	}
+	public function get_OJT1($stud_id) {
+		$this->db->WHERE('stud_id',$stud_id);
+		return $this->db->GET('evsu_cdr_spv_agency_stud_tbl')->num_rows();
 	}
 
 }	

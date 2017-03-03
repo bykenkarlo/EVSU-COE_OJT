@@ -18,8 +18,7 @@
 background:url('<?php echo base_url();?>assets/images/background.png') no-repeat;
 background-size: 100% 90%; padding: 0px 0px 0px 0px" >
 <header>
-<img id="non-printable" src="<?php echo base_url();?>assets/images/EVSU_banner.png" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System"> 
-	
+<img src="<?php echo base_url();?>assets/images/EVSU_banner.png" height="100" width="100%" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System">
 </header>
 <nav class="navbar navbar-inverse" id="nav2">
   <div class="container-fluid">
@@ -40,7 +39,7 @@ background-size: 100% 90%; padding: 0px 0px 0px 0px" >
       <ul class="nav navbar-nav">       
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      	<li class="#"><a href="<?php echo base_url();?>Login/student_profile_page"><span class="fa fa-home"></span> Home </a></li>
+      	<li class="#"><a href="<?php echo base_url();?>"><span class="fa fa-home"></span> Home </a></li>
         <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
 		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
 		<li><a href="<?php echo base_url();?>Login/student_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
@@ -54,7 +53,8 @@ background-size: 100% 90%; padding: 0px 0px 0px 0px" >
 				$lname = $_SESSION['lname'];  
 				$stud_num = $_SESSION['stud_num']; 
 				$stud_id = $_SESSION['stud_num']; 
-				
+
+
 				}?><span class="caret"></span>
           	<ul class="dropdown-menu">
             <li><a style="color: #000;"  href="<?php echo base_url();?>Student/logout/<?= md5($user)?>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -67,7 +67,7 @@ background-size: 100% 90%; padding: 0px 0px 0px 0px" >
 
 <div class="container" style="font-size:14pt; margin-top: 10px; margin-bottom: 12px;">
 		<?= $this->session->flashdata('message') ?>
-<div class="container">
+<div class="">
 <div style="margin: 30px 0px 20px 0px">
 	<div class="" style="text-align: center;">
 		<div id="non-printable">
@@ -101,11 +101,12 @@ background-size: 100% 90%; padding: 0px 0px 0px 0px" >
 			<label class="control-label" style="font-size: 15px; border-bottom: 1px solid #000; ">Rating Systems</label>
 		</div>
 	</div>
+<?php $info = $this->Login_user_model->get_stud_info($stud_id); ?>
 	<div class="row" style="font-size: 15px;margin:40px 0px 0px 10px;">
 		<div class="form-group">
 			<label class="control-label col-sm-7">Name of Agency:<span class="text-capitalize" style="border-bottom: : 1px solid #000; width: 50" > <?= $info['cname']?></span></label>			
 		</div>
-			<?php  ?>
+			
 		<div>
 			<label class="control-label col-sm-7">Agency Address: <span class="text-capitalize" style="border-bottom: : 1px solid #000; width: 50" >
 			<?= $info['agency_address']?></span></label>
@@ -132,96 +133,98 @@ background-size: 100% 90%; padding: 0px 0px 0px 0px" >
 
 				<tr>
 					<th style="text-align: center; padding-bottom: 15px;">TRAINER'S CHARACTERISTICS</th>
-					<th width="100">RATING<br>(1.0 - 5.0)</th>
+					<th width="100" align="center">RATING<br>(1.0 - 5.0)</th>
 					<!-- <th>Action</th> -->
 				</tr>			
 			</thead>
 				<?php $data = $this->Login_user_model->get_grades($stud_id);?>
+				<?php foreach ($this->Login_user_model->get_criteria() as $criteria) { ?>
 			<tbody>
 				<tr>
 					<td>
-						<p>1. <b>KNOWLEDGE OF JOB.</b> Understand what needs to be true and knows how to do it. Follows directions carefully and uses the proper materials.</p>
+						<p><?= $criteria['c1']?>.</p>
 					</td>
 						
 					<td>	
 						<input type="hidden" name="stud_id" value="<?= $data['stud_id'];?>">					
-						<input type="number" name="answer_1" step="any" class="col-sm-12 form-control" value="<?=$data['answer_1']?>" readonly>
+						<span><?=$data['answer_1']?></span>
 					</td>
 					
 				</tr>
 				<tr>
 					<td>
-						<p>2. <b>QUALITY OF  WORK.</b> Turns out work that meets industry standards of neatness and accuracy.</p>
+						<p><?= $criteria['c2']?></p>
 					</td>
 					<td>
-						<input type="number" max="5" min="1" step="any" name="answer_2" value="<?=$data['answer_2']?>" class="col-sm-12 form-control" readonly>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>3. <b>QUANTITY OF  WORK.</b> Works steadily and turns out a quantity of work that meets industry standards of production.</p>
-					</td>
-					<td>
-						<input type="number" name="answer_3" step="any" class="col-sm-12 form-control" value="<?=$data['answer_3']?>" readonly>
+						<span><?=$data['answer_2']?></span>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<p>4. <b>DEPENDABILITY.</b> Is present and on time each day. Can be counted on to finish the hob assigned to him/her</p>
+						<p><?= $criteria['c3']?></p>
 					</td>
 					<td>
-						<input type="number" name="answer_4" step="any" class="col-sm-12 form-control" value="<?=$data['answer_4']?>" readonly >
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>5. <b>WORK ORGANIZATION.</b> Thinks through each training assignment and assembles the needed materials before stating. Handles the work in order of priority.</p>
-					</td>
-					<td>
-						<input type="number" name="answer_5" step="any" class="col-sm-12 form-control" value="<?=$data['answer_5']?>" readonly>
+					<span><?=$data['answer_3']?></span>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<p>6. <b>JUDGEMENT ON SEEKING HELP.</b> Knows when to ask questions on training procedures so as to avoid making mistakes or wasting time. Also knows wen to seek in-service training to build needed skills.</p>
+						<p><?= $criteria['c4']?></p>
 					</td>
 					<td>
-						<input type="number" name="answer_6" step="any" class="col-sm-12 form-control" value="<?=$data['answer_6']?>" readonly>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>7. <b>ATTITUDE.</b> Is enthusiastic about mastering the job. Accepts constructive criticism gracefully Works smoothly and cooperatively with fellow trainees. Is friendly and helplful to visitors.</p>
-					</td>
-					<td>
-						<input type="number" name="answer_7" step="any" class="col-sm-12 form-control" value="<?=$data['answer_7']?>" readonly>
+						<span><?=$data['answer_4']?></span>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<p>8. <b>APPEARANCE OF WORK STATION.</b> training materials, supplies and equipment are kept in good order while work is on progress. Everything is left in good condition or put neatly away at the end of each rtaining session. </p>
+						<p><?= $criteria['c5']?></p>
 					</td>
 					<td>
-						<input type="number" name="answer_8" step="any" class="col-sm-12 form-control" value="<?=$data['answer_8']?>" readonly>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>9. <b>PERSONAL APPEARANCE.</b> Always looks neat and clean. Meets the industry standards of grooming.</p>
-					</td>
-					<td>
-						<input type="number" name="answer_9" step="any" class="col-sm-12 form-control" value="<?=$data['answer_9']?>" readonly>
+						<span><?=$data['answer_5']?></span>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<p>10. <b>ATTENDANCE AND PUNCTIONALTY.</b> Consider frequency of absences as tardiness and exerts effort to avoid or keep them minimal</p>
+						<p><?= $criteria['c6']?></p>
 					</td>
 					<td>
-						<input type="number" name="answer_10" step="any" class="col-sm-12 form-control" value="<?=$data['answer_10']?>" readonly>
+						<span><?=$data['answer_6']?></span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p><?= $criteria['c8']?></p>
+					</td>
+					<td>
+						<span><?=$data['answer_7']?></span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p><?= $criteria['c7']?></p>
+					</td>
+					<td>
+						<span><?=$data['answer_8']?></span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p><?= $criteria['c9']?></p>
+					</td>
+					<td>
+						<span><?=$data['answer_9']?></span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p><i hidden="">9</i><?= $criteria['c10']?></p>
+					</td>
+					<td>
+						<span><?=$data['answer_10']?></span>
 					</td>
 				</tr>
 			</tbody>
+			<?php } ?>
 		</table>
 		<div>
 				<?php $data = $this->Login_user_model->get_grades($stud_id);?>
@@ -254,10 +257,12 @@ background-size: 100% 90%; padding: 0px 0px 0px 0px" >
 		</div>
 	</div>
 	</div>
-</div>
-	<div style="margin-left: 10px; margin-top: 50px;">
+
+	<div style="margin-left: 10px; margin-top: 50px;" id="printable">
 		<button id="printables" class="btn btn-primary" onClick="window.print()"><span class="glyphicon glyphicon-print"></span> Print this page</button>
 	</div>
+</div>
+	
 </div>
 
 <div class="container">	</div>

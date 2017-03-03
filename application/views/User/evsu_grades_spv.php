@@ -1,6 +1,5 @@
 
 	<style type="text/css">
-	#printable { display: none; }
 
 	@media print
 	{
@@ -63,7 +62,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="#"><a href="<?php echo base_url();?>Login/supervisor_profile_page"><span class="fa fa-home"></span> Home </a></li>
+        <li class="#"><a href="<?php echo base_url();?>"><span class="fa fa-home"></span> Home </a></li>
         <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
 		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
 		<li><a href="<?php echo base_url();?>Login/supervisor_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
@@ -163,92 +162,95 @@ background-size: 100% 90%; padding: 0px 0px 0px 0px" >
 				</tr>			
 			</thead>
 
-						
+			<?php foreach ($this->Login_user_model->get_criteria() as $criteria) { ?>
+			
 			<tbody>
 				<tr>
 					<td>
-						<p>1. <b>KNOWLEDGE OF JOB.</b> Understand what needs to be true and knows how to do it. Follows directions carefully and uses the proper materials.</p>
+						<p><?= $criteria['c1']?></p>
 					</td>
 						
 					<td>	
+						<input type="hidden" name="fullname" value="<?= $info['lname'].', '.$info['fname'];  ?>">					
 						<input type="hidden" name="stud_id" value="<?= $info['stud_id'];?>">					
-						<input type="number" name="answer_1" step="any" class="col-sm-12 form-control" value="<?=$data['answer_1']?>" required>
+						<input type="number" name="answer_1" max="5" min="1" step=".1" class="col-sm-12 form-control" value="<?=$data['answer_1']?>" required > 
 					</td>
 					
 				</tr>
 				<tr>
 					<td>
-						<p>2. <b>QUALITY OF  WORK.</b> Turns out work that meets industry standards of neatness and accuracy.</p>
+						<p><?= $criteria['c2']?></p>
 					</td>
 					<td>
-						<input type="number" max="5" min="1" step="any" name="answer_2" value="<?=$data['answer_2']?>" class="col-sm-12 form-control" required>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>3. <b>QUANTITY OF  WORK.</b> Works steadily and turns out a quantity of work that meets industry standards of production.</p>
-					</td>
-					<td>
-						<input type="number" name="answer_3" step="any" class="col-sm-12 form-control" value="<?=$data['answer_3']?>" required>
+						<input type="number" max="5" min="1" max="5" min="1" step=".1" name="answer_2" value="<?=$data['answer_2']?>" class="col-sm-12 form-control" required>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<p>4. <b>DEPENDABILITY.</b> Is present and on time each day. Can be counted on to finish the hob assigned to him/her</p>
+						<p><?= $criteria['c3']?></p>
 					</td>
 					<td>
-						<input type="number" name="answer_4" step="any" class="col-sm-12 form-control" value="<?=$data['answer_4']?>" required >
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>5. <b>WORK ORGANIZATION.</b> Thinks through each training assignment and assembles the needed materials before stating. Handles the work in order of priority.</p>
-					</td>
-					<td>
-						<input type="number" name="answer_5" step="any" class="col-sm-12 form-control" value="<?=$data['answer_5']?>" required>
+						<input type="number" name="answer_3" max="5" min="1" step=".1" class="col-sm-12 form-control" value="<?=$data['answer_3']?>" required>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<p>6. <b>JUDGEMENT ON SEEKING HELP.</b> Knows when to ask questions on training procedures so as to avoid making mistakes or wasting time. Also knows wen to seek in-service training to build needed skills.</p>
+						<p><?= $criteria['c4']?></p>
 					</td>
 					<td>
-						<input type="number" name="answer_6" step="any" class="col-sm-12 form-control" value="<?=$data['answer_6']?>" required>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>7. <b>ATTITUDE.</b> Is enthusiastic about mastering the job. Accepts constructive criticism gracefully Works smoothly and cooperatively with fellow trainees. Is friendly and helplful to visitors.</p>
-					</td>
-					<td>
-						<input type="number" name="answer_7" step="any" class="col-sm-12 form-control" value="<?=$data['answer_7']?>" required>
+						<input type="number" name="answer_4" max="5" min="1" step=".1" class="col-sm-12 form-control" value="<?=$data['answer_4']?>" required >
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<p>8. <b>APPEARANCE OF WORK STATION.</b> training materials, supplies and equipment are kept in good order while work is on progress. Everything is left in good condition or put neatly away at the end of each rtaining session. </p>
+						<p><?= $criteria['c5']?></p>
 					</td>
 					<td>
-						<input type="number" name="answer_8" step="any" class="col-sm-12 form-control" value="<?=$data['answer_8']?>" required>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>9. <b>PERSONAL APPEARANCE.</b> Always looks neat and clean. Meets the industry standards of grooming.</p>
-					</td>
-					<td>
-						<input type="number" name="answer_9" step="any" class="col-sm-12 form-control" value="<?=$data['answer_9']?>" required>
+						<input type="number" name="answer_5" max="5" min="1" step=".1" class="col-sm-12 form-control" value="<?=$data['answer_5']?>" required>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<p>10. <b>ATTENDANCE AND PUNCTIONALTY.</b> Consider frequency of absences as tardiness and exerts effort to avoid or keep them minimal</p>
+						<p><?= $criteria['c6']?></p>
 					</td>
 					<td>
-						<input type="number" name="answer_10" step="any" class="col-sm-12 form-control" value="<?=$data['answer_10']?>" required>
+						<input type="number" name="answer_6" max="5" min="1" step=".1" class="col-sm-12 form-control" value="<?=$data['answer_6']?>" required>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p><?= $criteria['c7']?></p>
+					</td>
+					<td>
+						<input type="number" name="answer_7" max="5" min="1" step=".1" class="col-sm-12 form-control" value="<?=$data['answer_7']?>" required>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p><?= $criteria['c8']?></p>
+					</td>
+					<td>
+						<input type="number" name="answer_8" max="5" min="1" step=".1" class="col-sm-12 form-control" value="<?=$data['answer_8']?>" required>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p><?= $criteria['c9']?></p>
+					</td>
+					<td>
+						<input type="number" name="answer_9" max="5" min="1" step=".1" class="col-sm-12 form-control" value="<?=$data['answer_9']?>" required>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p><?= $criteria['c10']?></p>
+					</td>
+					<td>
+						<input type="number" name="answer_10" max="5" min="1" step=".1" class="col-sm-12 form-control" value="<?=$data['answer_10']?>" required>
 					</td>
 				</tr>
 			</tbody>
+			<?php } ?>
 		</table>
 		<div>
 			<button type="submit" class="btn btn-primary btnCompGrades" style="float: right;" id="grades"><span class="fa fa-calculator"></span> Compute Grades</button><br>

@@ -21,7 +21,7 @@
 <nav id="nav">
 	<div class="btn-group">
 		<ul class="nav nav-pills ">
-			<li class=""><a href="/EVSU_OJT">Home</a></li>
+			<li class=""><a href="<?= base_url(); ?>">Home</a></li>
 			<li role="presentation" class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">About<span class="caret"></span></a>
 					<ul class="dropdown-menu">

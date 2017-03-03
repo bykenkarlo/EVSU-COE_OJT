@@ -11,7 +11,7 @@ public function logout($user)
 		unset($_SESSION['cname']);
 		unset($_SESSION['stud_id']);
 		$_SESSION[] = [];
-		$this->session->sess_destroy();	
+		$this->session->sess_destroy();
 		redirect('/');
 	}
 	public function student_profile_page()

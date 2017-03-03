@@ -43,16 +43,21 @@ background-size: 100% 85%; margin: 0px 0px 0px 0px" >
 <div class="container">
 	<?php 
 		if (isset($_SESSION['stud_id'])) {
-			echo $stud_id = $_SESSION['stud_id']; 
+			$stud_id = $_SESSION['stud_id']; 
 			$lname = $_SESSION['lname'];
 			$fname = $_SESSION['fname'];
 			$sex = $_SESSION ['sex'];
+			$fullname = $_SESSION['fullname'];
 			$cname = $_SESSION['cname'];
 			$year = $_SESSION['year'];
 			$course = $_SESSION['course'];
-			$section = $_SESSION['section'] ;
+			$section = $_SESSION['section'];
+			
 		}
 	 ?>
+	 <?php $info = $this->Login_user_model->get_stud_data2($stud_id); ?>
+	 <?php $course_id = $info['course_id']; ?>
+	 <?php $data = $this->Login_user_model->get_all_course2($course_id) ?>
 	<div class="col-sm-7 col-md-offset-3 " id="reg_user">
 		<div id="reg_form" class="panel">
 			<div class="panel-heading panel_head">
@@ -60,7 +65,7 @@ background-size: 100% 85%; margin: 0px 0px 0px 0px" >
 			</div>
 			<div class="panel-body">
 			<?= $this->session->flashdata('message') ?>
-				<form class="form-horizontal" action="<?php echo base_url();?>control/register_stud_user" method="POST">
+				<form class="form-horizontal" action="<?php echo base_url();?>Control/register_stud_user" method="POST">
 					<div class="form-group">
 						<label class="col-sm-3 control-label text-capitalize">Student Number</label>						
 						<div class="col-sm-9 form_lname">
@@ -85,16 +90,16 @@ background-size: 100% 85%; margin: 0px 0px 0px 0px" >
 							<input type="text" name="reg_sex" class="form-control text-capitalize" value="<?= $sex ?>" readonly  >
 						</div>
 					</div>
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<label class="col-sm-3 control-label text-capitalize">Agency Name</label>						
 						<div class="col-sm-9 form_fname">
 							<input type="text" name="reg_cname" class="form-control text-capitalize" value="<?= $cname ?>" readonly  >
 						</div>
-					</div>
+					</div> -->
 					<div class="form-group">
 						<label class="col-sm-3 control-label text-capitalize">Course</label>						
 						<div class="col-sm-9 form_fname">
-							<input type="text" name="reg_course" class="form-control text-capitalize" value="<?= $course ?>"  readonly >
+							<input type="text" name="reg_course" class="form-control text-capitalize" value="<?= $data['course_abbrv'] ?>"  readonly >
 						</div>
 					</div>
 					<div class="form-group">
@@ -112,8 +117,8 @@ background-size: 100% 85%; margin: 0px 0px 0px 0px" >
 					<div class="form-group">
 						<label class="col-sm-3 control-label">UserName</label>						
 						<div class="col-sm-9 form_username">
-							<input type="text" name="reg_username" class="form-control" autofocus required>
-							<label><small style="font-weight: normal;">*as your(lastname)&(firstname) ex.delacruzjuan</small></label>
+							<input type="text" name="reg_username" class="form-control text-capitalize" value="<?= trim($fullname, ''); ?>" placeholder="Username" readonly required>
+							<label><small style="font-weight: bold;">*as your(lastname)&(firstname) ex.delacruzjuan</small></label>
 						</div>
 					</div>
 					<div class="form-group">	

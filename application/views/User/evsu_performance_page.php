@@ -42,7 +42,7 @@
         
 
       </ul>
-      <ul class="nav navbar-nav navbar-right">	<li class="#"><a href="<?php echo base_url();?>Login/supervisor_profile_page"><span class="fa fa-home"></span> Home </a></li>
+      <ul class="nav navbar-nav navbar-right">	<li class="#"><a href="<?php echo base_url();?>"><span class="fa fa-home"></span> Home </a></li>
         <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
 		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
 		<li><a href="<?php echo base_url();?>Login/supervisor_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
@@ -50,7 +50,8 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span><?php 
 				if (isset($_SESSION['username'])) { ?>
 				<?php echo $_SESSION['fname'].' '.$_SESSION['lname'];	
-				$user = $_SESSION['username'];	    
+				$user = $_SESSION['username'];
+				$spv_id = $_SESSION['spv_id'];	    
 					    
 				}?><span class="caret"></span>
           <ul class="dropdown-menu">
@@ -83,16 +84,17 @@
 	<div class="well well-custom" style="box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 4px 0 rgba(0, 0, 0, 0.19);">
 		<h1><span class="fa fa-calendar"></span> Feedback Form</h1><br>
 	</div>
-	<form class="form-horizontal" action="<?php echo base_url();?>Login/insert_attendance" method="POST" style="background: #fff; margin:-15px 0px 30px 0px;box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.21), 0 3px 6px 0 rgba(0, 0, 0, 0.19); padding: 20px 10px 15px 10px; " >
-			<input type="hidden" name="stud_num" value="">
+	<form class="form-horizontal" action="<?php echo base_url();?>Login/add_feedback" method="POST" style="background: #fff; margin:-15px 0px 30px 0px;box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.21), 0 3px 6px 0 rgba(0, 0, 0, 0.19); padding: 20px 10px 15px 10px; " >
+			<input type="hidden" name="stud_id" value="<?= $stud_id?>">
+			<input type="hidden" name="spv_id" value="<?= $spv_id?>">
 			<div style="padding: 10px 30px 10px 30px;">
 				<div class="form-group col-sm-7" style="margin: .1em 0px .5em -2.2em;">
 					<label class="control-label">To:</label>
-					<input  type="text" name="title" class="form-control col-sm-6 text-capitalize" value="<?= $info['fname'].' '.$info['lname']?>"   >	
+					<input  type="text" name="fullname" class="form-control col-sm-6 text-capitalize" value="<?= $info['fname'].' '.$info['lname']?>"   >	
 				</div>
 
 				<div class="form-group">
-					<p><textarea name="message" rows="8" cols="70" class="form-control col-sm-8" placeholder="Write your feedback here..." required></textarea></p>
+					<p><textarea name="feedback" rows="8" cols="70" class="form-control col-sm-8" placeholder="Write your feedback here..." required></textarea></p>
 				</div>			
 				<div id="non-printable" class="" style="margin-left: -15px;" >								
 						<button type="submit" class="btn btn-primary btnStudent"><span class="glyphicon glyphicon-check"></span> Submit</button>						        

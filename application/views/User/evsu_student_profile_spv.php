@@ -27,7 +27,7 @@
         
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      	<li class="#"><a href="<?php echo base_url();?>Login/supervisor_profile_page"><span class="fa fa-home"></span> Home </a></li>
+      	<li class="#"><a href="<?php echo base_url();?>"><span class="fa fa-home"></span> Home </a></li>
         <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
 		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
 		<li><a href="<?php echo base_url();?>Login/supervisor_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
@@ -39,7 +39,8 @@
 				$user = $_SESSION['username'];	
 				$cname = $_SESSION['cname'];    
 				// $stud_id = $_SESSION['stud_id'];    
-				}?><span class="caret"></span>
+				}?>
+				<span class="caret"></span>
           <ul class="dropdown-menu">
             <li><a style="color: #000;"  href="#"><span class="fa fa-cog"></span> Settings</a></li>
             <li><a style="color: #000;"  href="<?php echo base_url();?>Member/logout/<?= md5($_SESSION['username']);?>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -84,13 +85,18 @@
 <div class="well well-custom">
 	<h2 class="text-capitalize"><span class="fa fa-user"></span> <?= $info['fname'].' '.$info['lname']?>'s Profile</h2>
 </div>	
-
+		<?php if ($info['sex']=='m' || 'M') {
+			$info['sex'] = 'male';
+		}else
+			$info['sex'] = 'female'; 
+		?>
+		
 <div style="background: #fff; border-radius: 2px; padding: 10px 10px 15px 10px; box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.1); margin: -15px 5px 5px 5px">
 	<form class="form-horizontal" action="" method="">	
 	<div class="form-group">	
 		<label class="col-sm-3 control-label">Student Number: </label>
 		<div class="col-sm-8">
-			<input type="text" class="form-control text-capitalize" value="<?= $info['stud_id']?>">
+			<input type="text" class="form-control text-capitalize" value="<?= $stud_id ?>">
 		</div>
 	</div>
 	<div class="form-group">	
@@ -106,6 +112,24 @@
 		</div>
 	</div>
 	<div class="form-group">
+		<label class="col-sm-3 control-label">Email Address</label>						
+		<div class="col-sm-8">
+			<input type="text" class="form-control text-capitalize" value="<?= $info['email']?>" >
+		</div>
+	</div>
+	<div class="form-group">	
+		<label class="col-sm-3 control-label">Contact Num</label>		
+		<div class="col-sm-8">
+			<div class="input-group">
+				<span class="input-group-addon">
+					<span class="">+63</span>
+				</span>
+				<input type="number" class="form-control" value="<?= $info['contactNum']?>">		
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
 		<label class="col-sm-3 control-label">Gender</label>						
 		<div class="col-sm-8">
 			<input type="text" class="form-control text-capitalize" value="<?= $info['sex']?>" >
@@ -118,15 +142,16 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-sm-3 control-label">Year</label>						
+		<label class="col-sm-3 control-label">Year & Sectrion</label>						
 		<div class="col-sm-8">
-			<input type="text"  class="form-control text-capitalize" value="<?= $info['year']?>" >
+			<input type="text"  class="form-control text-capitalize" value="<?= $info['year']?>-<?= $info['section']?>" >
 		</div>
 	</div>
+
 	<div class="form-group">
-		<label class="col-sm-3 control-label">Section</label>						
+		<label class="col-sm-3 control-label">Address</label>						
 		<div class="col-sm-8">
-			<input type="text"  class="form-control text-capitalize" value="<?= $info['section']?>" >
+			<input type="text"  class="form-control text-capitalize" value="<?= $info['address']?>" >
 		</div>
 	</div>
 </form>

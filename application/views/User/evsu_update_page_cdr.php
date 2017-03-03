@@ -31,7 +31,7 @@
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      	<li class="#"><a href="<?php echo base_url();?>Login/profile_page"><span class="fa fa-home"></span> Home </a></li>
+      	<li class="#"><a href="<?php echo base_url();?>"><span class="fa fa-home"></span> Home </a></li>
         <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
 		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
 		<li><a href="<?php echo base_url();?>Login/admin_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
@@ -144,7 +144,7 @@
 
 <?php $info = $this->Login_user_model->get_cdr_info($cdr_id); ?>	
 
-<div class="" id="table_list" style="background: #fff; margin: 10px 0px 40px 0px; border-radius: 5px;" >
+<div class="" id="table_list" style="background: #fff; border-radius: 2px; box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.1); margin: 5px 5px 5px"  >
 	<div>
 		<h1 style="font-weight: ; padding: 20px 40px 10px 50px; margin-top: 10px; "><span class="glyphicon glyphicon-share"></span> Update Profile</h1>
 	</div>	<div class="panel-body">
@@ -169,15 +169,27 @@
 						</div>
 					</div>
 					<div class="form-group">	
-						<label class="col-sm-3 control-label">Contact Number</label>
-						<div class="col-sm-8">
-							<div class="input-group">
+						<label class="col-sm-3 control-label">Email Address</label>
+						<div class="col-sm-7">
+
+						<div class="input-group">
 								<span class="input-group-addon">
-							            <span class="">+63</span>
-							    </span>
-								<input type="text" name="contact" class="form-control " value="<?= $info['contactNum']?>">
-								
-							</div>
+										<span>@</span>
+							    </span>		
+								<input type="email" name="email" class="form-control " value="<?= $info['email']?> " required>
+							</div> 
+						</div>
+					</div>
+					<div class="form-group">	
+						<label class="col-sm-3 control-label">Mobile Number</label>
+						<div class="col-sm-7">
+
+						<div class="input-group">
+								<span class="input-group-addon">
+										<span>+63</span>
+							    </span>		
+								<input type="text" maxlength="10" minlength="10" name="contact" class="form-control " value="<?= $info['contactNum']?> ">
+							</div> 
 							<label><small style="font-weight: normal;">*must be valid mobile number.</small></label>
 						</div>
 					</div>

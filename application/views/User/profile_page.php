@@ -26,9 +26,9 @@
       <ul class="nav navbar-nav">
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      	<li class="#"><a href="<?= base_url();?>Login/profile_page"><span class="fa fa-home"></span> Home </a></li>
+      	<li class="#"><a href="<?= base_url();?>"><span class="fa fa-home"></span> Home </a></li>
         <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
-		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
+		<li><a href="<?= base_url();?>Login/Usersguide"><span class="fa fa-envelope"></span> Help Desk</a></li>
 		<li><a href="<?php echo base_url();?>Login/admin_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
         <li class="dropdown">
          	<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -71,7 +71,7 @@
 	<div class="panel-heading avatar1" style="padding-bottom: 25px">
 		<h3 style="color: #000; font-weight: bold;">Welcome!</h3>
 		<!-- <span class="fa fa-user-circle  fa-5x" style="color: #000;"></span> -->
-		<img src="<?= base_url()?>assets/images/avatar_img.jpg" data-toggle="modal" data-target="#myModal_image"  style="height:90px;width:90px" alt="avatar" >
+		<img src="<?= base_url()?>assets/images/avatar_img.jpg" style="height:90px;width:90px" alt="avatar" >
 	</div>
 	<span class="text-capitalize nav_span col-sm-12">Name: <?php echo $_SESSION['fname'].' '.$_SESSION['lname']; ?></span>
 	<span class="text-capitalize nav_span">Username: <?= $user; ?></span>
@@ -80,8 +80,10 @@
 	<div class="add_admin_cdr" style="text-align: left;">
 		<button type="button" class="btn btn-primary col-sm-2 btn-lg btnProfile" data-toggle="modal" data-target="#myModal_add_admin"><span class="fa fa-user-plus"></span> Add Administrator</button>		
 		<button type="button" class="btn btn-primary col-sm-2 btn-lg btnProfile" data-toggle="modal" data-target="#myModal_cdr"><span class="fa fa-user-plus"></span> Add Coordinator</button>
-		
-		<button type="button" onclick="window.location='<?php echo base_url();?>Login/userlogs';" class="btn btn-primary col-sm-2 btn-lg btnProfile"><span class="fa fa-tasks"></span> User Logs</button>		
+		<button type="button" class="btn btn-primary col-sm-2 btn-lg btnProfile" data-toggle="modal" data-target="#myModal_comp"><span class="fa fa-plus-circle"></span> Add Agency</button>
+		<button type="button" class="btn btn-primary col-sm-2 btn-lg btnProfile" data-toggle="modal" data-target="#myModal_course"><span class="fa fa-plus-circle"></span> Add Course</button>
+		<button type="button" onclick="window.location='<?php echo base_url();?>Login/criteria';" class="btn btn-primary col-sm-2 btn-lg btnProfile"><span class="fa fa-bar-chart"></span> Criteria</button>
+		<button type="button" onclick="window.location='<?php echo base_url();?>Login/userlogs/all';" class="btn btn-primary col-sm-2 btn-lg btnProfile"><span class="fa fa-tasks"></span> User Logs</button>		
 	</div>
 
 <!-- <a href="#" class="text-capitalize">Logout</a> -->
@@ -110,7 +112,10 @@
 	</div>
 	<div style="margin-bottom: 10px;" class="">
 		<button type="button" class="btn btn-primary btn-lg btnAdminCdr" onclick="window.location='<?= base_url();?>Login/profile_page'"><span class="fa fa-th-list"></span> Administrator Lists</button>
-		<button type="button" class="btn btn-primary btn-lg btnAdminCdr" onclick="window.location='<?= base_url();?>Login/coordinator_lists'"><span class="fa fa-th-list"></span> Coordinator Lists</button>		
+		<button type="button" class="btn btn-primary btn-lg btnAdminCdr" onclick="window.location='<?= base_url();?>Login/coordinator_lists'"><span class="fa fa-th-list"></span> Coordinator Lists</button>
+		<button type="button" class="btn btn-primary btn-lg btnAdminCdr" onclick="window.location='<?= base_url();?>Login/others'"><span class="fa fa-th-list"></span> Course Lists</button>
+		<button type="button" class="btn btn-primary btn-lg btnAdminCdr" onclick="window.location='<?= base_url();?>Login/agency_list'"><span class="fa fa-th-list"></span> Agency Lists</button>
+
 		
 	</div>
 	<div class="">
@@ -157,8 +162,8 @@
 					
 					<td ><?php echo $key['date_reg']; ?></td>
 					<td>
-						<button class="btn btn-info btn-xs btnCircle" type="button" onclick="window.location='<?= base_url();?>Login/update_admin/<?php echo $key['admin_id']; ?>';"><span class="glyphicon glyphicon-pencil"></span></button>
-						<a href="<?php echo base_url();?>Control/delete_admin/<?php echo $key['admin_id']; ?>" class="btn btn-danger btn-xs btnCircle glyphicon glyphicon-trash" onclick="return confirm('Are you sure?')"></a>
+						<button class="btn btn-info btn-xs btnCircle" type="button" onclick="window.location='<?= base_url();?>Login/update_admin/<?php echo $key['admin_id']; ?>';"><span class="fa fa-pencil"></span></button>
+						<a href="<?php echo base_url();?>Control/delete_admin/<?php echo $key['admin_id']; ?>" class="btn btn-danger btn-xs btnCircle fa fa-trash" onclick="return confirm('Are you sure?')"></a>
 					</td>
 				</tr>
 				<?php endforeach ?>
@@ -302,7 +307,7 @@
 												<span class="input-group-addon">
 											            <span class="">+63</span>
 											    </span>
-												<input type="number" name="reg_contact" class="form-control" placeholder="Contact Number" required>		
+												<input type="text" name="reg_contact" class="form-control" placeholder="Contact Number" maxlength="10" minlength="10" required>		
 											</div>
 											<label><small>*eg. 90123456789</small></label>
 										</div>
@@ -324,7 +329,7 @@
 									<div class="form-group">	
 										<label class="col-sm-3 control-label">Current Address </label>		
 										<div class="col-sm-8">
-											<input type="text" name="reg_curaddress" class="form-control text-capitalize" placeholder="St. Brgy. City. Province" required>
+											<input type="text" name="reg_curaddress" class="form-control text-capitalize" placeholder="Brgy. St. City. Province" required>
 										</div>
 									</div>
 									<div class="form-group">	
@@ -412,26 +417,27 @@
 											</select>
 										</div>
 									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Agency Name</label>
-										<div class="col-sm-4">
-											<select name="reg_cname" class="form-control" value="Course">
-												<option value="-">Choose</option>
-												<?php foreach ($this->Login_user_model->get_all_cname() as $key) : 
-												?>
-												<option value="<?= $key['cname'] ?>"><?= $key['cname'] ?></option>
-												<?php endforeach ?>
-											</select>
-										</div>
-									</div>
+									
 									<div class="form-group">	
-										<label class="col-sm-3 control-label">Contact Num</label>		
+										<label class="col-sm-3 control-label">Mobile Number</label>		
 										<div class="col-sm-8">
 											<div class="input-group">
 												<span class="input-group-addon">
 											            <span class="">+63</span>
 											    </span>
-												<input type="number" name="reg_contact" class="form-control" placeholder="Contact Number" required>		
+												<input type="text" name="reg_contact" class="form-control" placeholder="Contact Number" minlength="10" maxlength="10" required>		
+											</div>
+											<label><small>*eg. 90123456789</small></label>
+										</div>
+									</div>
+									<div class="form-group">	
+										<label class="col-sm-3 control-label">Email address</label>		
+										<div class="col-sm-8">
+											<div class="input-group">
+												<span class="input-group-addon">
+											            <span class="">@</span>
+											    </span>
+												<input type="email" name="reg_email" class="form-control" placeholder="Email Address" required>		
 											</div>
 											<label><small>*eg. 90123456789</small></label>
 										</div>
@@ -440,9 +446,9 @@
 										<label class="col-sm-3 control-label">Birthday</label>		
 										<div class='col-sm-5 ' id='datetimepicker1'>
 											<div class="input-group">
-												<input type='text' name="reg_birthday" class="form-control" placeholder="Month/Day/Year" />
+												<input type='text' name="reg_birthday" class="form-control" placeholder="Day-Month-Year" />
 							                    <span class="input-group-addon">
-							                        <span class="glyphicon glyphicon-calendar"></span>
+							                        <span class="fa fa-calendar"></span>
 							                    </span>
 											</div>						                  
 						                </div>
@@ -489,38 +495,113 @@
 <!--Modal end -->
 
 
-<!-- Modal add image-->
-<div class="modal fade" id="myModal_image" role="dialog" >
+
+<!-- Modal add agency-->
+  <div class="modal fade" id="myModal_comp" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content" id="">
         <div class="modal-header panel_head">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-         	<div class="panel-heading">
-				<h2><span class="fa fa-image"></span> Update Image</h2>
+         	<div class="">
+				<h2><span class="fa fa-user-plus"></span> Add Agency</h2>
 			</div>
         </div>
-        <div class="modal-body">
-			<img data-toggle="modal" data-target="#myModal_image" src="<?php echo base_url();?><?php echo base_url();?>$adminInfo['admin_image']" style="height:400px;width:550px" alt="avatar" >
-        <div>
-	        <div class="modal-footer">
-	        	<form action="<?= base_url()?>Login/insertImage" method="POST" enctype="multipart/form-data">
-	        		<input type="hidden" name="admin_id" value="<?= $adminID?>">
-	        		<label class="">            	
-		            <span class="btn btn-info btnStudent">
-		               	<span class="fa fa-image"></span> Add Image <input type="file" style="display: none;" name="fileToUpload" >
-		            </span>
-		        </label>
-		        <button type="submit" class="btn">Upload</button>
-	        	</form>
-	          <button type="button" class="btn btn-primary" data-dismiss="modal" style="margin-right: 33px;"><span class="fa fa-close"></span> Close</button>
-	        </div>        		
-        </div>
-      	</div>     
+        <div class="modal-body" id="">
+			<div class="container">
+				<div class="col-sm-6 " id="=">
+					<div id="" class="">
+						<div class="">
+								
+							<form class="form-horizontal" action="<?php echo base_url();?>Control/add_company" method="POST">	
+									<div class="form-group">	
+										<label class="col-sm-3 control-label">Agency name</label>
+										<div class="col-sm-8">
+											<input type="text" name="reg_cname" class="form-control text-capitalize" placeholder="Agency Name" autofocus required>
+										</div>
+									</div>
+									<div class="form-group">	
+										<label class="col-sm-3 control-label">Agency Supervisor</label>
+										<div class="col-sm-8">
+											<input type="text" name="reg_spv" class="form-control text-capitalize" placeholder="Agency Supervisor"  required>
+										</div>
+									</div>
+									<div class="form-group">	
+										<label class="col-sm-3 control-label">Agency Address</label>
+										<div class="col-sm-8">
+											<input type="text" name="reg_caddress" class="form-control text-capitalize" placeholder="Agency Address"  required>
+										</div>
+									</div>						
+									<div class="pull-right" style="margin-right: 50px; margin-bottom: 10px; margin-top: -15px;">
+										<button type="submit" class="btn btn-info reg_button"><span class="glyphicon glyphicon-cloud"></span> Add Agency</button>
+									</div>	
+							</form>
+						</div>
+					</div>
+				</div>
+        	</div>
+        	<div >
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" style="margin-right: 33px;"><span class="fa fa-close"></span> Close</button>
+        </div>        		
+        	</div>
+      </div>     
     </div>
   </div> 
 </div>
 <!--Modal end -->
+
+<!-- Modal add course-->
+  <div class="modal fade" id="myModal_course" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content" id="">
+        <div class="modal-header panel_head">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+         	<div class="">
+				<h2><span class="fa fa-user-plus"></span> Add Course</h2>
+			</div>
+        </div>
+        <div class="modal-body" id="">
+			<div class="container">
+				<div class="col-sm-6 " id="=">
+					<div id="" class="">
+						<div class="">
+								
+							<form class="form-horizontal" action="<?php echo base_url();?>Control/add_course" method="POST">	
+									<div class="form-group">	
+										<label class="col-sm-3 control-label">Course Abbreviation</label>
+										<div class="col-sm-8">
+											<input type="text" name="reg_course_abbrv" class="form-control text-capitalize" placeholder="Course Abbreviation" autofocus required>
+											<label><small style="font-weight: normal;">*BSCE</small></label>
+										</div>
+									</div>
+									<div class="form-group">	
+										<label class="col-sm-3 control-label">Course Name</label>
+										<div class="col-sm-8">
+											<input type="text" name="reg_course_name" class="form-control text-capitalize" placeholder="Course Name" required>
+											<label><small style="font-weight: normal;">*Bachelor of Science in Civil Engineering</small></label>
+										</div>
+									</div>
+									<div class="pull-right" style="margin-right: 50px; margin-bottom: 10px; margin-top: -15px;">
+										<button type="submit" class="btn btn-info reg_button"><span class="glyphicon glyphicon-cloud"></span> Add Course</button>
+									</div>	
+							</form>
+						</div>
+					</div>
+				</div>
+        	</div>
+        	<div >
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" style="margin-right: 33px;"><span class="fa fa-close"></span> Close</button>
+        </div>        		
+        	</div>
+      </div>     
+    </div>
+  </div> 
+</div>
+<!--Modal end -->
+
 		</div>		
 	</div>
 </div>
@@ -573,12 +654,7 @@
 	<script>
 		// Listen for click on toggle checkbox
 		$('#select-all').click(function(event) {   
-		    if(this.checked) {
-		        // Iterate each checkbox
-		        $(':checkbox').each(function() {
-		            this.checked = true;                        
-		        });
-		    }
+		    $("input:checkbox").prop('checked', $(this).prop("checked"));
 		});
 	</script>
 	

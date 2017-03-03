@@ -2,10 +2,8 @@
 </head>
 
 </body>
-<header >
-<img src="<?php echo base_url();?>assets/images/EVSU_banner.png" height="100" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System"> 
- 
-	
+<header id="mobile-view"> 
+	<img src="<?php echo base_url();?>assets/images/EVSU_banner.png" height="100" width="100%" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System">
 </header>
 <nav class="navbar navbar-inverse" id="nav2">
   <div class="container-fluid">
@@ -27,7 +25,7 @@
         
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      	<li class="#"><a href="<?php echo base_url();?>Login/student_list"><span class="fa fa-home"></span> Home </a></li>
+      	<li class="#"><a href="<?php echo base_url();?>"><span class="fa fa-home"></span> Home </a></li>
         <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
 		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
 		<li><a href="<?php echo base_url();?>Login/coordinator_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
@@ -39,7 +37,7 @@
 				$course = $_SESSION['course_abbrv'];
 				$user = $_SESSION['username'];	
 				$cname = $_SESSION['cname'];    
-				// $stud_id = $_SESSION['stud_id'];    
+				$stud_id = $_SESSION['stud_id'];    
 				}?><span class="caret"></span>
           <ul class="dropdown-menu">
             <li><a style="color: #000;"  href="#"><span class="fa fa-cog"></span> Settings</a></li>
@@ -85,7 +83,7 @@
 	<?php $info = $this->Login_user_model->get_stud_info($stud_id); ?>	
 
 <div class="well well-sm well-custom" style="margin-bottom: 1px;">
-	<h2 class="text-capitalize"><span class="fa fa-user"></span> <?= $info['fname'].' '.$info['lname']?>'s Profile</h2>
+	<h2 class="text-capitalize hoverme"><span class="fa fa-user"></span> <?= $info['fname'].' '.$info['lname']?>'s Profile</h2>
 </div>	
 
 <div class="col-sm-4" style="background: #fff; border-radius: 2px; padding: 1px 10px 15px 10px; box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.1); margin: 5px 5px 5px">
@@ -98,10 +96,10 @@
 			</h3>
 		</div>
 	</div>
-
+	<?php $dataqwe = $this->Login_user_model->getcnameqwe($stud_id); ?>
 	<div class="form-group">	
-		<label class="col-sm-12 control-label studentInfo"><b>Student Number:</b> <?= $info['stud_id']?></label>
-		<label class="col-sm-12 control-label text-capitalize studentInfo"><b>Agency Name:</b> <?= $info['cname']?></label>
+		<label class="col-sm-12 control-label studentInfo"><b>Student Number:</b> <?= $stud_id ?></label>
+		<label class="col-sm-12 control-label text-capitalize studentInfo"><b>Agency Name:</b> <?= $dataqwe['cname']?></label>
 		<label class="col-sm-12 control-label text-capitalize studentInfo"><b>Name:</b> <?= $info['fname'].' '.$info['lname']?></label>
 		<label class="col-sm-12 control-label text-capitalize studentInfo"><b>Course:</b> <?= $info['course_abbrv']?></label>
 		<label class="col-sm-12 control-label studentInfo"><b>Year:</b> <?= $info['year']?></label>
@@ -111,14 +109,17 @@
 <?php $grades = $this->Login_user_model->get_grades($stud_id); ?>
 
 <div class="col-sm-7" style="background: #fff; border-radius: 2px; padding: 10px 10px 15px 10px; box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.1); margin: 5px 5px 5px">
-	<button class="btn btn-primary btnUpdateAdmin" type="button" data-toggle="collapse" data-target="#gradesCollapse" aria-expanded="false" aria-controls="gradesCollapse">
-		 <span class="fa fa-calculator"></span> Grades <span class="caret"></span>
+	<button class="btn btn-primary btnTS" type="button" data-toggle="collapse" data-target="#gradesCollapse" aria-expanded="false" aria-controls="gradesCollapse">
+		 <span class="fa fa-calculator"></span> Grades From Trainee Supervisor <span class="caret"></span>
 	</button>
 	<button class="btn btn-primary btnAttendance " type="button" data-toggle="collapse" data-target="#AttendanceCollapse" aria-expanded="false" aria-controls="AttendanceCollapse">
 		<span class="fa fa-calendar"></span> Attendance Sheet <span class="caret"></span>
 	</button>
 	<button class="btn btn-primary btnPTP " type="button" data-toggle="collapse" data-target="#PTPCollapse" aria-expanded="false" aria-controls="PTPCollapse">
 		<span class="fa fa-users"></span> Peer To Peer Evaluation <span class="caret"></span>
+	</button>
+	<button class="btn btn-primary btnPTP " type="button" data-toggle="collapse" data-target="#selfPTPCollapse" aria-expanded="false" aria-controls="PTPCollapse">
+		<span class="fa fa-user"></span> Self Evaluation <span class="caret"></span>
 	</button>
 
 	<div class="collapse" id="gradesCollapse" style="margin: 10px;">
@@ -137,9 +138,8 @@
 			<table class="table table-striped table-bordered table-hover" style="margin-top: 10px;" >
 				<thead style="background: Steelblue; color: #fff;">			
 					<tr>
-						<!-- <th>Name</th> -->
+						<th>Name</th>
 						<th>Date</th>
-						<th>Day</th>
 						<th>Time in</th>
 						<th>Time out</th>
 					</tr>
@@ -147,11 +147,10 @@
 					<?php foreach ($this->Login_user_model->get_attendance($stud_id) as $key) { ?>
 				<tbody>
 					<tr>
-						<!-- <td class="text-capitalize"><?= $key['name']?></td> -->
-						<td><?= $key['month'].'-'.$key['date'].'-'.$key['year']?></td>
-						<td><?= $key['day']?></td>
-						<td><?= $key['time_in_hour'].':'.$key['time_in_min'].' '.$key['time_in_ap']?></td>
-						<td><?= $key['time_out_hour'].':'.$key['time_out_min'].' '.$key['time_out_ap']?></td>
+						<td class="text-capitalize"><?= $key['name']?></td>
+						<td><?= $key['date']?></td>
+						<td><?= $key['time_in']?></td>
+						<td><?= $key['time_out']?></td>
 					</tr>
 				</tbody>
 					
@@ -160,9 +159,11 @@
 			</table>
 		</div>
 	</div>
-	<div class="collapse" id="PTPCollapse" style="margin: 10px;">
+
+
+	<div class="collapse" id="selfPTPCollapse" style="margin: 10px;">
 		<div class="well well-custom">
-			<span class="fa fa-thumbs-o-up"></span><span> <b>Peer to Peer Evaluations</b></span>
+			<span class="fa fa-thumbs-o-up"></span><span> <b>Self Evaluation</b></span>
 			<table class="table table-hover table-striped table-bordered" style="margin-top: 10px;"">
 				<thead style="background: Steelblue; color: #fff;">			
 					<tr>
@@ -176,7 +177,7 @@
 						</th>
 					</tr>
 				</thead>
-					<?php foreach($this->Login_user_model->getPTPInfo($stud_id) as $key ) 
+					<?php foreach($this->Login_user_model->getPTPInfoself($stud_id) as $key ) 
 						$graded_by = $key['graded_by'];
 
 						if (isset($graded_by)) { 
@@ -203,7 +204,47 @@
 			</table>
 		</div>
 	</div>
+
+<form action="#" method="POST">
+	<div class="collapse" id="PTPCollapse" style="margin: 1px;">
+		<div class="well well-custom">
+			<span class="fa fa-thumbs-o-up"></span><span> <b>Peer to Peer Evaluations</b></span>
+			<table class="table table-hover table-striped table-bordered" style="margin-top: 0px;"">
+				<thead style="background: Steelblue; color: #fff;">			
+					<tr>
+						<th class="Tcenter"><span class="fa fa-users"></span> Student's Number</th>
+						<th class="Tcenter">Rate 
+						<span class="fa fa-star"></span>
+						<span class="fa fa-star"></span>
+						<span class="fa fa-star"></span>
+						<span class="fa fa-star"></span>
+						<span class="fa fa-star"></span>
+						</th>
+					</tr>
+				</thead>
+
+						<?php foreach ($this->Login_user_model->getPTPInfocdr($stud_id) as $key ) { ?>
+										
+				<tbody>
+						<tr>						
+						<td style="font-size: 15px;"><input type="hidden" name="graded_by" value="<?php echo $key['graded_by'] ?>"><span class="fa  fa-angle-double-right"></span><a href="#" class="text-capitalize"> <?= $key['graded_by'] ?></a>  </td>
+							<td style="text-align: center;"><button class="btn btn-primary btnStudGrade1"><span class="fa fa-calculator"></span> Grade: <?= $key['total_grades']?><input type="hidden" name="grades" value="<?= $key['total_grades']?>"></button></td>
+						</tr>
+						<?php } 
+						?>
+				</tbody>
+
+					
+			</table>
+				
+				<!-- <span >Record: <input type="hidden" name="record" value="<?php $dataInfo = $this->Login_user_model->getPTPInfocdrqw($stud_id) ?>"><?php $dataInfo = $this->Login_user_model->getPTPInfocdrqw($stud_id) ?></span> -->
+				<!-- <button type="submit" class="btn btn-primary btnStudGrade1">Compute <?= $dataInfo['avg_total_grades']?></button> -->
+</form>
+		</div>
+	</div>
 </div>
+
+
 <!-- Modal add supervisor -->
   <div class="modal fade" id="myModal_supervisor" role="dialog">
     <div class="modal-dialog">
@@ -414,16 +455,7 @@
 
 
 	} );
-
-		
-	</script>s
-
-	
-
-
-
-
-
+	</script>
 <div class="container">	
 </div>
 

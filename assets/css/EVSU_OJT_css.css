@@ -22,7 +22,18 @@ body
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e2e2e2', GradientType=0 );	
 }
 #example {
-	font-size: 12.5px;
+	font-size: 11.8px;
+}
+.aboutUs {
+	font-family: 'Century Gothic';
+	background-color: rgba(255,255,255,1);
+	background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.99) 14%, rgba(222,222,222,0.95) 68%, rgba(226,226,226,0.93) 90%, rgba(226,226,226,0.92) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(14%, rgba(255,255,255,0.99)), color-stop(68%, rgba(222,222,222,0.95)), color-stop(90%, rgba(226,226,226,0.93)), color-stop(100%, rgba(226,226,226,0.92)));
+	background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.99) 14%, rgba(222,222,222,0.95) 68%, rgba(226,226,226,0.93) 90%, rgba(226,226,226,0.92) 100%);
+	background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.99) 14%, rgba(222,222,222,0.95) 68%, rgba(226,226,226,0.93) 90%, rgba(226,226,226,0.92) 100%);
+	background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.99) 14%, rgba(222,222,222,0.95) 68%, rgba(226,226,226,0.93) 90%, rgba(226,226,226,0.92) 100%);
+	background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.99) 14%, rgba(222,222,222,0.95) 68%, rgba(226,226,226,0.93) 90%, rgba(226,226,226,0.92) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e2e2e2', GradientType=0 );
 }
 
 @font-face
@@ -847,6 +858,30 @@ header
   margin: 5px 0px 5px 5px;
   color: #5bc0de; 
 }
+.btnSubmitAttend
+{
+  background-color: #3269AD; 
+  border: 1px solid #3269AD;
+  border-radius: 22.5px; 
+  font-weight: bold;
+  margin: 5px 0px 5px 5px;
+  color: #fff; 
+}
+.btnConfirmed
+{
+  background-color: #fff; 
+  border-color: #3269AD;
+  border: 1.8px solid #3269AD;
+  border-radius: 22.5px; 
+  font-weight: bold;
+  height: 60px;
+  margin: 5px 0px 5px 5px;
+  color: #3E699F;
+  font-family: "Century Gothic";	
+  font-size: 19px;
+
+
+}
 .btnAdminCdr
 {
   background-color: #FFFFFF; 
@@ -868,6 +903,18 @@ header
   margin: 5px 0px 5px 5px;
   color: #3E699F; 
   background-color: #FFFFFF; 
+}
+.btnCdrSpvqwe
+{
+  border-color: #3269AD;
+  border: 1.8px solid #3269AD;
+  border-radius: 11.5px; 
+  font-weight: bold;
+  width: 120px;
+  margin: 5px 0px 5px 5px;
+  color: #3E699F; 
+  background-color: #FFFFFF;
+  margin-bottom: 10px; 
 }
 .btnCircle {
   width: 28px;
@@ -919,6 +966,15 @@ header
   color: #376092;
   background-color: #FFFFFF;
 }
+.btnUpdateqwe{
+  border: 1.8px solid #376092;
+  border-radius: 22.5px;
+  font-weight: bold;
+  width: 150px;
+  margin: 5px 0px 5px 5px;
+  color: #376092;
+  background-color: #FFFFFF;
+}
 .btnUpdateAdmin {
   border: 1.8px solid #376092;
   border-radius: 22.5px;
@@ -927,6 +983,48 @@ header
   margin: 5px 0px 5px 5px;
   color: #376092;
   background-color: #FFFFFF;
+}
+.btnTSq1 {
+  border: 1.8px solid #376092;
+  border-radius: 22.5px;
+  font-weight: bold;
+  width: 280px;
+  height: 48px;
+  font-size: 14px;
+  margin: 5px 0px 5px 5px;
+  color: #376092;
+  background-color: #FFFFFF;
+}
+.btnTSq {
+  border: 1.8px solid #376092;
+  border-radius: 22.5px;
+  font-weight: bold;
+  width: 270px;
+  height: 48px;
+  font-size: 14px;
+  margin: 5px 0px 5px 5px;
+  color: #376092;
+  background-color: #FFFFFF;
+}
+.btnTS {
+  border: 1.8px solid #376092;
+  border-radius: 22.5px;
+  font-weight: bold;
+  width: 270px;
+  margin: 5px 0px 5px 5px;
+  color: #376092;
+  background-color: #FFFFFF;
+}
+.btnTSa {
+  border: 1.8px solid #376092;
+  border-radius: 22.5px;
+  font-weight: bold;
+  width: 280px;
+  height: 50px;
+  margin: 5px 0px 5px 5px;
+  color: #fff;
+  background-color: #376092;
+  font-size: 15px;
 }
 .btnRate {
   border: 1.8px solid #376092;
@@ -1024,6 +1122,16 @@ header
   color: #376092;
   background-color: #FFFFFF;
 }
+.btnStudGrade1 {
+  border: 1.8px solid #376092;
+  border-radius: 22.5px;
+  font-weight: bold;
+  width: 130px;
+  height: 34px;
+  margin: 5px 0px 5px 5px;
+  color: #fff;
+  background-color: #376092;
+}
 @media only screen and (min-device-width : 320px) {
 	#mobile-view {
 		display: block;
@@ -1057,6 +1165,10 @@ header
 .well-custom {
 	background: #fff;
 }
+.well-custom1 {
+	background: rgba(200, 54, 54, 0.8);
+	padding-bottom: 30px;
+}
 .studentAvatar {
 	border-radius: 50px;
 }
@@ -1077,4 +1189,12 @@ header
 	font-size: 16px;
 	padding-bottom: 30px;
 	
+}
+.comfirmemail {
+	box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 3px 12px 0 rgba(0, 0, 0, 0.19);
+
+}
+.hoverme:hover {
+	color: #376092;
+	cursor: pointer;
 }

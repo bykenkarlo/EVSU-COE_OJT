@@ -31,7 +31,7 @@
         
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      	<li class="#"><a href="<?php echo base_url();?>Login/profile_page"><span class="fa fa-home"></span> Home </a></li>
+      	<li class="#"><a href="<?php echo base_url();?>"><span class="fa fa-home"></span> Home </a></li>
         <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
 		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
 		<li><a href="<?php echo base_url();?>Login/admin_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
@@ -164,15 +164,15 @@
 						</div>
 					</div>
 					<div class="form-group">	
-						<label class="col-sm-3 control-label">Contact Number</label>
-						<div class="col-sm-8">
-							<div class="input-group">
+						<label class="col-sm-3 control-label">Mobile Number</label>
+						<div class="col-sm-7">
+
+						<div class="input-group">
 								<span class="input-group-addon">
-							            <span class="">+63</span>
-							    </span>
-								<input type="text" name="contact" class="form-control " value="<?= $info['contactNum']?> ">
-								
-							</div>
+										<span>+63</span>
+							    </span>		
+								<input type="text" maxlength="10" minlength="10" name="contact" class="form-control " value="<?= $info['contactNum']?> ">
+							</div> 
 							<label><small style="font-weight: normal;">*must be valid mobile number.</small></label>
 						</div>
 					</div>

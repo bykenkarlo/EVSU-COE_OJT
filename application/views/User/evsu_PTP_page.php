@@ -24,7 +24,7 @@
         
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      	<li class="#"><a href="<?php echo base_url();?>Student/student_profile_page"><span class="fa fa-home"></span> Home </a></li>
+      	<li class="#"><a href="<?php echo base_url();?>"><span class="fa fa-home"></span> Home </a></li>
         <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
 		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
 		<li><a href="<?php echo base_url();?>Login/supervisor_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
@@ -50,14 +50,6 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<?php 
-	foreach ($this->Login_user_model->getStudentData($stud_id) as $studentData) {
-	if ($stud_id == $studentData['stud_id']) {
-		$comp_id = $studentData['comp_id'];
-		$cname = $studentData['cname'];
- ?>
-
-<!-- side nav -->
 <div id="mySidenav" class="sidenav " >
 	<a href="javascript:void(0)" class="closebtn avatarBody" onclick="closeNav()"
 	 style="position: absolute; float: left;">×</a>
@@ -66,22 +58,24 @@
 		<h3 style="color: #000; font-weight: bold;">Welcome!</h3>
 		<!-- <span class="fa fa-user-circle  fa-5x" style="color: #000;"></span> -->
 		<img data-toggle="modal" data-target="#myModal_add_admin" src="<?php echo base_url();?>assets/images/avatar_img.jpg" style="height:90px;width:90px" alt="avatar" >
-
+		
 	</div>
+	<?php $dataqwe = $this->Login_user_model->getcnameqwe($stud_id)
 
+	 ?>
+	 <!-- <?php echo $dataqwe['cname']; ?> -->
 	<span class="text-capitalize nav_span col-sm-12">Student Number: <?php echo $stud_num;  ?></span>
 	<span class="text-capitalize nav_span col-sm-12">Name: <?php echo $_SESSION['fname'].' '.$_SESSION['lname']; ?></span>
 	<span class="text-capitalize nav_span col-sm-12">Course: <?php echo $course;  ?></span>
 	<span class="text-capitalize nav_span col-sm-12">Username: <?php echo $user;  ?></span>		
-	<span class=" nav_span col-sm-12">Agency Assigned: <?php echo $cname;  ?></span>
-	<?php }
-	} ?>		
+	<span class=" nav_span col-sm-12">Agency Assigned: <?php echo $dataqwe['cname']  ?></span>	
+		
 	<div class="add_admin_cdr">
-		<button type="button" class="btn btn-danger col-sm-2 btnProfileStudent" data-toggle="modal" data-target="#myModal_edit"><span class="fa fa-user-plus"></span> Edit Profile</button>
-		<button type="button" class="btn btn-danger col-sm-2 btnProfileStudent" data-toggle="modal" data-target="#myModal_cdr"><span class="fa fa-cloud-upload"></span> Upload File</button>
-		<button onclick="window.location='<?php echo base_url();?>Student/journal';" type="button" class="btn btn-danger col-sm-2 btnProfileStudent"><span class="fa fa-newspaper-o"></span> Journal</button>
-		<button onclick="window.location='<?php echo base_url();?>Student/grades';" type="button" class="btn btn-danger col-sm-2 btnProfileStudent"><span class="fa fa-calculator"></span> Grades</button>
-		<button style="font-size: 14px;" onclick="window.location='<?= base_url(); ?>Login/PTPgrades'" type="button" class="btn btn-danger col-sm-2 btnProfileStudent"><span class="fa fa-thumbs-up"></span> Peer to Peer Evaluation</button>
+		<button type="button" class="btn btn-primary col-sm-2 btnProfile" data-toggle="modal" data-target="#myModal_edit"><span class="fa fa-user-plus"></span> Edit Profile</button>
+		<button type="button" class="btn btn-primary col-sm-2 btnProfile" data-toggle="modal" data-target="#myModal_cdr"><span class="fa fa-cloud-upload"></span> Upload File</button>
+		<!-- <button onclick="window.location='<?php echo base_url();?>Student/journal';" type="button" class="btn btn-primary col-sm-2 btnProfile"><span class="fa fa-newspaper-o"></span> Journal</button> -->
+		<button onclick="window.location='<?php echo base_url();?>Student/grades';" type="button" class="btn btn-primary col-sm-2 btnProfile"><span class="fa fa-calculator"></span> Grades</button>
+		<button style="font-size: 14px;" onclick="window.location='<?= base_url(); ?>Login/PTPgrades?studID=<?= $stud_id ?>/'" type="button" class="btn btn-primary col-sm-2 btnProfile"><span class="fa fa-thumbs-up"></span> Rate Your Self</button>
 	</div>
 </div>
 
@@ -92,53 +86,17 @@
 <body class="img-responsive" style="
 background:url('<?php echo base_url();?>assets/images/background.png') no-repeat;
 background-size: 100% 90%; padding: 0px 0px 0px 0px" >
-<!-- <div class="collapse" id="gradesCollapse" style="margin: 10px;">
-	<div class="well well-custom">
-		<span class="fa fa-calculator"></span><span> <b>Total Grades:</b> <?= $grades['total_grades']; ?></span>	    
-		<button align="center" class="btn btn-primary btnShowGrades" onclick="window.location='<?= base_url()?>Control/studentGrades/<?= $info['stud_id']?>' " >
-		    <span class="fa fa-angle-double-right"></span> <b>SHOW TRAINEE'S EVALUATION RECORD</b>
-	    </button>
-	</div>
-</div> -->
+
 <div class="container" style="font-size:14pt; margin-top: 10px; margin-bottom: 12px;">
 		<?= $this->session->flashdata('message') ?>
 <div class="container">
 
-<div class="well well-custom" style="margin-bottom: 4.5em;">
-	<div class="dropdown category">
-	 	<button class="btn btn-primary dropdown-toggle btnStudents" type="button" data-toggle="dropdown"><span class="fa fa-users"></span> Choose Student
-	 	<span class="caret"></span></button>
-		<ul class="dropdown-menu">
-			<?php foreach ($this->Login_user_model->get_all_student_spv($comp_id) as $studentInfo) : 
-			// $studentID = $studentInfo['stud_id']; ?>
-				<li class="text-capitalize"><a href="<?= base_url()?>Login/PTPgrades?studID=<?= $studentInfo['stud_id']; ?>" ><?= $studentInfo['fname'] ?> <?= $studentInfo['lname'] ?></a></li>
-			<?php endforeach ?>
-		</ul>
-	</div>
 
-	<!-- <form action="" method="get">
-		<div class="form-group">
-			<div class="col-sm-4">
-				<select  name="reg_comp_id" class="btn btnStudents form-control text-capitalize">
-					<option value="-">Choose Student</option>
-					<?php foreach ($this->Login_user_model->get_all_student_spv($comp_id) as $key) : 
-					?>
-					<option value="<?= $key['comp_id'] ?>"><?= $key['fname'] ?></option>
-					<?php endforeach ?>
-				</select>
-			</div>	
-		</div>
-	</form> -->
-	<button class="btn btn-primary btnRate" type="button" data-toggle="collapse" data-target="#gradesCollapse" aria-expanded="false" aria-controls="gradesCollapse">
-		<span class="fa fa-calculator"></span> Rate <span class="caret"></span>
-	</button>
-</div>
-
-<div class="collapse" id="gradesCollapse" style="margin: 10px;" >
+<div class="" style="margin: 10px;" >
 	<div style="margin: 30px 0px 20px 0px">
 	<div class="" style="text-align: center;">
 		<div id="non-printable">
-			<button type="button" onclick="window.location='<?= base_url();?>Login/student_profile_page';" style=" margin:0px 30px 50px 0px; border-radius: 100px; box-shadow: 0 9px 18px 0 rgba(0, 0, 0, 0.21), 0 3px 10px 0 rgba(0, 0, 0, 0.19); float: right; position: fixed; z-index: 1; right: 0; bottom: 0;background: #db4437" class="btn btn-lg"><span style="color: #fff; font-size: 50px;" class="fa fa-arrow-left fa-1x"></span>
+			<button type="button" onclick="window.location='<?= base_url();?>Login/student_profile_page';" style=" margin:0px 30px 50px 0px; border-radius: 120px; box-shadow: 0 9px 18px 0 rgba(0, 0, 0, 0.21), 0 3px 10px 0 rgba(0, 0, 0, 0.19); float: right; position: fixed; z-index: 1; right: 0; bottom: 0;background: #db4437" class="btn btn-sm"><span style="color: #fff; font-size: 40px; padding-top: 5px; padding-bottom: 5px;" class="fa fa-hand-o-left"></span>
 			</button>
 		</div>
 	<div>
@@ -155,6 +113,8 @@ background-size: 100% 90%; padding: 0px 0px 0px 0px" >
 	<?php 
 		$studentID = $_GET['studID'];
 		$info = $this->Login_user_model->get_stud_info($studentID); 
+		$hash = $info['hash'];
+
 	?>	
 	<div class="row" style="margin-top: 60px;"> 
 		<div  class="col-md-8" >
@@ -196,8 +156,8 @@ background-size: 100% 90%; padding: 0px 0px 0px 0px" >
 	<div style="font-" class="table_grades">
 	<form action="<?php echo base_url();?>Login/compute_grades_PTP" method="post">
 		
-		<table class="table table-bordered table-hover "  class="table_grades">
-				<?php $studData = $this->Login_user_model->get_gradesPTP($studentID);?>
+		<table class="table table-bordered table-hover" class="table_grades">
+				<?php $studData = $this->Login_user_model->get_gradesPTP($hash);?>
 			<thead>
 				<tr>
 					<th style="padding-bottom: 15px;text-align: center;">TRAINER'S CHARACTERISTICS</th>
@@ -206,102 +166,104 @@ background-size: 100% 90%; padding: 0px 0px 0px 0px" >
 				</tr>			
 			</thead>
 
-						
+				<?php foreach ($this->Login_user_model->get_criteria() as $criteria) { ?>
 			<tbody>
 				<tr>
 					<td>
-						<p>1. <b>KNOWLEDGE OF JOB.</b> Understand what needs to be true and knows how to do it. Follows directions carefully and uses the proper materials.</p>
+						<p><?= $criteria['c1']?></p>
 					</td>
 						
 					<td>	
+						<input type="hidden" name="hash" value="<?= $hash ?>">
 						<input type="hidden" name="fullname" value="<?php echo $info['lname'].', '.$info['fname'];  ?>">
 						<input type="hidden" name="stud_id" value="<?= $studentID?>">	
 						<input type="hidden" name="graded_by" value="<?= $stud_id ?>">				
-						<input type="number" name="answer_1" step="any" class="col-sm-12 form-control" value="<?=$studData['answer_1']?>" required>
+						<input type="number" name="answer_1" step="any" class="col-sm-12 form-control" value="" required>
 					</td>
 					
 				</tr>
 				<tr>
 					<td>
-						<p>2. <b>QUALITY OF  WORK.</b> Turns out work that meets industry standards of neatness and accuracy.</p>
+						<p><?= $criteria['c2']?></p>
 					</td>
 					<td>
-						<input type="number" max="5" min="1" step="any" name="answer_2" value="<?=$studData['answer_2']?>" class="col-sm-12 form-control" required>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>3. <b>QUANTITY OF  WORK.</b> Works steadily and turns out a quantity of work that meets industry standards of production.</p>
-					</td>
-					<td>
-						<input type="number" name="answer_3" step="any" class="col-sm-12 form-control" value="<?=$studData['answer_3']?>" required>
+						<input type="number" max="5" min="1" step=".1" name="answer_2" value="" class="col-sm-12 form-control" required>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<p>4. <b>DEPENDABILITY.</b> Is present and on time each day. Can be counted on to finish the hob assigned to him/her</p>
+						<p><?= $criteria['c3']?></p>
 					</td>
 					<td>
-						<input type="number" name="answer_4" step="any" class="col-sm-12 form-control" value="<?=$studData['answer_4']?>" required >
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>5. <b>WORK ORGANIZATION.</b> Thinks through each training assignment and assembles the needed materials before stating. Handles the work in order of priority.</p>
-					</td>
-					<td>
-						<input type="number" name="answer_5" step="any" class="col-sm-12 form-control" value="<?=$studData['answer_5']?>" required>
+						<input type="number" name="answer_3" max="5" min="1" step=".1" class="col-sm-12 form-control" value="" required>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<p>6. <b>JUDGEMENT ON SEEKING HELP.</b> Knows when to ask questions on training procedures so as to avoid making mistakes or wasting time. Also knows wen to seek in-service training to build needed skills.</p>
+						<p><?= $criteria['c4']?></p>
 					</td>
 					<td>
-						<input type="number" name="answer_6" step="any" class="col-sm-12 form-control" value="<?=$studData['answer_6']?>" required>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>7. <b>ATTITUDE.</b> Is enthusiastic about mastering the job. Accepts constructive criticism gracefully Works smoothly and cooperatively with fellow trainees. Is friendly and helplful to visitors.</p>
-					</td>
-					<td>
-						<input type="number" name="answer_7" step="any" class="col-sm-12 form-control" value="<?=$studData['answer_7']?>" required>
+						<input type="number" name="answer_4" max="5" min="1" step=".1" class="col-sm-12 form-control" value="" required >
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<p>8. <b>APPEARANCE OF WORK STATION.</b> training materials, supplies and equipment are kept in good order while work is on progress. Everything is left in good condition or put neatly away at the end of each rtaining session. </p>
+						<p><?= $criteria['c5']?></p>
 					</td>
 					<td>
-						<input type="number" name="answer_8" step="any" class="col-sm-12 form-control" value="<?=$studData['answer_8']?>" required>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p>9. <b>PERSONAL APPEARANCE.</b> Always looks neat and clean. Meets the industry standards of grooming.</p>
-					</td>
-					<td>
-						<input type="number" name="answer_9" step="any" class="col-sm-12 form-control" value="<?=$studData['answer_9']?>" required>
+						<input type="number" name="answer_5" max="5" min="1" step=".1" class="col-sm-12 form-control" value="" required>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<p>10. <b>ATTENDANCE AND PUNCTIONALTY.</b> Consider frequency of absences as tardiness and exerts effort to avoid or keep them minimal</p>
+						<p><?= $criteria['c6']?></p>
 					</td>
 					<td>
-						<input type="number" name="answer_10" step="any" class="col-sm-12 form-control" value="<?=$studData['answer_10']?>" required>
+						<input type="number" name="answer_6" max="5" min="1" step=".1" class="col-sm-12 form-control" value="" required>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p><?= $criteria['c7']?></p>
+					</td>
+					<td>
+						<input type="number" name="answer_7" max="5" min="1" step=".1" class="col-sm-12 form-control" value="" required>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p><?= $criteria['c8']?> </p>
+					</td>
+					<td>
+						<input type="number" name="answer_8" max="5" min="1" step=".1" class="col-sm-12 form-control" value="" required>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p><?= $criteria['c9']?></p>
+					</td>
+					<td>
+						<input type="number" name="answer_9" max="5" min="1" step=".1" class="col-sm-12 form-control" value="" required>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p><?= $criteria['c10']?></p>
+					</td>
+					<td>
+						<input type="number" name="answer_10" max="5" min="1" step=".1" class="col-sm-12 form-control" value="" required>
 					</td>
 				</tr>
 			</tbody>
+			<?php } ?>
 		</table>
 		<div>
 			<button type="submit" class="btn btn-primary btnCompGrades" style="float: right;" id="grades"><span class="fa fa-calculator"></span> Compute Grades</button><br>
-				<?php $data = $this->Login_user_model->get_gradesPTP($studentID);?>
+				<?php $data = $this->Login_user_model->get_gradesPTP($hash);?>
 
 			<div id="total" style="float: right; margin-right: -190px; margin-top: 50px;">
 				<label class="label-control">Total Grades:</label><br>
-				<input type="text" class="col-sm-3 form-control" value="<?= $data['total_grades']; ?>">
+				<input type="text" class="col-sm-3 form-control" value="">
 			</div>
 		</div>
 	</form>
