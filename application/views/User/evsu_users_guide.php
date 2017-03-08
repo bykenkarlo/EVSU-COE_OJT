@@ -62,16 +62,11 @@
 	<div>
 		<h1 style="font-weight: ; padding: 20px 40px 10px 50px; margin-top: 10px; "><span class="fa fa-users"></span> User's Manual</h1>
 	</div>	
-	<div class="panel-body " style="margin: 10px 10px 10px 80px;" >
+	<div class="panel-body " style="margin: 10px 10px 10px 100px;" >
 		<div class="col-sm-10">
-			<iframe src="<?= base_url() ?>assets/docs/u1.png" width="820" height="850"></iframe>	
-			<!-- <iframe src="<?= base_url() ?>assets/docs/u2.png" width="820" height="850"></iframe>	 -->
-			<iframe src="<?= base_url() ?>assets/docs/u3.png" width="820" height="850"></iframe>	
-			<iframe src="<?= base_url() ?>assets/docs/u4.png" width="820" height="850"></iframe>	
-			<iframe src="<?= base_url() ?>assets/docs/u5.png" width="820" height="850"></iframe>	
-			<iframe src="<?= base_url() ?>assets/docs/u6.png" width="820" height="850"></iframe>	
-			<iframe src="<?= base_url() ?>assets/docs/u7.png" width="820" height="850"></iframe>	
-			<iframe src="<?= base_url() ?>assets/docs/u8.png" width="820" height="850"></iframe>	
+
+			<!-- <iframe src="https://drive.google.com/file/d/0B2SFUWMJMToOYkU5cmItajRiQjg/preview" width="850" height="650"></iframe> -->
+			<iframe src="https://drive.google.com/file/d/0B2SFUWMJMToOZVRkUVdXZFFSSVU/preview" width="850" height="650"></iframe>
 					
 		</div>
 					

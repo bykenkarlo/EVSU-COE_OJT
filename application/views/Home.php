@@ -73,8 +73,8 @@
 	 style="position: absolute; float: left;">×</a>
 	<div class="panel-heading avatar1" style="padding-bottom: 25px">
 		<h3 style="color: #000; font-weight: bold;">Welcome!</h3>
-		<!-- <span class="fa fa-user-circle  fa-5x" style="color: #000;"></span> -->
-		<img src="<?= base_url()?>assets/images/avatar_img.jpg" style="height:90px;width:90px" alt="avatar" >
+		<span class="fa fa-user-circle fa-5x" style="color: #000;"></span>
+		<!-- <img src="<?= base_url()?>assets/images/avatar_img.jpg" style="height:90px;width:90px" alt="avatar" > -->
 	</div>
 	<span class="text-capitalize nav_span col-sm-12">Name: <?php echo $_SESSION['fname'].' '.$_SESSION['lname']; ?></span>
 	<span class="text-capitalize nav_span">Username: <?= $user; ?></span>
@@ -86,6 +86,7 @@
 		<button type="button" class="btn btn-primary col-sm-2 btn-lg btnProfile" data-toggle="modal" data-target="#myModal_comp"><span class="fa fa-plus-circle"></span> Add Agency</button>
 		<button type="button" class="btn btn-primary col-sm-2 btn-lg btnProfile" data-toggle="modal" data-target="#myModal_course"><span class="fa fa-plus-circle"></span> Add Course</button>
 		<button type="button" onclick="window.location='<?php echo base_url();?>Login/criteria';" class="btn btn-primary col-sm-2 btn-lg btnProfile"><span class="fa fa-bar-chart"></span> Criteria</button>
+		<button type="button" onclick="window.location='<?php echo base_url();?>Login/gradingSystem/1';" class="btn btn-primary col-sm-2 btn-lg btnProfile"><span class="fa fa-calculator"></span> Grading System</button>
 		<button type="button" onclick="window.location='<?php echo base_url();?>Login/userlogs';" class="btn btn-primary col-sm-2 btn-lg btnProfile"><span class="fa fa-tasks"></span> User Logs</button>		
 	</div>
 
@@ -288,7 +289,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">Gender</label>						
 										<div class="col-sm-4">
-											<select name="reg_sex" class="form-control">
+											<select name="reg_sex" class="form-control" required>
 												<option value="-">Choose</option>
 												<option value="M">Male</option>
 												<option value="F">Female</option>
@@ -747,7 +748,7 @@
 		<span class="text-capitalize nav_span">Name: <?php echo $_SESSION['fname'].' '.$_SESSION['lname']; ?></span>
 		<span class="text-capitalize nav_span">Username: <?= $user; ?></span>
 		<span class="text-capitalize nav_span">Course: <?= $course; ?></span>
-		<span class="text-capitalize nav_span">Agency Name: <?= $cname  ?></span>
+		<!-- <span class="text-capitalize nav_span">Agency Name: <?= $cname  ?></span> -->
 	</div>	
 	<div class="add_admin_cdr">
 		<button type="button" class="btn btn-primary btnProfile col-sm-2" data-toggle="modal" data-target="#myModal_supervisor"><span class="fa fa-user-plus"></span> Add Supervisor</button>
@@ -1537,6 +1538,7 @@
 		</div>
 		<table id="example" class="table table-hover table-bordered" class="w">
 			<thead style="background: Steelblue; color: #fff;">
+				<th class="text-align">Image/s</th>
 				<th class="text-align">Task/s</th>
 				<th class="text-align">How the Task/s was/were Accomplished</th>
 				<th class="text-align">Lessons Learned</th>
@@ -1546,6 +1548,7 @@
 				<?php foreach ($this->Login_user_model->get_journal_data($stud_id) as $datatable): ?>		
 			<tbody>
 				<tr>
+					<td class="text-center" style="padding: 10px 5px 5px 5px;"><img src="<?= base_url() ?><?= $datatable['image'] ?>" width="50" height="50"></td>
 					<td><?= $datatable['tasks1'] ?></td>
 					<td><?= $datatable['tasks2'] ?></td>
 					<td><?= $datatable['tasks3'] ?></td>

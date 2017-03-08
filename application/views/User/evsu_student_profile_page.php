@@ -2,7 +2,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/buttons.bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/css/bootstrap-datepicker.css">
 	<link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/css/bootstrap-timepicker.min.css">
-	<style type="text/css">
+<style type="text/css">
 		#example_length{
 			display: none;
 		}
@@ -54,6 +54,7 @@
 				$lname = $_SESSION['lname'];  
 				$stud_num = $_SESSION['stud_num']; 
 				$stud_id = $_SESSION['stud_num']; 
+				
 
 
 				}?><span class="caret"></span>
@@ -128,6 +129,7 @@
 		</div>
 		<table id="example" class="table table-hover table-bordered" class="w">
 			<thead style="background: Steelblue; color: #fff;">
+				<th class="text-align">Image/s</th>
 				<th class="text-align">Task/s</th>
 				<th class="text-align">How the Task/s was/were Accomplished</th>
 				<th class="text-align">Lessons Learned</th>
@@ -137,6 +139,7 @@
 				<?php foreach ($this->Login_user_model->get_journal_data($stud_id) as $datatable): ?>		
 			<tbody>
 				<tr>
+					<td class="text-center" style="padding: 10px 5px 5px 5px;"><img src="<?= base_url() ?><?= $datatable['image'] ?>" width="50" height="50"></td>
 					<td><?= $datatable['tasks1'] ?></td>
 					<td><?= $datatable['tasks2'] ?></td>
 					<td><?= $datatable['tasks3'] ?></td>
@@ -146,11 +149,7 @@
 					</td>
 					
 				</tr>
-
-				
-
 				<?php endforeach ?>
-
 			</tbody>
 
 		</table>

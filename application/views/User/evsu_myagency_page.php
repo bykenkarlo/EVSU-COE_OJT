@@ -27,7 +27,7 @@
       <ul class="nav navbar-nav navbar-right">
        	<li class="#"><a href="<?= base_url(); ?>"><span class="fa fa-home"></span> Home </a>
         </li>
-        <li><a href="#about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
+        <li><a href="<?= base_url();?>Login/about" data-toggle="modal" data-target="#myModal_about" id="#about"><span class="fa fa-info-circle"></span> About</a></li>
 		<li><a href="#contact_us"><span class="fa fa-envelope"></span> Contact Us</a></li>
 		<li><a href="<?= base_url(); ?>Login/coordinator_chat_message"><span class="fa fa-comments"></span> Chat Us</a></li>
         <li class="dropdown">
@@ -62,7 +62,7 @@
 		<span class="text-capitalize nav_span">Name: <?php echo $_SESSION['fname'].' '.$_SESSION['lname']; ?></span>
 		<span class="text-capitalize nav_span">Username: <?= $user; ?></span>
 		<span class="text-capitalize nav_span">Course: <?= $course; ?></span>
-		<span class="text-capitalize nav_span">Agency Name: <?= $cname  ?></span>
+		<!-- <span class="text-capitalize nav_span">Agency Name: <?= $cname  ?></span> -->
 	</div>	
 	<div class="add_admin_cdr">
 		<button type="button" class="btn btn-primary btnProfile col-sm-2" data-toggle="modal" data-target="#myModal_supervisor"><span class="fa fa-user-plus"></span> Add Supervisor</button>

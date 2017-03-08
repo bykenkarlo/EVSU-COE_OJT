@@ -252,6 +252,25 @@ class Login extends CI_Controller {
 		}
 		
 	}
+	public function gradingSystem($id)
+	{
+		if(isset($_SESSION['username']))
+		{
+			$data['id'] = $id;
+			$this->load->model('Login_user_model');
+			$this->load->view('assets/header');
+			$this->load->view('User/evsu_grading_system', $data);
+			$this->load->view('assets/footer');
+		}
+		else
+		{
+			echo '  <script>
+					    alert("You dont have the right to access this page. Please login first!");
+					    location.href="/"
+				    </script>';
+		}
+			
+	}
 	public function confirmAccount($id)
 	{
 		if(isset($_SESSION['username']))
@@ -677,27 +696,82 @@ class Login extends CI_Controller {
 		}
 		
 	}
+	public function update_gradePercent() {
+		$this->load->model('Login_user_model');
+		$cdr_grade = $this->input->post('cdr_grade');
+		$spv_grade = $this->input->post('spv_grade');
+		$ptp_grade = $this->input->post('ptp_grade');
+		$self_grade = $this->input->post('self_grade');
+		$id = 1;
+
+		$sum = array('cdr_grade' => $cdr_grade, 'spv_grade'=>$spv_grade, 'PTP_grade'=>$ptp_grade, 'self_grade'=>$self_grade );
+		$grades = array_sum($sum);
+	
+
+		if ($grades > 100) {
+			$this->message('message','danger' ,'Total percentage must not exceed 100%');
+			redirect('/Login/gradingSystem/1');
+		}elseif ($grades < 100) {
+			$this->message('message','danger' ,'Total percentage must be 100%');
+			redirect('/Login/gradingSystem/1');
+		}
+		else 
+		$data = array('cdr_grade' => $cdr_grade, 'spv_grade'=>$spv_grade, 'PTP_grade'=>$ptp_grade, 'self_grade'=>$self_grade );
+		$this->message('message','info' ,'Percentage Updated');
+		$this->Login_user_model->update_percentage($data, $id);
+		redirect('/Login/gradingSystem/1');
+
+	}
+	public function compute_percentage() {
+		$cdr_grade = $this->input->post('cdr_grade');
+		$spv_grade = $this->input->post('spv_grade');
+		$ptp_grade = $this->input->post('ptp_grade');
+		$self_grade = $this->input->post('self_grade');
+		$id = 1;
+
+		$sum = array('cdr_grade' => $cdr_grade, 'spv_grade'=>$spv_grade, 'PTP_grade'=>$ptp_grade, 'self_grade'=>$self_grade );
+		$grades = array_sum($sum);
+
+		echo $grades;
+
+	}
 	public function compute_grades_student() {
 		$this->load->model('Login_user_model');
+		$id = 1;
 		$stud_id = $this->input->post('stud_id');
 		$cdr_id = $this->input->post('cdr_id');
 		$course = $this->input->post('course');
 		$course_id = $this->input->post('course_id');
 		$fullname = $this->input->post('fullname');
+
 		$cdr_grade = $this->input->post('cdr_grade');
 		$spv_grade = $this->input->post('spv_grade');
 		$ptp_grade = $this->input->post('PTP_grade');
 		$self_grade = $this->input->post('self_grade');
 
-		$sum = array('cdr_grade' => $cdr_grade, 'spv_grade'=>$spv_grade,'PTP_grade'=>$ptp_grade,'self_grade'=>$self_grade );
-		$grades = array_sum($sum) / 4;
-		$this->message('message','info' ,'Grades Added to'.' <span class="text-capitalize">'.$fullname.'</span> with a Total Grade of '.$grades.'');
+		$gradePercent = $this->Login_user_model->get_gradepercentage_tbl($id);
+		$base = 0.01;		
+
+		$cdr_grades = $base * $gradePercent['cdr_grade'];
+	 	$spv_grades = $base * $gradePercent['spv_grade'];
+	 	$PTP_grades = $base * $gradePercent['ptp_grade'];
+	 	$self_grades = $base * $gradePercent['self_grade'];
+
+
+	 	$cdrgrade = $cdr_grade * $cdr_grades;
+	 	$spvgrade = $spv_grade * $spv_grades;
+	 	$ptpgrade = $ptp_grade * $PTP_grades;
+	 	$selfgrade = $self_grade * $self_grades;
+
+		$sum = array('cdr_grade' => $cdrgrade, 'spv_grade'=>$spvgrade, 'PTP_grade'=>$ptpgrade, 'self_grade'=>$selfgrade );
+		$grades = array_sum($sum);
 
 		echo $grades;
 
 		if (isset($grades)) {
 			$data = array('stud_id'=>$stud_id,'fullname'=>$fullname,'cdr_id' => $cdr_id,'course_id' => $course_id, 'course' => $course, 'cdr_grade' => $cdr_grade,'spv_grade' => $spv_grade, 'PTPgrade'=>$ptp_grade,'selfgrade'=>$self_grade,'total_grades'=>$grades);
 			$this->Login_user_model->compute_overall_grade_update1($data, $stud_id);
+			$this->message('message','info' ,'Grades Added to'.' <span class="text-capitalize">'.$fullname.'</span> with a Total Grade of '.$grades.'');
 			
 		}
 	
@@ -706,6 +780,7 @@ class Login extends CI_Controller {
 	public function compute_grades_for_student()
 	{
 		$this->load->model('Login_user_model');
+		$id = 1;
 		$stud_id = $this->input->post('stud_id');
 		$cdr_id = $this->input->post('cdr_id');
 		$course = $this->input->post('course');
@@ -716,16 +791,28 @@ class Login extends CI_Controller {
 		$PTP_grade = $this->input->post('PTP_grade');
 		$self_grade = $this->input->post('self_grade');	
 
-		// $check = $this->Login_user_model->checkgrades($stud_id);
-		// if ($check) {
-		// 	$this->message('message','danger' ,'Error occured, Trainee graded already!');	
-		// 	redirect('/Login/gradeStudent/'.$stud_id.'');
+		$gradePercent = $this->Login_user_model->get_gradepercentage_tbl($id);
+		$base = 0.01;
 
-		// }else	
-	 
+		$check = $this->Login_user_model->checkgrades($stud_id);
+		if ($check) {
+			$this->message('message','danger' ,'Error occured, Trainee graded already!');	
+			redirect('/Login/gradeStudent/'.$stud_id.'');
 
-		$sum = array('cdr_grade' => $cdr_grade, 'spv_grade'=>$spv_grade,'PTP_grade'=>$PTP_grade,'self_grade'=>$self_grade );
-		$grades = array_sum($sum) / 4;
+		}else	
+	 	
+	 	$cdr_grades = $base * $gradePercent['cdr_grade'];
+	 	$spv_grades = $base * $gradePercent['spv_grade'];
+	 	$PTP_grades = $base * $gradePercent['ptp_grade'];
+	 	$self_grades = $base * $gradePercent['self_grade'];
+
+	 	$cdrgrade = $cdr_grade * $cdr_grades;
+	 	$spvgrade = $spv_grade * $spv_grades;
+	 	$ptpgrade = $ptp_grade * $PTP_grades;
+	 	$selfgrade = $self_grade * $self_grades;
+
+		$sum = array('cdr_grade' => $cdrgrade, 'spv_grade'=>$spvgrade, 'PTP_grade'=>$ptpgrade, 'self_grade'=>$selfgrade );
+		$grades = array_sum($sum);
 		
 		$data = array('stud_id'=>$stud_id,'fullname'=>$fullname,'cdr_id' => $cdr_id,'course_id' => $course_id, 'course' => $course, 'cdr_grade' => $cdr_grade,'spv_grade' => $spv_grade, 'PTPgrade'=>$PTP_grade,'selfgrade'=>$self_grade,'total_grades'=>$grades);
 		// $data = array('grades' => $output);
@@ -938,7 +1025,11 @@ class Login extends CI_Controller {
 			$this->Login_user_model->add_activity($logs);
 			$this->Login_user_model->get_journal_data($stud_id);
 			$this->message('message','info' ,'Successfully Login');
-			redirect('/');		
+			redirect('/');	
+			if ($verified <= 0) {
+					$this->message('message','danger' ,'Error! Theres no Username that match the record!');
+					redirect('/');
+				}	
 		}
 		elseif ($verified2)
 		{						
@@ -960,7 +1051,11 @@ class Login extends CI_Controller {
 			$this->Login_user_model->add_activity($logs);
 			$this->message('message','info' ,'Successfully Login!');
 			echo json_encode($data);
-			redirect('/');		
+			redirect('/');	
+			if ($verified2 <= 0) {
+					$this->message('message','danger' ,'Error! Theres no Username that match the record!');
+					redirect('/');
+				}	
 		}
 		elseif ($verified3)
 		{
@@ -981,7 +1076,11 @@ class Login extends CI_Controller {
 			$logs = array('user' => $user, 'ip_address'=>$ip_address, 'activity' => 'Logged in');
 			$this->Login_user_model->add_activity($logs);
 			$this->message('message','info' ,'Successfully Login!');
-			redirect('/');		
+			redirect('/');	
+			if ($verified3 <= 0) {
+					$this->message('message','danger' ,'Error! Theres no Username that match the record!');
+					redirect('/');
+				}
 				
 		}
 		elseif ($verified4)
@@ -1002,7 +1101,11 @@ class Login extends CI_Controller {
 			$logs = array('user' => $user, 'ip_address'=>$ip_address, 'activity' => 'Logged in');
 			$this->Login_user_model->add_activity($logs);
 			$this->message('message','info' ,'Succesfully Login');
-			redirect('/');		
+			redirect('/');	
+			if ($verified4 <= 0) {
+					$this->message('message','danger' ,'Error! Theres no Username that match the record!');
+					redirect('/');
+				}	
 				
 		}
 		else

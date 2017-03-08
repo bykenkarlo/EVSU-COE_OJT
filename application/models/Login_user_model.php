@@ -509,6 +509,11 @@ class Login_user_model extends CI_Model {
 		$this->db->where('stud_id', $stud_id);
 		$this->db->insert('evsu_overall_grades_tbl', $data);	
 	}
+	Public function update_percentage($data, $id)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('evsu_grade_percent', $data);
+	}
 	Public function compute_overall_grade_update1($data, $stud_id)
 	{
 		$this->db->where('stud_id', $stud_id);
@@ -801,19 +806,19 @@ class Login_user_model extends CI_Model {
 		$this->db->JOIN('evsu_company_tbl','evsu_spv_tbl.comp_id = evsu_company_tbl .comp_id','left');
 		$this->db->where(array('evsu_spv_tbl.cdr_id' => $cdr_id ));
 		$query = $this->db->get()->result_array();
-		return $query;	
-
-		
+		return $query;		
+	}
+	Public function get_percentage_tbl()
+	{
+		return $this->db->get('evsu_grade_percent')->row_array();			
+	}
+	Public function get_gradepercentage_tbl($id)
+	{
+		$this->db->where('id', $id);
+		return $this->db->get('evsu_grade_percent')->row_array();			
 	}
 
-		// $this->db->SELECT('*');
-		// $this->db->FROM('evsu_cdr_spv_agency_stud_tbl ');
-		// $this->db->JOIN('evsu_cdr_tbl','evsu_cdr_spv_agency_stud_tbl.cdr_id = evsu_cdr_tbl.cdr_id','left');
-		// $this->db->JOIN('evsu_company_tbl','evsu_cdr_spv_agency_stud_tbl.comp_id = evsu_company_tbl.comp_id', 'left');
-		// // $this->db->JOIN('evsu_company_tbl','evsu_cdr_spv_agency_stud_tbl.stud_id = evsu_company_tbl.comp_id', 'left');
-		// $this->db->where(array('evsu_cdr_spv_agency_stud_tbl.cdr_id' => $cdr_id ));
-		// $query = $this->db->get()->result_array();
-		// return $query;
+		
 
 
 

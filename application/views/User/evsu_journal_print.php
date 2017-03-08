@@ -120,12 +120,24 @@
 			</tbody>
 
 		</table>
-		<div style="margin-top: 40px;">
+		<div style="margin-top: 80px; margin-bottom: 150px;">
 			<span>Prepared By: <br></span>
 			<span class="text-capitalize"><?= $_SESSION['lname'].', '.$_SESSION['fname']; ?><br></span>
 			<span style="border-top: 1px solid #000;">Signature of Student-Trainee <br></span>
 		</div>
+
+		<div id="non-printable" style=" border-top: 1px solid Steelblue; width: 910px;"></div>
+		<div style="margin-top: 10px; margin-bottom: 50px;">
+			<h1 id="non-printable" class="text-center" style=" margin-bottom: 20px;"><span class="fa fa-image"></span> Image</h1>
+			<div style="margin-bottom: 30px;">
+				<img src="<?= base_url() ?><?= $printer['image']?>" alt="EVSU-COE-OJT-image" width="900" height="500">
+			</div>
+			<div id="non-printable" style="border-bottom: 1px solid Steelblue; width: 910px;"></div>
+		</div>
 	</div>
+
+
+	
 </div>
 
 </div>

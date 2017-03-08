@@ -68,7 +68,7 @@
 		<span class="text-capitalize nav_span">Name: <?php echo $_SESSION['fname'].' '.$_SESSION['lname']; ?></span>
 		<span class="text-capitalize nav_span">Username: <?= $user; ?></span>
 		<span class="text-capitalize nav_span">Course: <?= $course; ?></span>
-		<span class="text-capitalize nav_span">Agency Name: <?= $cname  ?></span>
+		<!-- <span class="text-capitalize nav_span">Agency Name: <?= $cname  ?></span> -->
 	</div>	
 	<div class="add_admin_cdr">
 		<button type="button" class="btn btn-primary btnProfile col-sm-2" data-toggle="modal" data-target="#myModal_supervisor"><span class="fa fa-user-plus"></span> Add Supervisor</button>
@@ -619,7 +619,7 @@
 					<th>Peer to Peer's Grade(Average) </th>
 					<th>Self Evaluation </th>
 					<th>Total Grades </th>
-					<th>Action</th>
+					<!-- <th>Action</th> -->
 					
 				</tr>
 			</thead>
@@ -633,7 +633,7 @@
 					<th>Peer to Peer's Grade(Average) </th>
 					<th>Self Evaluation </th>
 					<th>Total Grades </th>
-					<th>Action</th>
+					<!-- <th>Action</th> -->
 					
 				</tr>
 			</tfoot>
@@ -651,18 +651,16 @@
 					<td class="text-capitalize" align="center"><a href="#"><input type="hidden" name="selfgrade"><?=$key['selfgrade']?></a></td>
 					<td class="text-capitalize" align="center"><a href="#"><input type="hidden" name="total_grades"><?=$key['total_grades']?></a></td>
 										
-					<td>
-						<!-- a href="<?php echo base_url();?>Login/update_student_page/<?php echo $key['stud_id']; ?>" class="btn btn-success btn-xs btnCircle fa fa-check btn-sm"></a> -->
-						<a href="<?php echo base_url();?>Login/update_grades_student_page/<?php echo $key['stud_id']; ?>" class="btn btn-info btn-xs btnCircle fa fa-pencil btn-sm"></a>
-
-						
-					</td>
+					<!-- <td>
+						<a href="<?php echo base_url();?>Login/update_student_page/<?php echo $key['stud_id']; ?>" class="btn btn-success btn-xs btnCircle fa fa-check btn-sm"></a>
+						<a href="<?php echo base_url();?>Login/update_grades_student_page/<?php echo $key['stud_id']; ?>" class="btn btn-info btn-xs btnCircle fa fa-pencil btn-sm"></a>		
+					</td> -->
 				</tr>
 			<?php endforeach ?>
 			</tbody>
 		</table>
 		<div class="btn-group" style="float: right;" style="margin: 10px 0px 10px 0px ;">
-			<button onclick="window.location='<?php echo base_url();?>Control/mailpage';" type="button" class="btn btn-default"><span class="fa fa-user-plus"></span> Mail</button>
+			<!-- <button onclick="window.location='<?php echo base_url();?>Control/mailpage';" type="button" class="btn btn-default"><span class="fa fa-user-plus"></span> Mail</button> -->
 			<button data-toggle="modal" data-target="#myModal_student" type="button" class="btn btn-default"><span class="fa fa-user-plus"></span> New</button>
 			<button data-toggle="modal" data-target="#myModal_email" type="button" class="btn btn-default"><span class="fa fa-envelope"></span> Send Email</button>
 			<button type="submit" class="btn btn-default" onclick="return confirm('Are you sure to delete this?')"><span class="glyphicon glyphicon-trash"></span> Delete Multiple</button>

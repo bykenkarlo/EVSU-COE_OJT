@@ -1198,3 +1198,7 @@ header
 	color: #376092;
 	cursor: pointer;
 }
+.btn-percent {
+	width: 70px;
+	height: 33px;
+}

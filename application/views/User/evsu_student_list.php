@@ -63,13 +63,13 @@
 	25px">
 		<h3 style="color: #000; font-weight: bold;">Welcome!</h3>
 		<!-- <span class="fa fa-user-circle  fa-5x" style="color: #000;"></span> -->
-		<img data-toggle="modal" data-target="#myModal_add_admin" src="<?php echo base_url();?>assets/avatar_img.jpg" style="height:90px;width:90px" alt="avatar" >		
+		<img data-toggle="modal" data-target="#myModal_add_admin" src="<?php echo base_url();?>assets/images/avatar_img.jpg" style="height:90px;width:90px" alt="avatar" >		
 	</div>
 	<div class="side_nav">
 		<span class="text-capitalize nav_span">Name: <?php echo $_SESSION['fname'].' '.$_SESSION['lname']; ?></span>
 		<span class="text-capitalize nav_span">Username: <?= $user; ?></span>
 		<span class="text-capitalize nav_span">Course: <?= $course; ?></span>
-		<span class="text-capitalize nav_span">Agency Name: <?= $cname  ?></span>
+		<!-- <span class="text-capitalize nav_span">Agency Name: <?= $cname  ?></span> -->
 	</div>	
 	<div class="add_admin_cdr">
 		<button type="button" class="btn btn-primary btnProfile col-sm-2" data-toggle="modal" data-target="#myModal_supervisor"><span class="fa fa-user-plus"></span> Add Supervisor</button>

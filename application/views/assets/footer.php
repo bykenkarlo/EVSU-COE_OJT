@@ -16,14 +16,14 @@
 			<ul class="list-inline">
 				<li style="text-align: center;margin-bottom: 20px;margin-top: 20px; margin-left: : 40px;"><span>CONNECT WITH US</span></li><br/>
 				<li class="social">
-					<a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fevsu-coe-ojt.890m.com%2F&amp;src=sdkpreparse"><img src="<?php echo base_url();?>assets/images/fb.png" alt="facebook" height="50" width="50"></a>
+					<a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//evsu-coe-ojt.ismartbit.net"><img src="<?php echo base_url();?>assets/images/fb.png" alt="facebook" height="50" width="50"></a>
 				</li>
 				<li class="social">
 					<a class="twitter-share-button"
-					  href="https://twitter.com/intent/tweet?text=On the Job Training Monitoring and Online Grading System - http://evsu-coe-ojt.890m.com/">
+					  href="https://twitter.com/intent/tweet?text=On the Job Training Monitoring and Online Grading System - http://evsu-coe-ojt.ismartbit.net/">
 					<img src="<?php echo base_url();?>assets/images/twitter.png" alt="twitter" height="50" width="50"></a></li>
 				<li class="social">
-					<a href="https://plus.google.com/share?url=http://evsu-coe-ojt.890m.com/" onclick="javascript:window.open(this.href,
+					<a href="https://plus.google.com/share?url=http://evsu-coe-ojt.ismartbit.net" onclick="javascript:window.open(this.href,
 				  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" ><img src="<?php echo base_url();?>assets/images/googleplus.png" alt="google-plus" height="50" width="50"></a>
 				</li>
 			</ul>			

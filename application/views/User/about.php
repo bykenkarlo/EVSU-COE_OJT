@@ -95,8 +95,8 @@
 						</ul>
 						</div>
 			</div>
-			<div style="margin-left: 35px; margin-bottom: 50px; font-size: 16px;">
-				<span class="fa fa-code fa-"></span><span> By:<a href="https://www.linkedin.com/in/kenkarlopadal"> Ken Karlo Padal</a></span>
+			<div style="margin-left: 45px; margin-bottom: 60px; font-size: 16px;">
+				<span class="fa fa-codepen"></span><span> By:<a href="https://www.linkedin.com/in/kenkarlopadal"> Ken Karlo Padal</a></span>
 				<div class="row" style="margin-left: 20px; margin-top: 10px;">
 					<span class="">
 						<a href="https://www.linkedin.com/in/kenkarlopadal/"><span class="fa fa-linkedin-square fa-2x"></span></a>
@@ -107,7 +107,9 @@
 					<span>
 						<a style="color: #d50000;" href="https://plus.google.com/"><span class="fa fa-google-plus-square fa-2x"></span></a>	
 					</span>
-						
+					<span>
+						<a style="color: #000;" href="mailto: kenkarlopadal@gmail.com"><span class="fa fa-envelope fa-2x"></span></a>	
+					</span>	
 				</div>
 				
 			</div>

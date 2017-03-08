@@ -484,6 +484,7 @@
 								<th>PTP's Grade</th>
 								<th>Self's Evaluation</th>
 								<th>Total Grade</th>
+								<th>Compute Grade</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -504,14 +505,14 @@
 									<input type="text" id="self_grade" name="self_grade" class="form-control text-capitalize" value="<?= $info2['total_grades']; ?>" required readonly  >
 								</td>
 								<td>
+									<button type="button" class="btn btn-primary btnStudGrade1"><span class="fa fa-calculator"></span> <?= $overallgrade['total_grades']?></button>
+								</td>
+								<td>
 									<button type="button" class="btn btn-primary btnStudGrade1"><span class="fa fa-calculator"></span>  <span id="total"></span>  </button>
 								</td>
 							</tr>
-							
 						</tbody>
 					</table>
-					
-
 					<div class="pull-right" style="margin-right: : 0em; margin-bottom: 10px; ">
 						<a href=""><button type="submit"  class="submit btn btn-primary btn-lg btnUpdateqwe"> Save</button></a>
 						<a href="<?php echo base_url();?>Login/myAgency/<?= $cdr_id ?>"><button type="button" class="btn btn-danger btn-lg btnCancel">Cancel</button></td></a>

@@ -683,7 +683,6 @@ class Control extends CI_Controller {
 		unset($_SESSION['admin_id']);
 		unset($_SESSION['cdr_id']);
 		unset($_SESSION['spv_id']);
-		
 
 		$this->session->sess_destroy();	
 		redirect('/');
@@ -691,14 +690,22 @@ class Control extends CI_Controller {
 	public function delete_admin($id)
 	{	
 		$this->load->model('Stud_user_model');
+		$admin_id = $id;
 		$admin_info = $this->Stud_user_model->get_admin_info($id);
 		$name = $admin_info['fname'].' '.$admin_info['lname'];
 		$username = $admin_info['username'];
+		$current_adminID = $admin_info['admin_id'];
 		$ip_address = $this->input->ip_address();
-
-		if($currentUser == $username )
+		$currentUser = $_SESSION['currentUser'];
+		
+		if ($admin_id == 1) {
+			$this->message('message', 'danger', 'Action is not Allowed! Default Administrator cannot be deleted!');
+			redirect('/');
+		}
+		elseif($currentUser == $username)
 		{
-			$this->message('message', 'danger', 'Action is not allowed!');
+			$this->message('message', 'danger', 'Action is not Allowed!');
+			redirect('/');
 		}
 		else
 		{
@@ -708,8 +715,7 @@ class Control extends CI_Controller {
 			$this->Stud_user_model->delete_admin($id);
 			$this->message('message', 'danger', 'Admin has been Deleted');
 		}
-		
-		redirect('/Login/profile_page');
+		redirect('/');
 	}
 	public function delete_logs($id)
 	{
@@ -892,6 +898,7 @@ class Control extends CI_Controller {
 		$this->load->model('Stud_user_model');
 		$StudentInfo = $this->Stud_user_model->getThisUser($id);
 		$name = $StudentInfo['fname'].' '.$StudentInfo['lname'];
+		$spv_id = $_SESSION['spv_id'];
 
 		$user = $_SESSION['username'];
 		$ip_address = $this->input->ip_address();
@@ -899,8 +906,8 @@ class Control extends CI_Controller {
 		$this->Stud_user_model->add_activity($logs);
 
 		$this->Stud_user_model->delete_student1($id);
-		$this->message('message', 'danger', 'Student has been Removed from the List');
-		redirect('/Login/student_list');
+		$this->message('message', 'danger', 'Student <span class="text-capitalize">'.$name.'</span> has been Removed from the List');
+		redirect('/Login/supervisorPage/'.$spv_id.'');
 	}
 	public function delete_file($id)
 	{

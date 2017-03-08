@@ -1,6 +1,17 @@
 	<link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/css/bootstrap-datepicker.css">
-	<link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/css/bootstrap-timepicker.min.css">    
-	<link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/css/bootstrap-formhelpers.min.css">    
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/buttons.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/buttons.bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-select.min.css">   
+<style type="text/css">
+		#example_length{
+			display: none;
+		}
+		#example_info{
+		    float: left;
+		    display: none;	
+		}
+		#example_filter{ display: none;	}
+</style> 
 </head>
 </body>
 <header>
@@ -104,33 +115,19 @@
                     </span>
             </div>
         </div>
-        <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker3').datetimepicker({
-                    format: 'LT'
-                });
-                $('#datetimepicker').data("DateTimePicker").FUNCTION()
-            });
-        </script>
+        
 	</div>
 	<div class="form-group bootstrap-timepicker timepicker" data-provide="datetimepicker">	
 		<label class="col-sm-2 control-label">Time out:</label>
         <div class='col-sm-5' id=''>
-            <div class="input-group date" id="datetimepicker3">
+            <div class="input-group date" id="datetimepicker">
                 <input type='text' name="time_out" id="timepicker1" class="form-control" placeholder="HH:MM:AM/PM" required/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-time"></span>
                     </span>
             </div>
         </div>
-        <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker3').datetimepicker({
-                    format: 'LT'
-                });
-                $('#datetimepicker').data("DateTimePicker").FUNCTION()
-            });
-        </script>
+        
 	</div>
 	<div class="form-group">		
 	<div class="col-sm-offset-2" style="">
@@ -152,7 +149,7 @@
 	<div class="well well-custom">
 		<h1 id=""><span class="fa fa-calendar"></span> Attendance Sheet</h1>
 	</div>
-	<table class="table table-striped table-bordered table-hover" style="margin-top: -18px;">
+	<table id="example" class="table table-striped table-bordered table-hover" style="margin-top: -18px;">
 		<thead style="background: Steelblue; color: #fff;">
 		
 			<tr>
@@ -162,19 +159,14 @@
 				<th>Time out</th>
 			</tr>
 		</thead>
-			<?php foreach ($this->Login_user_model->get_attendance($stud_id) as $key) :
-				
-
+			<?php foreach ($this->Login_user_model->get_attendance($stud_id) as $key) :			
 			 ?>
-
 		<tbody>
 			<tr>
 				<td class="text-capitalize"><?= $key['name']?></td>
 				<td><?= $key['date']?></td>
-
 				<td><?= $key['time_in']?></td>
-				<td><?= $key['time_out']?></td>
-						
+				<td><?= $key['time_out']?></td>		
 			</tr>
 		</tbody>
 		<?php endforeach ?>		
@@ -195,7 +187,29 @@
 
 <div class="container">	
 </div>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/dataTables.buttons.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap-datepicker.js"></script>
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap-timepicker.min.js"></script>
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap-formhelpers.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/buttons.flash.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/buttons.html5.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/buttons.print.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/buttons.bootstrap.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jszip.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/vfs_fonts.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/pdfmake.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/buttons.colVis.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap-select.min.js"></script>
+<script>
+	$(document).ready(function() {
+    $('#example').DataTable({
+
+        "iDisplayLength": 10,
+        dom: 'Bfrtip',
+    	buttons: [
+    		'copy','csv','print','pdf', 'colvis',
+    		]
+        
+    	});
+
+	} );	
+</script>
 

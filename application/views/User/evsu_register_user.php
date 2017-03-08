@@ -5,8 +5,7 @@
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
 </head>
-<header style="background: url('/EVSU_OJT/assets/images/EVSU_banner.png'); height: 120px;" class=""> 
-		
+<img src="<?php echo base_url();?>assets/images/EVSU_banner.png" height="100" width="100%" class="img-responsive" alt="EVSU | College of Engineering | On the Job Training Monitoring and Grading System">
 </header>
 
 <nav class="navbar navbar-inverse" id="nav2">
@@ -139,7 +138,7 @@ background-size: 100% 85%; margin: 0px 0px 0px 0px" >
 							
 				</form>
 				<div class="pull-right" style="margin-right: 10px;">
-						<a href="<?php base_url();?>/EVSU_OJT"><button class="btn btn-primary">Cancel</button></a>
+						<a href="<?php base_url();?>/"><button class="btn btn-primary">Cancel</button></a>
 						
 					</div>
 			</div>
